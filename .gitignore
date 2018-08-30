@@ -1,31 +1,26 @@
 .DS_Store
 
-application/cache/*
-!application/cache/index.html
+### Bower ###
+bower_components/
+.bower-cache
+.bower-registry
+.bower-tmp
 
-application/logs/*
-!application/logs/index.html
+### Node ###
+node_modules/
+npm-debug.log
 
-!application/*/.htaccess
+### Composer ###
+application/composer.lock
 
-composer.lock
+### https://github.com/github/gitignore/blob/master/CodeIgniter.gitignore ###
+*/config/development
+*/logs/log-*.php
+*/logs/!index.html
+*/cache/*
+*/cache/!index.html
+*/cache/!.htaccess
 
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
-
-# IDE Files
-#-------------------------
-/nbproject/
-.idea/*
-
-## Sublime Text cache files
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-project
-/tests/tests/
-/tests/results/
+### SQL backup files ###
+sql/backup/*
+sql/backup/!index.html
