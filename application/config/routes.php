@@ -50,8 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['404_override'] = 'error';
+$route['404_override'] = 'errors/index';
 $route['translate_uri_dashes'] = FALSE;
+
 
 /**
  * Custom routes by CI Bootstrap 3
@@ -70,3 +71,8 @@ $route['api/(:any)']					= "api_v1/$1";
 $route['api/(:any)/(:num)']				= "api_v1/$1/index/$2";
 $route['api/(:any)/(:num)/(:any)']		= "api_v1/$1/index/$2/$3";
 $route['api/(:any)/(:any)']				= "api_v1/$1/$2";
+
+/**
+ *  My routes 
+ */
+$route['usuarios/(:any)'] = 'usuarios/view/$1';
