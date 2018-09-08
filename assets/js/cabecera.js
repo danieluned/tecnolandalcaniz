@@ -19,5 +19,6 @@ $( document ).ready(function() {
 		alert(event);
 	});
 	*/
+	$('img[alt="www.000webhost.com"]').hide();
 });
 

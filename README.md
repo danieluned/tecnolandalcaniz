@@ -2,7 +2,7 @@
 Este repositorio contiene la pagina de Tecnoland Web para 
 su desarrollo y puesta en marcha en 2018
 
-- Autodespliegue en el servidor de pruebas
+- Autodespliegue en el servidor de pruebas (aun no)
 
 ##Enlaces de para trabajar interes
 
@@ -14,3 +14,5 @@ su desarrollo y puesta en marcha en 2018
 
 ###Discord
 [Enlace Discord](https://discord.gg/9tJEfd)
+
+
