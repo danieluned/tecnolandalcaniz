@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /foro/
+Disallow: /newadmin/
+Disallow: /inscripcion.php

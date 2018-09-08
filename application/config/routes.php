@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -49,30 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
-$route['404_override'] = 'errors/index';
+$route['default_controller'] = 'inicio';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-
-/**
- * Custom routes by CI Bootstrap 3
- */
-
-// API endpoints to specific version
-$route['api/v1']						= "api_v1";
-$route['api/v1/(:any)']					= "api_v1/$1";
-$route['api/v1/(:any)/(:num)']			= "api_v1/$1/index/$2";
-$route['api/v1/(:any)/(:num)/(:any)']	= "api_v1/$1/index/$2/$3";
-$route['api/v1/(:any)/(:any)']			= "api_v1/$1/$2";
-
-// API endpoints to latest version (need to change "api_v1" when there is a later version)
-$route['api']							= "api_v1";
-$route['api/(:any)']					= "api_v1/$1";
-$route['api/(:any)/(:num)']				= "api_v1/$1/index/$2";
-$route['api/(:any)/(:num)/(:any)']		= "api_v1/$1/index/$2/$3";
-$route['api/(:any)/(:any)']				= "api_v1/$1/$2";
-
-/**
- *  My routes 
- */
-$route['usuarios/(:any)'] = 'usuarios/view/$1';
