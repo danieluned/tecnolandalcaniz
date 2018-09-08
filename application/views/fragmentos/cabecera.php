@@ -122,7 +122,7 @@
 		<!-- //Navigation -->
 
 		<!-- Slider -->
-		<div class="slider" style="margin-top:60px">
+		<div class="slider" style="margin-top:60px" >
 			<ul class="rslides" id="slider">
 				<li id="#owl-demo1">
 					<img src="<?= assets()?>images/carousel/1.jpg" alt="Game Robo">

@@ -1,9 +1,8 @@
-.carousel {
-  max-height: 200px;
-  overflow: hidden;
+#slider li img {
 
-  .item img {
+
+    max-height: 85vh;
     width: 100%;
-    height: auto;
-  }
+    object-fit: cover; // here
+  
 }
