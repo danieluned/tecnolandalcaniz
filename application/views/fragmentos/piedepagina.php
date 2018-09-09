@@ -93,8 +93,8 @@
 					$("#slider").responsiveSlides({
 						auto: true,
 						nav: true,
-						speed: 1500,            // Integer: Speed of the transition, in milliseconds
-						timeout: 8500,          // Integer: Time between slide transitions, in milliseconds
+						speed: 1000,            // Integer: Speed of the transition, in milliseconds
+						timeout: 5500,          // Integer: Time between slide transitions, in milliseconds
 						namespace: "callbacks",
 						pager: true,
 					});

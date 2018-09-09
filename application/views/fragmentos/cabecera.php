@@ -76,7 +76,7 @@
 					</button>
 					<!-- Logo -->
 					<div class="logo">
-						<a class="navbar-brand logo-w3l button" href="#"><img src="<?= assets()?>images/snText.png" style="width:34px;height:34px;" class="d-inline-block align-top" alt=""><span class="hidden-xs">Tecnoland Alcañiz</span></a>
+						<a class="navbar-brand logo-w3l button" href="#"><img src="<?= assets()?>images/snText.png" style="width:34px;height:34px;" class="d-inline-block align-top" alt=""> TECNOLAND <span class="hidden-xs">ALCAÑIZ</span></a>
 					</div>
 					<!-- //Logo -->
 				</div>
@@ -120,12 +120,11 @@
 			</nav>
 		</div>
 		<!-- //Navigation -->
-
 		<!-- Slider -->
 		<div class="slider" style="margin-top:60px" >
 			<ul class="rslides" id="slider">
 				<li id="#owl-demo1">
-					<img src="<?= assets()?>images/carousel/1.jpg" alt="Game Robo">
+					<img src="<?= assets()?>images/carousel/1.png" alt="Game Robo">
 					<div class="heading">
 						<h1>TECNOLAND ALCAÑIZ</h1>
 						<h2>TORNEOS, COSPLAYs, CONCURSOS</h2>
@@ -146,11 +145,10 @@
 					<img src="<?= assets()?>images/carousel/5.png" alt="Game Robo">
 				</li>
 				<li id="#owl-demo6" class="item">
-					<img src="<?= assets()?>images/carousel/Cabecera_TECNOLAND.jpg" alt="Game Robo">
+					<img src="<?= assets()?>images/carousel/6.png" alt="Game Robo">
 				</li>
 			</ul>
 		</div>
 		<!-- //Slider -->
-
 	</div>
 	<!-- //Header -->
