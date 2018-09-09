@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inicio extends CI_Controller {
+class Inicio extends Public_Controller {
 
 	/**
 	 *  Metodo Index
@@ -11,9 +11,6 @@ class Inicio extends CI_Controller {
 	 */
 	public function index()
 	{
-	    $datos = array("title"=> "Tecnoland Alcañiz", "keywords"=>"Tecnoland Alcañiz Lan Party Aragón Battlefield Games Videogames");
-	    $this->load->view('fragmentos/cabecera',$datos);
-		$this->load->view('inicio');
-		$this->load->view('fragmentos/piedepagina');
+		$this->render('inicio');
 	}
 }

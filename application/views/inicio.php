@@ -1,4 +1,35 @@
-	
+	<!-- Slider -->
+	<div class="agileheader" id="agileitshome">
+		<div class="slider">
+			<ul class="rslides" id="slider">
+				<li id="#owl-demo1">
+					<img src="<?= assets()?>images/carousel/1.png" alt="Game Robo">
+					<div class="heading">
+						<h1>TECNOLAND ALCAÑIZ</h1>
+						<h2>TORNEOS, COSPLAYs, CONCURSOS</h2>
+						<h3>UN LUGAR UNICO PARA DISFRUTAR</h3>
+					</div>
+					
+				</li>
+				<li id="#owl-demo2" class="item">
+					<img src="<?= assets()?>images/carousel/2.png" alt="cosplay" >
+				</li>
+				<li id="#owl-demo3" class="item">
+					<img src="<?= assets()?>images/carousel/3.png" alt="Battlefield">
+				</li>
+				<li id="#owl-demo4" class="item">
+					<img src="<?= assets()?>images/carousel/4.png" alt="Game Robo">
+				</li>
+				<li id="#owl-demo5" class="item">
+					<img src="<?= assets()?>images/carousel/5.png" alt="Game Robo">
+				</li>
+				<li id="#owl-demo6" class="item">
+					<img src="<?= assets()?>images/carousel/6.png" alt="Game Robo">
+				</li>
+			</ul>
+		</div>
+	</div>
+    <!-- //Slider -->
 	<!-- About -->
 	<div class="w3lsaboutaits" id="w3lsaboutaits">
 		<div class="container">
@@ -1219,7 +1250,7 @@
 	<!-- //Partners -->
 
 
-
+	
 	<!-- Newsletter -->
 	<div class="w3lsnewsletter" id="w3lsnewsletter">
 		<div class="container">

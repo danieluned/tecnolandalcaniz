@@ -49,7 +49,8 @@
 <!-- TTF --> <link rel="stylesheet" href="<?= assets()?>fonts/fontawesome-webfont.ttf" type="text/css" media="all">
 <!-- //Font-Awesome-File-Links -->
 
-
+<!--  Custom  -->
+<?php echo $before_head;?>
 </head>
 <!-- //Head -->
 
@@ -57,10 +58,7 @@
 
 <!-- Body -->
 <body>
-
-
-
-	<!-- Header -->
+    <!-- Header -->
 	<div class="agileheader" id="agileitshome">
 
 		<!-- Navigation -->
@@ -120,35 +118,6 @@
 			</nav>
 		</div>
 		<!-- //Navigation -->
-		<!-- Slider -->
-		<div class="slider" style="margin-top:60px" >
-			<ul class="rslides" id="slider">
-				<li id="#owl-demo1">
-					<img src="<?= assets()?>images/carousel/1.png" alt="Game Robo">
-					<div class="heading">
-						<h1>TECNOLAND ALCAÑIZ</h1>
-						<h2>TORNEOS, COSPLAYs, CONCURSOS</h2>
-						<h3>UN LUGAR UNICO PARA DISFRUTAR</h3>
-					</div>
-					
-				</li>
-				<li id="#owl-demo2" class="item">
-					<img src="<?= assets()?>images/carousel/2.png" alt="cosplay" >
-				</li>
-				<li id="#owl-demo3" class="item">
-					<img src="<?= assets()?>images/carousel/3.png" alt="Battlefield">
-				</li>
-				<li id="#owl-demo4" class="item">
-					<img src="<?= assets()?>images/carousel/4.png" alt="Game Robo">
-				</li>
-				<li id="#owl-demo5" class="item">
-					<img src="<?= assets()?>images/carousel/5.png" alt="Game Robo">
-				</li>
-				<li id="#owl-demo6" class="item">
-					<img src="<?= assets()?>images/carousel/6.png" alt="Game Robo">
-				</li>
-			</ul>
-		</div>
-		<!-- //Slider -->
 	</div>
+	<br/><br/><br/>
 	<!-- //Header -->

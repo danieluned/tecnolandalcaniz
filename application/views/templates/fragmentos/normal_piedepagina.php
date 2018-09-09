@@ -164,7 +164,8 @@
 	<!-- //Custom-JavaScript-File-Links -->
 			<script src="<?= assets()?>js/cabecera.js"></script> 
 			
-
+	<!--  Custom files -->
+	 <?php echo $before_body?>
 </body>
 <!-- //Body -->
 
