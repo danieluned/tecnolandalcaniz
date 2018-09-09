@@ -126,13 +126,12 @@
 			<ul class="rslides" id="slider">
 				<li id="#owl-demo1">
 					<img src="<?= assets()?>images/carousel/1.jpg" alt="Game Robo">
-					<!-- 
 					<div class="heading">
-						<h1>GAME ROBO</h1>
-						<h2>FREE FULL GAMES</h2>
-						<h3>A UNIQUE PLACE TO DOWNLOAD</h3>
+						<h1>TECNOLAND ALCAÑIZ</h1>
+						<h2>TORNEOS, COSPLAYs, CONCURSOS</h2>
+						<h3>UN LUGAR UNICO PARA DISFRUTAR</h3>
 					</div>
-					 -->
+					
 				</li>
 				<li id="#owl-demo2" class="item">
 					<img src="<?= assets()?>images/carousel/2.png" alt="cosplay" >

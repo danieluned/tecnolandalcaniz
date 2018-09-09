@@ -1,8 +1,26 @@
+@media all and (max-width: 620px) {
+   #slider li img{
+          height: 600px;
+    }
+}
+@media all and (max-width: 520px) {
+   #slider li img{
+          height: 500px;
+    }
+}
+@media all and (max-width: 420px) {
+  #slider li img{
+          height: 400px;
+    }
+}
+
+@media all and (max-width: 320px) {
+	#slider li img{
+		  height: 300px;
+	}
+}
 #slider li img {
-
-
-    max-height: 85vh;
+    height: 700px;
     width: 100%;
-    object-fit: cover; // here
-  
+    object-fit: cover; // here 
 }

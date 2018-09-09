@@ -87,17 +87,20 @@
 
 		<!-- Resopnsive-Slider-JavaScript -->
 			<script src="<?= assets()?>js/responsiveslides.min.js"></script>
+			
 			<script>
 				$(function () {
 					$("#slider").responsiveSlides({
 						auto: true,
 						nav: true,
-						speed: 2000,
+						speed: 1500,            // Integer: Speed of the transition, in milliseconds
+						timeout: 8500,          // Integer: Time between slide transitions, in milliseconds
 						namespace: "callbacks",
 						pager: true,
 					});
 				});
 			</script>
+			
 		<!-- //Resopnsive-Slider-JavaScript -->
 
 		<!-- Tab-JavaScript -->
@@ -116,7 +119,7 @@
 			<script>
 				$(document).ready(function() {
 					$("#owl-demo, #owl-demo1, #owl-demo2, #owl-demo3, #owl-demo4, #owl-demo5, #owl-demp6").owlCarousel({
-						autoPlay: 3000,
+						autoPlay: 1000,
 						items : 6,
 						itemsDesktop : [1024,4],
 						itemsDesktopSmall : [414,3]
