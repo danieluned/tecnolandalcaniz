@@ -2,11 +2,11 @@
 
 <?php $this->load->view('templates/fragmentos/admin_cabecera'); ?>
 
-<div class="container">
-	<div class="main-content" style="padding-top:40px;">
+
+	<div class="main-content">
 		<?php echo $the_view_content;?>
 	</div>
-</div>
+
 
 
 <?php $this->load->view('templates/fragmentos/admin_piedepagina');?>

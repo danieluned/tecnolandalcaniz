@@ -1,25 +1,22 @@
-<div class="row">
-  <div class="col-lg-4 col-lg-offset-4">
-    <h1>Login</h1>
-    <?php echo $this->session->flashdata('message');?>
-    <?php echo form_open('',array('class'=>'form-horizontal'));?>
-      <div class="form-group">
-        <?php echo form_label('Username','identity');?>
-        <?php echo form_error('identity');?>
-        <?php echo form_input('identity','','class="form-control"');?>
-      </div>
-      <div class="form-group">
-        <?php echo form_label('Password','password');?>
-        <?php echo form_error('password');?>
-        <?php echo form_password('password','','class="form-control"');?>
-      </div>
-      <div class="form-group">
-        <label>
-          <?php echo form_checkbox('remember','1',FALSE);?> Remember me
-        </label>
-      </div>
-      <?php echo form_submit('submit', 'Log in', 'class="btn btn-primary btn-lg btn-block"');?>
-    <?php echo form_close();?>
-  </div>
-</div>
-<br/><br/><br/>
+
+
+<!-- Login -->
+	<div class="agilecontactw3ls" id="agilecontactw3ls">
+		<div class="container">
+			<h3>Login</h3>
+			<?php echo form_open('',array());?>
+				<div class="col-sm-offset-3 col-md-6 agilecontactw3ls-grid agilecontactw3ls-grid-1">
+					<div style="color:red"><?php echo $this->session->flashdata('message');?></div>
+					
+					<input type="text" name="identity" placeholder="Usuario" required>
+					<input type="password" name="password" placeholder="Contraseña" required>
+					<input type="checkbox" name="remember" value="1" ><span style="color:darkgray"> Recordar</span>
+					<div class="send-button">
+						<input type="submit" value="ENTRAR">
+					</div>
+				</div>				
+				
+			 <?php echo form_close();?>
+		</div>
+	</div>
+<!-- //Login -->

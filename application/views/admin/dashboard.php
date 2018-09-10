@@ -1,3 +1,6 @@
-<div class="container">
-  <h1>Welcome to the Dashboard!</h1>
+
+<div class="agilecontactw3ls" id="agilecontactw3ls">
+    <div class="container">
+      <h3>Bienvenido al panel admin</h3>
+    </div>
 </div>

@@ -1121,7 +1121,7 @@ figure.effect-apollo:hover figcaption::before {
 	color: #FFF;
 }
 
-.agilecontactw3ls-grid input[type="text"], .agilecontactw3ls-grid input[type="email"], .agilecontactw3ls-grid textarea {
+.agilecontactw3ls-grid input[type="text"], .agilecontactw3ls-grid input[type="email"], .agilecontactw3ls-grid textarea, .agilecontactw3ls-grid input[type="password"]  {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #0199e6;

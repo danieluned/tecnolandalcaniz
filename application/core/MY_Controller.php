@@ -30,7 +30,12 @@ class Admin_Controller extends MY_Controller {
         $this->load->library('ion_auth');
         if (!$this->ion_auth->logged_in()){
             //redirigir al usuario a la pagina de logeo
-            redirect('admin/user/login','refresh');
+            redirect('admin/usuario/login','refresh');
+        }
+        $this->data['current_user'] = $this->ion_auth->user()->row(); 
+        $this->data['current_user_menu'] = "";
+        if($this->ion_auth->in_group("admin")){
+            $this->data['current_user_menu'] = $this->load->view('templates/fragmentos/admin_menu',NULL,TRUE);
         }
         $this->data['title'] = 'Tecnoland Alcañiz - Admin';
     }

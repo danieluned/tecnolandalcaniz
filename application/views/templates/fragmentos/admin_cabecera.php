@@ -58,7 +58,7 @@
 
 <!-- Body -->
 <body>
-	<?php if ($this->ion_auth->logged_in()){?>
+	
 	<!-- Header -->
 	<div class="agileheader" id="agileitshome">
 
@@ -75,22 +75,41 @@
 					</button>
 					<!-- Logo -->
 					<div class="logo">
-						<a class="navbar-brand logo-w3l button" href="<?= base_url()?>"><img src="<?= assets()?>images/snText.png" style="width:34px;height:34px;" class="d-inline-block align-top" alt=""> <span class="hidden-xs">TECNOLAND ALCAÑIZ -</span> ADMIN </a>
+						<a class="navbar-brand logo-w3l button" href="<?= base_url()?>"><img src="<?= assets()?>images/snText.png" style="width:34px;height:34px;" class="d-inline-block align-top" alt=""> <span class="hidden-xs">TECNOLAND</span> <span>ADMIN<span></span> </a>
 					</div>
 					<!-- //Logo -->
 				</div>
+				<?php if ($this->ion_auth->logged_in()){?>
 				<div id="navbar" class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
-						<li><a href="<?php echo site_url('admin/user/logout');?>">Logout</a></li>
+					<?php if ($this->ion_auth->is_admin()){?>
+						<li><a href="<?php echo site_url('admin/grupos'); ?>">Grupos</a></li>
+      					<li><a href="<?php echo site_url('admin/usuarios'); ?>">Usuarios</a></li>
+					<?php }?>
+						<li><a href="<?php echo site_url('admin/usuario/perfil');?>">Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="<?php echo site_url('admin/usuario/logout');?>">Logout</a></li>
   					</ul>
 				</div><!-- //Navbar-Collapse -->
-				
-
+				<?php }?>
 			</nav>
+				
 		</div>
 		<!-- //Navigation -->
 	</div>
 	<br/><br/><br/>
 	<!-- //Header -->
-	
-	<?php }?>
+	<?php
+    if($this->session->flashdata('message'))
+    {
+    ?>
+      <div class="container">
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+    aria-hidden="true">&times;</span></button>
+          <?php echo $this->session->flashdata('message');?>
+        </div>
+      </div>
+    <?php
+    }
+    ?>
