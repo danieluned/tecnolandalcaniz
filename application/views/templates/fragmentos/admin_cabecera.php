@@ -29,7 +29,7 @@
 <meta name="keywords" content="<?= $keywords?>">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Meta-Tags -->
-
+<link rel="icon" href="<?=base_url()?>/favicon.ico" type="image/gif">
 <!-- Custom-Stylesheet-Links -->
 <!-- Bootstrap-CSS -->	  <link rel="stylesheet" href="<?= assets()?>css/bootstrap.min.css"  type="text/css" media="all">
 <!-- Index-Page-CSS -->	  <link rel="stylesheet" href="<?= assets()?>css/style.css"		   type="text/css" media="all">
@@ -45,7 +45,7 @@
 <!-- //Fonts -->
 
 <!-- Font-Awesome-File-Links -->
-<!-- CSS --> <link rel="stylesheet" href="<?= assets()?>css/font-awesome.min.css" 	 type="text/css" media="all">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!-- TTF --> <link rel="stylesheet" href="<?= assets()?>fonts/fontawesome-webfont.ttf" type="text/css" media="all">
 <!-- //Font-Awesome-File-Links -->
 

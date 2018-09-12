@@ -3,9 +3,9 @@
 <?php $this->load->view('templates/fragmentos/admin_cabecera'); ?>
 
 
-	<div class="main-content">
-		<?php echo $the_view_content;?>
-	</div>
+<div class="pageContentWrapper">
+	<?php echo $the_view_content;?>
+</div>
 
 
 

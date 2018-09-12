@@ -1,5 +1,5 @@
 <!-- Footer -->
-	<div class="agilefooterwthree" id="agilefooterwthree">
+	<div class="agilefooterwthree"  id="agilefooterwthree">
 		<div class="container">
 			<div class="agilefooterwthreebottom">
 				<div class="col-md-6 agilefooterwthreebottom-grid agilefooterwthreebottom-grid1">

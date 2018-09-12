@@ -20,5 +20,27 @@ $( document ).ready(function() {
 	});
 	*/
 	$('img[alt="www.000webhost.com"]').hide();
+	
+
+	
+	
+	/* Mostrar un texto escribiendo */
+	var txt = 'Bienvenido al panel admin.';
+	var i = 0;
+	var speed = 150;
+	
+	function escribir() {
+	  if (i < txt.length) {
+	    document.getElementById("saludar").innerHTML += txt.charAt(i);
+	     i++;
+	     setTimeout(escribir, speed);
+	  }
+	 
+	 
+	}
+	if ($("#saludar").size()>0){
+		escribir();
+	}
+
 });
 

@@ -6,7 +6,7 @@
 					<img src="<?= assets()?>images/carousel/1.png" alt="Game Robo">
 					<div class="heading">
 						<h1>TECNOLAND ALCAÑIZ</h1>
-						<h2>TORNEOS, COSPLAYs, CONCURSOS</h2>
+						<h2>TORNEOS, COSPLAYS, CONCURSOS</h2>
 						<h3>UN LUGAR UNICO PARA DISFRUTAR</h3>
 					</div>
 					
@@ -35,11 +35,21 @@
 		<div class="container">
 			<div class="w3lsaboutaits-grids">
 				<div class="col-md-6 w3lsaboutaits-grid w3lsaboutaits-grid-1">
-					<h3>Choose from 10000+ Games to Download</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<h3>Bienvenido a Tecnoland</h3>
+					<p>Ya se acerca la nueva edición 2018, y con ella nuevas sospresas. 
+						Si aun no nos conoces, somos un grupo de amigos del Bajo Aragón que 
+						les encanta los juegos y celebramos cada año en noviembre una Lan Party en Alcañiz.						
+					</p>
+					<p> Con esta nueva edición tambien traemos nuevas mejoras en la pagina web, ahora podreis
+					seguir al detalle cada uno de los torneos que se celebren con el sistema de brackets de la página web.</p>
+					<p> Si aun no estais inscritos apuntaros en el siguiente enlace:</p>
+					 <p >
+					 <a href="#">Inscripciones Tecnoland 2018</a>
+					</p>
 				</div>
 				<div class="col-md-6 w3lsaboutaits-grid w3lsaboutaits-grid-2">
-					<img src="<?= assets()?>images/about.jpg" alt="Game Robo">
+				
+					<img src="<?= assets()?>images/p2.jpg" alt="Foto Tecnoland 2017">
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -57,7 +67,7 @@
 					<figure>
 						<img src="<?= assets()?>images/platform-1.jpg" alt="Game Robo" class="img-responsive">
 						<figcaption>
-							<h4>PC</h4>
+							<h4>Torneos de PC</h4>
 							<p><span><img src="<?= assets()?>images/platform-1-icon.png" alt="Game Robo"></span></p>
 						</figcaption>
 					</figure>
@@ -106,14 +116,14 @@
 	<!-- Tabs -->
 	<div class="wthreetabsaits" id="wthreetabsaits">
 		<section>
-			<h3>Collection</h3>
+			<h3>Eventos</h3>
 			<div class="tabs tabs-style-line">
 				<nav class="container">
 					<ul>
-						<li><a href="#section-line-1"><span>POPULAR</span></a></li>
-						<li><a href="#section-line-2"><span>NEW ARRIVALS</span></a></li>
-						<li><a href="#section-line-3"><span>BEST SELLERS</span></a></li>
-						<li><a href="#section-line-4"><span>EDITOR'S PICK</span></a></li>
+						<li><a href="#section-line-1"><span>TORNEOS</span></a></li>
+						<li><a href="#section-line-2"><span>COSPLAY</span></a></li>
+						<li><a href="#section-line-3"><span>CONCURSOS</span></a></li>
+						<li><a href="#section-line-4"><span>BATTLEFIELD</span></a></li>
 					</ul>
 				</nav>
 				<div class="content-wrap">
@@ -905,7 +915,7 @@
 	<div class="wthreeblogsaits" id="wthreeblogsaits">
 		<div class="wthreeblogsaits-grids">
 
-			<h3>Latest Blogs & News</h3>
+			<h3>Ultimas Noticas</h3>
 			<div class="col-md-3 wthreeblogsaits-grid wthreeblogsaits-grid-1">
 				<a href="#" data-toggle="modal" data-target="#myModal1"><img src="<?= assets()?>images/blog-1.jpg" alt="Game Robo"></a>
 				<span class="w3date">10-10-2016</span>
@@ -1010,7 +1020,7 @@
 
 	<!-- Portfolio -->
 	<div class="w3portfolioaits" id="w3portfolioaits">
-	<h3>Portfolio</h3>
+	<h3>Galeria</h3>
 		<div class="w3portfolioaits-items">
 			<div class="col-md-3 w3portfolioaits-item w3portfolioaits-item-1">
 				<a class="example-image-link" href="<?= assets()?>images/popular-1.jpg" data-lightbox="example-set" data-title="">
@@ -1149,28 +1159,28 @@
 					<div class="w3lsstatsaits-img">
 						<img src="<?= assets()?>images/stats-1.png" alt="Corsa Racer">
 					</div>
-					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='10000' data-delay='5' data-increment=4>10000</div>
-					<p>Games</p>
+					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='130' data-delay='10' data-increment="1">130</div>
+					<p>Juegos</p>
 				</div>
 				<div class="col-md-3 w3lsstatsaits-grid w3lsstatsaits-grid-2">
 					<div class="w3lsstatsaits-img">
 						<img src="<?= assets()?>images/stats-2.png" alt="Corsa Racer">
 					</div>
-					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='1657033000' data-delay='5' data-increment="1">1657033000</div>
-					<p>Downloads</p>
+					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='1657033000' data-delay='10' data-increment="1">1657000</div>
+					<p>Premios</p>
 				</div>
 				<div class="col-md-3 w3lsstatsaits-grid w3lsstatsaits-grid-3">
 					<div class="w3lsstatsaits-img">
 						<img src="<?= assets()?>images/stats-3.png" alt="Corsa Racer">
 					</div>
-					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='192000' data-delay='5' data-increment="11">192000</div>
-					<p>Followers</p>
+					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='192000' data-delay='40' data-increment="11">1920</div>
+					<p>Asistentes</p>
 				</div>
 				<div class="col-md-3 w3lsstatsaits-grid w3lsstatsaits-grid-4">
 					<div class="w3lsstatsaits-img">
 						<img src="<?= assets()?>images/stats-4.png" alt="Corsa Racer">
 					</div>
-					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='71600' data-delay='5' data-increment="1">71600</div>
+					<div class="w3lsstatsaitsstats counter" data-slno='1' data-min='0' data-max='71600' data-delay='2' data-increment="1">71600</div>
 					<p>Online Gamers</p>
 				</div>
 				<div class="clearfix"></div>
@@ -1248,8 +1258,36 @@
 		</div>
 	</div>
 	<!-- //Partners -->
-
-
+	<div class="w3portfolioaits" id="w3portfolioaits">
+        <h3 class="text-center">Organizadores</h3>
+        <div class="row justify-content-center pdd-top-bot organizadores">
+          <a href="https://www.alcaniz.es/"><img src="<?=assets()?>images/sponsor/aynt.gif"></a>
+          <a href="index.php"><img src="<?=assets()?>images/sponsor/tecnoland.gif"></a>
+          <a href="https://www.netllar.es/"><img src="<?=assets()?>images/sponsor/netllar.gif"></a>
+        </div>
+        <h3 class="text-center">Colaboradores</h3>
+        <div class="row justify-content-center pdd-top-bot sponsor">
+          
+          <a href="https://www.appalcaniz.es/"><img src="<?=assets()?>images/sponsor/app.jpg"></a>
+          <a href="https://www.facebook.com/FRkNights/"><img src="<?=assets()?>images/sponsor/freack.gif"></a>
+          <a href="https://www.marioelectrodomesticos.com/"><img src="<?=assets()?>images/sponsor/mario.gif"></a>          
+          <a href="https://www.telepizza.es/pizzerias/teruel/alcaniz"><img src="<?=assets()?>images/sponsor/telepizza.png"></a>
+          <a href="http://www.bajoaragon.es/"><img src="<?=assets()?>images/sponsor/comarcabajoaragon.gif"></a>
+          <a href="http://zahira.portfoliobox.net/"><img src="<?=assets()?>images/sponsor/zahira.jpg"></a>  
+          <a href="https://nextlevelzgz.com/"><img src="<?=assets()?>images/sponsor/nextLevel.jpg"></a>
+          <a href="http://kontrolgrips.com/"><img src="<?=assets()?>images/sponsor/kontrolGrips.png"></a>          
+          <a href="https://fadairsoft.es/"><img src="<?=assets()?>images/sponsor/fada.png"></a>
+          <a href="http://www.hotelguadalope.es/"><img src="<?=assets()?>images/sponsor/hotelguadalope.jpg"></a>
+                
+                    
+        </div>
+        <h3 class="text-center">Locales y Comunidades Herman@s</h3>
+        <div class="row justify-content-center pdd-top-bot sponsor">          
+          <a href="https://www.mpgaming.pro/"><img src="<?=assets()?>images/sponsor/Logotipo_MPG_Mini.png"></a>
+          <a href="https://www.facebook.com/belegendbar/"><img src="<?=assets()?>images/sponsor/bealegend.jpg"></a>
+          <a href="https://bepro-esports.com/"><img src="<?=assets()?>images/sponsor/brPRO.gif"></a>                                                
+        </div>
+	</div>
 	
 	<!-- Newsletter -->
 	<div class="w3lsnewsletter" id="w3lsnewsletter">

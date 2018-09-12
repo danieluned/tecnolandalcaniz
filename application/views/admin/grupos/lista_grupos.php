@@ -15,8 +15,8 @@
         foreach($grupos as $grupo)
       {
           echo '<tr>';
-          echo '<td>'.$grupo->id.'</td><td>'.anchor('admin/usuarios/index/'.$grupo->id,$grupo->name).'</td><td>'.$grupo->description.'</td><td>'.anchor('admin/grupos/editar/'.$grupo->id,'<span class="glyphicon glyphicon-pencil"></span>');
-          if(!in_array($grupo->name, array('admin','members'))) echo ' '.anchor('admin/grupos/borrar/'.$grupo->id,'<span class="glyphicon glyphicon-remove"></span>');
+          echo '<td>'.$grupo->id.'</td><td>'.anchor('admin/usuarios/index/'.$grupo->id,$grupo->name).'</td><td>'.$grupo->description.'</td><td>'.anchor('admin/grupos/editar/'.$grupo->id,'<i class="fas fa-edit"></i>');
+          if(!in_array($grupo->name, array('admin','members'))) echo ' '.anchor('admin/grupos/borrar/'.$grupo->id,'<i style="color:red;" class="fas fa-trash-alt"></i>');
           echo '</td>';
           echo '</tr>';
       }

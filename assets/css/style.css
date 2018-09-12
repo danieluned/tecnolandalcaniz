@@ -119,9 +119,9 @@ a:focus, a:hover {
 	}
 
 	.navbar-inverse .navbar-brand {
-		color: #FFF;
+		color: #C9C7C7;
 		font-family: 'Press Start 2P', cursive;
-		font-size: 40px;
+		font-size: 39px;
 		line-height: 45px;
 	}
 
@@ -1576,7 +1576,7 @@ ul.social-icons li a.youtube:hover {
 
 @media screen and (max-width: 966px) {
 	.navbar-inverse .navbar-brand {
-		font-size: 27px;
+		font-size: 24px;
 		padding-right: 0;
 		line-height: 34px;
 	}
