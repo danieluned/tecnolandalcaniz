@@ -1,4 +1,3 @@
-#Tecnoland Web Git Hub
 Este repositorio contiene la pagina de Tecnoland Web para 
 su desarrollo 
 
