@@ -3,7 +3,7 @@
 -- Table `competicion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `competicion` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(200) NULL,
   `maxequipos` INT NULL DEFAULT 0,
   `minequipos` INT NULL DEFAULT 0,
@@ -18,11 +18,12 @@ CREATE TABLE IF NOT EXISTS `competicion` (
   `iniciofechapresencial` DATETIME NULL,
   `finfechapresencial` DATETIME NULL,
   `costeinscripcion` DOUBLE NULL,
-  `costeincripcionequipo` DOUBLE NULL,
+  `costeinscripcionequipo` DOUBLE NULL,
   `ganar` INT NULL DEFAULT 3,
   `empatar` INT NULL DEFAULT 1,
   `perder` INT NULL DEFAULT 0,
   `fecha` DATETIME NULL,
+  `porequipos` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -138,7 +139,7 @@ ENGINE = InnoDB;
 -- Table `periodosdescanso`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `periodosdescanso` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `competicion_id` INT NOT NULL,
   `fechainicio` DATETIME NULL,
   `fechafin` DATETIME NULL,
