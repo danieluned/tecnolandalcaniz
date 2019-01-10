@@ -12,7 +12,9 @@
     
       <table class="table table-hover table-bordered table-condensed">
       <tr>
-      	<td>ID</td><td>Nombre</td><td>Acciones</td>
+      	<td>ID</td>
+      	<td>Nombre</td>
+      	<td>Acciones</td>
       </tr>
       <?php foreach($competiciones as $competicion){?>
       
