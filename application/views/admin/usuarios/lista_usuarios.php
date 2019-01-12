@@ -16,7 +16,7 @@
       {
         echo '<tr>';
         echo '<td>'.$usuario->id.'</td><td>'.$usuario->username.'</td><td>'.$usuario->first_name.' '.$usuario->last_name.'</td></td><td>'.$usuario->email.'</td><td>'.date('Y-m-d H:i:s', $usuario->last_login).'</td><td>';
-        if($current_user->id != $usuario->id) echo anchor('admin/usuarios/editar/'.$usuario->id,'<i class="fas fa-edit"></i>').' '.anchor('admin/usuarios/borrar/'.$usuario->id,'<i style="color:red;" class="fas fa-trash-alt"></i>');
+        if($current_user->id != $usuario->id) echo anchor('admin/usuarios/editar/'.$usuario->id,'<i class="fas fa-edit"></i>').' '.anchor('admin/usuarios/borrar/'.$usuario->id,'<i style="color:red;" class="fas fa-trash-alt"></i>',array('class'=>'borrar'));
         else echo '&nbsp;';
         echo '</td>';
         echo '</tr>';

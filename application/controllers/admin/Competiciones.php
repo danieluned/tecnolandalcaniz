@@ -1,6 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
  
+/**
+ * Controlador encargado de crear, editar y borrar la lista de competiciones
+ * @author Usuario
+ *
+ */
 class Competiciones extends Admin_Controller
 {
  
@@ -15,6 +20,7 @@ class Competiciones extends Admin_Controller
       redirect('admin','refresh');
     }
     $this->load->model('competicion');
+ 
   }
  
   /**
@@ -44,7 +50,6 @@ class Competiciones extends Admin_Controller
       
           // Si es incorrecto mostrarle la información necesaria para crear la competicion 
           $this->data['competicion'] = new Competicion();
-          $this->load->helper('form');
           $this->render('admin/competiciones/crear');
           
       }else{
@@ -54,6 +59,10 @@ class Competiciones extends Admin_Controller
           redirect('admin/competiciones','refresh');
       }
   }
+  /**
+   * Edita los parametros generales de una competicion 
+   * @param unknown $id
+   */
   public function editar($id = null){
       
       //Titulo de la página
@@ -72,7 +81,6 @@ class Competiciones extends Admin_Controller
       if( $this->form_validation->run() === FALSE ){
           
           // Si es incorrecto mostrarle la información necesaria para crear la competicion
-          $this->load->helper('form');
           $this->render('admin/competiciones/crear');
           
       }else{
@@ -81,16 +89,48 @@ class Competiciones extends Admin_Controller
           redirect('admin/competiciones','refresh');
       }
   }
-  public function borrar($id = NULL)
-  {
-      if(is_null($id)){
-      
-          $this->session->set_flashdata('message','Seleciona una competición');
-      }else{
-      
-          $this->competicion->borrar($id);
-          $this->session->set_flashdata('message','Borrado');
-      }
+  
+  /**
+   * Borra una competición 
+   * @param unknown $id
+   */
+  public function borrar($id){
+  
+      $this->competicion->borrar($id);
+      $this->session->set_flashdata('message','Borrado');
+     
       redirect('admin/competiciones','refresh');
+  }
+  
+  /**
+   * Permite ver y añadir una lista de equipos/jugadores a la competición
+   * @param unknown $id
+   */
+  public function ver($id){
+      //Titulo de la página
+      
+      $this->data['competicion'] = $this->competicion->get($id);
+      $this->data['title'] = 'Competición: '.$this->data['competicion']->nombre;
+      if(is_null($this->data['competicion']) ){
+          $this->session->set_flashdata('message','Seleciona una competición');
+          redirect('admin/competiciones','refresh');
+      }
+      
+      
+      
+      
+      if(isset($_POST['inscrito'])){
+          $this->competicion->actualizarInscrito($id,explode("\n", str_replace("\r", "", $_POST['inscrito'])));
+          $this->session->set_flashdata('message','Actualizado Lista de Participantes');
+      }
+      if(isset($_POST['inscritoequipo'])){
+          $this->competicion->actualizarInscritoEquipo($id,explode("\n", str_replace("\r", "", $_POST['inscritoequipo'])));
+          $this->session->set_flashdata('message','Actualizado Lista de Equipos');
+      }
+      
+      $this->data['inscrito'] = $this->competicion->getInscrito($id);
+      $this->data['inscritoequipo'] = $this->competicion->getInscritoEquipo($id);
+      
+      $this->render('admin/competiciones/ver');  
   }
 }

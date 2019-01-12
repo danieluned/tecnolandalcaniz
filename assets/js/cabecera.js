@@ -41,6 +41,13 @@ $( document ).ready(function() {
 	if ($("#saludar").size()>0){
 		escribir();
 	}
-
+	
+	
+	$(".borrar").on("click", function(e) {
+		var r = confirm("¿Borrar!?");
+		if(!r){
+			 e.preventDefault();	
+		}
+	});
 });
 

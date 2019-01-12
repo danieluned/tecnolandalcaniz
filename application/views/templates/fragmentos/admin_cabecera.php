@@ -165,6 +165,7 @@
 				<div id="navbar" class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
 					<?php if ($this->ion_auth->is_admin()){?>
+					<li><a href="<?php echo site_url('admin/competiciones'); ?>">Competiciones</a></li>
 						<li><a href="<?php echo site_url('admin/grupos'); ?>">Grupos</a></li>
       					<li><a href="<?php echo site_url('admin/usuarios'); ?>">Usuarios</a></li>
 					<?php }?>
