@@ -1,8 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-
+<?php 
+$aux = "crear"; 
+if(!$crear){
+    $aux = "editar/".$competicion->id;
+}
+?>
 <script>
 $(function(){
-	$("select[name='porequipos']").change(function(){
+	$("select[name='moo']").change(function(){
 		if($(this).val() == "1"){
 			$("label.sinequipo input").prop("disabled",true);
 			$("label.sinequipo").hide();
@@ -24,99 +29,113 @@ $(function(){
 <div class="container" style="margin-top: 60px;">
   <div class="row">
     <div class="col-lg-4 col-lg-offset-4">
-      <h1>Crear competición</h1>
-      <form action="<?=site_url("admin/competiciones/crear")?>" method="post">
+      <h1><?=$title?></h1>
+      
+      <form action="<?=site_url("admin/competiciones/".$aux)?>" method="post">
           <div class="form-group">
-                <label >
+                <label>
+                ID
+                <input class="form-control" type="text" readonly value="<?=$competicion->id?>"/>
+                <input class="form-control" type="hidden" name="c_id" value="<?=$competicion->id?>"/>
+                </label>
+                
+                <label>
                 Nombre
-                <input class="form-control" type="text" name="nombre"/>
+                <input class="form-control" type="text" name="c_nombre" value="<?=$competicion->nombre?>"/>
+                </label>
+                <label >
+                Información
+                <input class="form-control" type="text" name="c_info" value="<?=$competicion->info?>"/>
                 </label>
                 <label>
-                ¿Por equipos?
-                <select class="form-control" name="porequipos">
-                	<option selected="selected" value="0">No</option>
-                	<option value="1">Si</option>
+                Modo
+                <select class="form-control" name="c_modo">
+                	<option <?php echo $competicion->modo === "0"?"selected='selected'":"";?> value="0">Torneo</option>
+                	<option <?php echo $competicion->modo === "1"?"selected='selected'":"";?> value="1">Liga</option>
+                	<option <?php echo $competicion->modo === "2"?"selected='selected'":"";?> value="2">Sorteo</option>
+                	<option <?php echo $competicion->modo === "2"?"selected='selected'":"";?> value="3">Liga + Torneo final (Equipos)</option>
                 </select>
-                </label>             
-                <label class="equipo" style="display:none;">
+                </label> 
+                            
+                <label>
                 Maximo de equipos
-                <input class="form-control" type="number"  name="maxequipos" disabled/>
+                <input class="form-control" type="number"  name="c_maxequipos" value="<?=$competicion->maxequipos?>"/>
                 </label>
                 
-                <label class="equipo" style="display:none;">
+                <label>
                 Minimo de equipos
-                <input class="form-control" type="number" name="minequipos" disabled/>
+                <input class="form-control" type="number" name="c_minequipos" value="<?=$competicion->minequipos?>"/>
                 </label>
                 
-                <label class="equipo" style="display:none;">
+                <label>
                 Maximo de jugadores por equipo
-                <input class="form-control" type="number" name="maxjugadoresequipo" disabled/>
+                <input class="form-control" type="number" name="c_maxjugadoresequipo" value="<?=$competicion->maxjugadoresequipo?>"/>
                 </label>
                 
-                <label class="equipo" style="display:none;">
+                <label>
                 Minimo de jugadores por equipo
-                <input class="form-control" type="text" name="minjugadoresequipo" disabled/>
+                <input class="form-control" type="number" name="c_minjugadoresequipo" value="<?=$competicion->minjugadoresequipo?>"/>
                 </label>
                 
-				<label class="sinequipo">
+				<label>
                 Minimo de jugadores
-                <input class="form-control" type="text" name="minjugadores"/>
+                <input class="form-control" type="number" name="c_minjugadores" value="<?=$competicion->minjugadores?>"/>
                 </label>
                 
-                <label class="sinequipo">
+                <label>
                 Maximo de jugadores
-                <input class="form-control" type="text" name="minjugadores"/>
+                <input class="form-control" type="number" name="c_maxjugadores" value="<?=$competicion->maxjugadores?>"/>
                 </label>
                 
                 <label>
                 Inicio inscripcion
-                <input class="form-control" type="datetime-local" name="inicioinscripcion"/>
+                <input class="form-control" type="datetime-local" name="c_inicioinscripcion" value="<?=date("Y-m-d\TH:i:s", strtotime($competicion->inicioinscripcion))?>"/>
                 </label> 
                 <label>
                 Fin inscripcion
-                <input class="form-control" type="datetime-local" name="fininscripcion"/>
+                <input class="form-control" type="datetime-local" name="c_fininscripcion" value="<?=date('Y-m-d\TH:i:s',strtotime($competicion->fininscripcion))?>"/>
                 </label>
                 
                 <label>
                 Inicio fase regular
-                <input class="form-control" type="datetime-local" name="iniciofaseregular"/>
+                <input class="form-control" type="datetime-local" name="c_iniciofaseregular" value="<?=date('Y-m-d\TH:i:s',strtotime($competicion->iniciofaseregular))?>"/>
                 </label>
                 <label>
                 Fin fase regular
-                <input class="form-control" type="datetime-local" name="iniciofaseregular"/>
+                <input class="form-control" type="datetime-local" name="c_finfaseregular" value="<?=date('Y-m-d\TH:i:s',strtotime($competicion->finfaseregular))?>"/>
                 </label>
                 
                 <label>
                 Inicio fecha presencial
-                <input class="form-control" type="datetime-local" name="iniciofaseregular"/>
+                <input class="form-control" type="datetime-local" name="c_iniciofechapresencial" value="<?=date('Y-m-d\TH:i:s',strtotime($competicion->iniciofechapresencial))?>"/>
                 </label>
                 <label>
                 Fin fecha presencial
-                <input class="form-control" type="datetime-local" name="iniciofaseregular"/>
+                <input class="form-control" type="datetime-local" name="c_finfechapresencial" value="<?=date('Y-m-d\TH:i:s',strtotime($competicion->finfechapresencial))?>"/>
                 </label>
                 
-                <label class="sinequipo">
+                <label>
                 Coste inscripcion
-                <input class="form-control" type="number" placeholder="0.00" name="costeinscripcion" min="0" value="0" step="0.01"/>
+                <input class="form-control" type="number"  name="c_costeinscripcion" step="0.01" value="<?=$competicion->costeinscripcion?>"/>
                  </label>
-                 <label class="equipo" style="display:none;">
+                 <label >
                 Coste inscripcion equipo
-                <input class="form-control" type="number" disabled placeholder="0.00" name="costeinscripcionequipo" min="0" value="0" step="0.01"/>
+                <input class="form-control" type="number" " name="c_costeinscripcionequipo" step="0.01" value="<?=$competicion->costeinscripcionequipo?>"/>
                  </label>
                  
                  <label>
                 Puntos por ganar
-                <input class="form-control" type="number" name="ganar"/>
+                <input class="form-control" type="number" name="c_ganar" value="<?=$competicion->ganar?>"/>
                 </label>
                 <label>
                 Puntos por perder
-                <input class="form-control" type="number" name="perder"/>
+                <input class="form-control" type="number" name="c_perder" value="<?=$competicion->perder?>"/>
                 </label>
                 <label>
                 Puntos por empatar
-                <input class="form-control" type="number" name="empatar"/>
+                <input class="form-control" type="number" name="c_empatar" value="<?=$competicion->empatar?>"/>
                 </label>
-                <input type="submit" value="Crear"/>
+                <input type="submit" value="Guardar"/>
           </div>
       </form>
     </div>
