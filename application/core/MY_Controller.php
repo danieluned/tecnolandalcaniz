@@ -6,6 +6,8 @@ class MY_Controller extends CI_Controller {
     
     function __construct(){
         parent::__construct();
+        
+        $this->load->library('ion_auth');
         $this->data['title'] = 'Tecnoland Alcañiz';
         $this->data['keywords'] = "Tecnoland Alcañiz Lan Party Aragón Battlefield Games Videogames";
         $this->data['before_head'] = '';
@@ -27,7 +29,6 @@ class Admin_Controller extends MY_Controller {
 
     function __construct(){
         parent::__construct();
-        $this->load->library('ion_auth');
         if (!$this->ion_auth->logged_in()){
             //redirigir al usuario a la pagina de logeo
             redirect('admin/usuario/login','refresh');

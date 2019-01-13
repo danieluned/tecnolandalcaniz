@@ -55,8 +55,9 @@ class Usuarios extends Admin_Controller
               'phone' => $this->input->post('phone')
           );
           $this->ion_auth->register($username, $password, $email, $additional_data, $group_ids);
-          $this->session->set_flashdata('message',$this->ion_auth->messages());
-          redirect('admin/usuarios','refresh');
+          $me = $this->ion_auth->messages();
+          $this->session->set_flashdata('message',$me);
+          //redirect('admin/usuarios','refresh');
       }
   }
  

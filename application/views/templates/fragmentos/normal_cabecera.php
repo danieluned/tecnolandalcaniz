@@ -84,34 +84,37 @@
 						<li><a class="scroll" href="#wthreetabsaits">LAN PARTY</a></li>
 						<li><a class="scroll" href="#wthreeblogsaits">BF-PARTY</a></li>
 						<li><a class="scroll" href="#agilecontactw3ls">CONTACTO</a></li>
-						<li class="dropdown">
+						
+						<?php if ($this->ion_auth->logged_in()){?>
+        				
+						<li><a href="<?php echo site_url('usuario/perfil');?>">Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="<?php echo site_url('usuario/logout');?>">Logout</a></li>
+          				
+        				<?php }else{?>
+        				<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
 							<div class="dropdown-menu">
-								<form action="#" method="post">
+								<form action="<?=site_url('usuario/login')?>" method="post">
 									<div id="login" class="animate w3loginagile form">
 										<h3>Login</h3>
-										<input type="text" Name="Userame" placeholder="Username" required="">
-										<input type="password" Name="Password" placeholder="Password" required="">
+										<input type="text" Name="identity" placeholder="email">
+										<input type="password" Name="password" placeholder="password">
 										<div class="send-button wthree agileits">
 											<input type="submit" value="Login">
 										</div>
 										<div class="clearfix"></div>
 									</div>
 								</form>
-								<form action="#" method="post">
-									<div id="register" class="animate w3registeragile form">
-										<h3>Sign Up</h3>
-										<input type="text" Name="Name" placeholder="Name" required="">
-										<input type="text" Name="Email" placeholder="Email" required="">
-										<input type="password" Name="Password" placeholder="Password" required="">
-										<input type="text" Name="Phone Number" placeholder="Phone Number" required="">
-										<div class="send-button wthree agileits">
-											<input type="submit" value="Sign Up">
-										</div>
-									</div>
-								</form>
+								
+								<div id="register" class="animate w3registeragile form">
+									<a href="<?=site_url('usuario/login')?>">Crear una cuenta</a>
+								</div>
+								
 							</div>
 						</li>
+        				<?php }?>
+						
 					</ul>
 				</div><!-- //Navbar-Collapse -->
 
