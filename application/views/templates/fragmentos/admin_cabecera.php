@@ -146,7 +146,7 @@
 
 		<!-- Navigation -->
 		<div class="w3lsnavigation">
-			<nav class="navbar navbar-inverse agilehover-effect wthreeeffect " style="padding-bottom: 10px;">
+			<nav class="navbar navbar-inverse agilehover-effect wthreeeffect navbar-default" style="padding-bottom: 10px;">
 
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

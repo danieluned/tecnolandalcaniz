@@ -61,7 +61,6 @@ class Competiciones extends Admin_Controller
   }
   /**
    * Edita los parametros generales de una competicion 
-   * @param unknown $id
    */
   public function editar($id = null){
       
@@ -92,7 +91,6 @@ class Competiciones extends Admin_Controller
   
   /**
    * Borra una competición 
-   * @param unknown $id
    */
   public function borrar($id){
   
@@ -104,7 +102,6 @@ class Competiciones extends Admin_Controller
   
   /**
    * Permite ver y añadir una lista de equipos/jugadores a la competición
-   * @param unknown $id
    */
   public function ver($id){
       //Titulo de la página
