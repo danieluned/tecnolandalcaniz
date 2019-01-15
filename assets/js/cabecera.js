@@ -19,7 +19,7 @@ $( document ).ready(function() {
 		alert(event);
 	});
 	*/
-	$('img[alt="www.000webhost.com"]').hide();
+	$('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').hide();
 	
 
 	
