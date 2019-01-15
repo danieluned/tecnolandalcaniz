@@ -126,5 +126,16 @@ class Competicion extends CI_Model {
             }
             $this->db->query("delete from inscritoequipo where id > ".count($lista));
         }
+        
+        public function actualizarInscritoJugadoresEquipo($id,$lista,$capitan){
+            $i = 0;
+            foreach ($lista as $nick){
+                $i++;
+                $this->db->query("insert into inscritoequipo (id, competicion_id, nombre) values
+                                    (".$i.",".$id.", '".$nick."') on duplicate key update
+                                     nombre = '".$nick."'");
+            }
+            $this->db->query("delete from inscritoequipo where id > ".count($lista));
+        }
 } 
 ?>

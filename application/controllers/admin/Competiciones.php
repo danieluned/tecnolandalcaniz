@@ -127,6 +127,10 @@ class Competiciones extends Admin_Controller
           $this->competicion->actualizarInscritoEquipo($id,explode("\n", str_replace("\r", "", $_POST['inscritoequipo'])));
           $this->session->set_flashdata('message','Actualizado Lista de Equipos');
       }
+      if(isset($_POST['inscritojugadoresequipo'])){
+          $this->competicion->actualizarInscritoEquipo($id,explode("\n", str_replace("\r", "", $_POST['inscritoequipo'])));
+          $this->session->set_flashdata('message','Actualizado Lista de Equipos');
+      }
       
       $this->data['inscrito'] = $this->competicion->getInscrito($id);
       $this->data['inscritoequipo'] = $this->competicion->getInscritoEquipo($id);
