@@ -29,7 +29,7 @@ class Usuario extends MY_Controller
                     redirect('admin','refresh');
                 }else{
                     $this->session->set_flashdata('message',$this->ion_auth->errors());
-                    redirect('admin/usuario/login','refresh');
+                    redirect('admin/login','refresh');
                 }
             }
         }
