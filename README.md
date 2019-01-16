@@ -1,21 +1,19 @@
-#Tecnoland Web Git Hub dasdasdasd
+# Tecnoland Web Git Hub dasdasdasd
 Este repositorio contiene la pagina de Tecnoland Web para 
 su desarrollo 
 
 Feliz Año 2019
 
-##Enlaces de para trabajar interes
+## Enlaces de para trabajar interes
 
-###Tecnoland Servidor de pruebas
+### Tecnoland Servidor de pruebas
 [Enlace Servidor de pruebas](https://tecnolandpruebas.000webhostapp.com/)
 
-###Trello
+### Trello
 [Enlace Trello](https://trello.com/b/kMmEY7uJ/web)
 
-###Discord
+### Discord
 [Enlace Discord](https://discord.gg/9tJEfd)
 
-
-### Mi nuevo cambio
 ### Sa Dani! 
 
