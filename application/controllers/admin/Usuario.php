@@ -34,7 +34,7 @@ class Usuario extends MY_Controller
             }
         }
         $this->load->helper('form');
-        $this->render('admin/login','admin_template');
+        $this->render('admin/usuario/login','admin_template');
     }
     public function logout()
     {

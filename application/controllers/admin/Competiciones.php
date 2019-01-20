@@ -201,7 +201,20 @@ class Competiciones extends Admin_Controller
           $this->session->set_flashdata('message','Actualizado Lista de Participantes');
           
       }
-      
+      if (isset($_POST['borrarequipo'])){
+          $equipo = new Inscritoequipo();
+          $equipo->cargar($_POST);
+          $jugadores = $equipo->getInscrito();         
+          foreach($jugadores as $jugador){
+              $jugador->borrarDB();
+          }
+          $equipo->borrarDB();
+      }
+      if(isset($_POST['borrarjugador'])){
+          $jugador = new Inscrito();
+          $jugador->cargar($_POST);
+          $jugador->borrarDB();
+      }
       
       $this->render('admin/competiciones/ver');  
   }

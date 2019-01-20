@@ -4,7 +4,7 @@
 	<div class="agilecontactw3ls" id="agilecontactw3ls">
 		<div class="container">
 			<h3>Login</h3>
-			<form action=""/>
+			<form action="<?=site_url("admin/usuario/login")?>" method="post">
 				<div class="col-sm-offset-3 col-md-6 agilecontactw3ls-grid agilecontactw3ls-grid-1">
 					<div style="color:red"><?php echo $this->session->flashdata('message');?></div>
 					
@@ -15,8 +15,8 @@
 						<input type="submit" value="ENTRAR">
 					</div>
 				</div>				
-				
-			 <?php echo form_close();?>
+			 
+			 </form>
 		</div>
 	</div>
 <!-- //Login -->

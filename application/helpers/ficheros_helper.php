@@ -3,7 +3,7 @@
 
 if ( ! function_exists('createPath'))
 {
-    function createPath($path) {
+    /*function createPath($path) {
         $tags = explode( DIRECTORY_SEPARATOR ,$path);            // explode the full path
         $mkDir = "";
         
@@ -13,7 +13,11 @@ if ( ! function_exists('createPath'))
                 mkdir($mkDir, 0777);            // if not exist then make the directory
             }
         }
+    }*/
+    function createPath($path){
+        mkdir($path, null, true);
     }
+    
 }
 if ( ! function_exists('object_to_array'))
 {
