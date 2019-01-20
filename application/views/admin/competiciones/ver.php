@@ -1,119 +1,187 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<?php 
-$listajugadores = "";
-foreach ($inscrito as $ins){
-    $listajugadores .= $ins->nombre . "\n";
-}
-
-$listaequipos = "";
-foreach ($inscritoequipo as $ins){
-    $listaequipos .= $ins->nombre . "\n";
-}
-
-?>
-<script>
-function allowDrop(ev) {
-	  ev.preventDefault();
-	}
-
-	function drag(ev) {
-	  ev.dataTransfer.setData("text", ev.target.id);
-	}
-
-	function drop(ev) {
-	  ev.preventDefault();
-	  var data = ev.dataTransfer.getData("text");
-	  ev.target.appendChild(document.getElementById(data));
-	}
-
-</script>
-<style>
-.drop {
-  width: 350px;
-  height: 70px;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
-}
-</style>
 <div class="container" style="margin-top: 60px;">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-      <h1><?=$title?></h1>
-      <p>Formulario rapido para copy paste de listas de jugadores o equipos</p>
-      <p>Solo actualiza los nombres de las posiciones, por lo que si ya esta en marcha el torneo OJO si el primer jugador lleva 10 puntos, seguira llevando 10 puntos 
-      aunque se le ponga otro nombre</p>
-      
-      <form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post">
-          <div class="form-group">
-                <label for="a">
-                Jugadores
-                </label>
-                <textarea id="a" data-limit-rows="true" rows="<?=$competicion->maxjugadores?>" class="form-control" name="inscrito"><?=$listajugadores?></textarea> 
-                
-                 <input type="submit" class="form-control" value="Guardar"/>
-          </div>
-      </form>
-       <form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post">
-          <div class="form-group">
-                <label for="b">
-                Equipos
-                </label>
-                <textarea id="b" data-limit-rows="true" rows="<?=$competicion->maxequipos?>" class="form-control" name="inscritoequipo"><?=$listaequipos?></textarea>
-                
-                <input type="submit" class="form-control" value="Guardar"/>
-          </div>
-      </form>
-     
-     <?php  foreach ($inscritoequipo as $eq){
-                $listajugadoresequipo = "";
-                $capitan = "";
-                 
-                foreach ($inscrito as $ju){
-                    
-                    if($eq->id == $ju->equipoinscrito_id){
-                        if($eq->capitan == $ju->equipoinscrito_id){
-                            $capitan = $ins->nombre;
-                        }
-                        $listajugadoresequipo .= $ins->nombre . "\n";
-                    }
-                    
-                }
-               
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<h1><?=$competicion->nombre?></h1>
+			<h4><?=$competicion->info?></h4>
+			<h2>Lista de equipos</h2>
+		</div>
+	</div>
+</div>
+<hr/>
+<?php
+$equipos = $competicion->getInscritoEquipo();
+foreach ($equipos as $equipo) {
+    ?>
+<div class="container">
+	<div class="row">
+		<div class="col-sm">
+			<img style="" class="img-fluid"
+				src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo->id?>/<?=$equipo->logotipo?>"></img>
+			<div class="row">
+				<form
+					action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"
+					method="post" enctype="multipart/form-data">
+					<input type="hidden" name="competicion_id"
+						value="<?=$competicion->id?>" /> <input type="hidden" name="id"
+						value="<?=$equipo->id?>" />
 
+
+					<div class="row">
+						<label for="n_nombre"> Nombre </label> <input id="n_nombre"
+							class="form-control" name="nombre" type="text"
+							value="<?=$equipo->nombre?>" />
+
+					</div>
+
+					<div class="row">
+						<label for="n_info"> Info </label>
+						<textarea id="n_info" class="form-control" name="info"><?=$equipo->info?></textarea>
+
+					</div>
+
+					<div class="row">
+						<label for="n_logotipo"> Logotipo </label> <input id="n_logotipo"
+							class="form-control" name="logotipo" type="file" />
+
+					</div>
+
+					<div class="row">
+						<input type="submit" class="form-control" name="inscribirequipo"
+							value="Guardar Info Equipo" />
+					</div>
+				</form>
+			</div>
+
+			<div class="col-sm">
+    	<?php
+    $inscrito = $equipo->getInscrito();
+    if (count($inscrito) > 0) {
+        foreach ($inscrito as $jugador) {
+            ?>
+			<hr/>
+<div class="container">
+
+	<div class="row">
+	<img style="" class="img-fluid"
+				src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscrito/<?=$jugador->id?>/<?=$jugador->logotipo?>"></img>
+			
+		<form
+			action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"
+			method="post" enctype="multipart/form-data">
+			<input type="hidden" name="competicion_id"
+				value="<?=$competicion->id?>" />
+			<input type="hidden" name="equipoinscrito_id" value="<?=$equipo->id?>"/>
+			<input type="text" disabled value="<?=$jugador->id?>"/>
+			<input type="hidden" name="id" value="<?=$jugador->id?>"/>
+			<div class="row">
+				<label for="n_nombre"> Nombre </label> <input id="n_nombre"
+					class="form-control" name="nombre" type="text" value="<?=$jugador->nombre?>" />
+
+			</div>
+
+			<div class="row">
+				<label for="n_info"> Info </label>
+				<textarea id="n_info" class="form-control" name="info"><?=$jugador->info?></textarea>
+
+			</div>
+
+			<div class="row">
+				<label for="n_logotipo"> Logotipo </label> <input id="n_logotipo"
+					class="form-control" name="logotipo" type="file" value="<?=$jugador->info?>" />
+
+			</div>
+
+			<div class="row">
+				<input type="submit" class="form-control" name="inscribirjugadorequipo"
+					value="Guardar cambios" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<?php
+        }
+    } else {
         ?>
-      <form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post">
-          <div class="form-group">
-                <label for="c_<?=$eq->id?>">
-                Jugadores del equipo <span style="font-weight: lighter;">"<?=$eq->nombre?>"</span>
-                </label>
-                <textarea id="c_<?=$eq->id?>" data-limit-rows="true" rows="<?=$competicion->maxjugadoresequipo?>" class="form-control" name="inscritojugadoresequipo"><?=$listajugadoresequipo?></textarea>
-                <label for="d_<?=$eq->id?>">
-                Capitan del <span style="font-weight: lighter;">"<?=$eq->nombre?>"</span>
-                </label>
-                <input type="text" id="d_<?=$eq->id?>" class="form-control" name="capitan" value="<?=$capitan?>"/>
-                <input type="submit" class="form-control" value="Actualizar: '<?=$eq->nombre?>'"/>
-          </div>
-      </form>
+Sin jugadores
+<?php
+    }
+    ?>	         
+    <hr/>
+<div class="container">
 
- 	<?php } ?>
- 	<hr/>
- 	<?php  foreach ($inscrito as $ju){
- 	          // if(!$ju->equipoinscrito_id){
- 	           ?>
- 	    <p id="drag1<?=$ju->id?>" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69"><?=$ju->nombre?></p>
- 	
-         <?php
-                //	}
-         	}
- 	    ?>
-               
-          
- 	<?php  foreach ($inscritoequipo as $eq){
- 	
- 	    ?>
-               
-          <div class="drop" id="equipoventana_<?=$eq->id?>" ondrop="drop(event)" ondragover="allowDrop(event)"></div>       
-     <?php  } ?>
-   </div>
-  </div>
+	<div class="row">
+		<form
+			action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"
+			method="post" enctype="multipart/form-data">
+			<input type="hidden" name="competicion_id"
+				value="<?=$competicion->id?>" />
+			<input type="hidden" name="equipoinscrito_id" value="<?=$equipo->id?>"/>
+			<div class="row">
+				<label for="n_nombre"> Nombre </label> <input id="n_nombre"
+					class="form-control" name="nombre" type="text"  />
+
+			</div>
+
+			<div class="row">
+				<label for="n_info"> Info </label>
+				<textarea id="n_info" class="form-control" name="info"></textarea>
+
+			</div>
+
+			<div class="row">
+				<label for="n_logotipo"> Logotipo </label> <input id="n_logotipo"
+					class="form-control" name="logotipo" type="file"  />
+
+			</div>
+
+			<div class="row">
+				<input type="submit" class="form-control" name="inscribirjugadorequipo"
+					value="Añadir Nuevo Jugador" />
+			</div>
+		</form>
+	</div>
+</div>          		
+			</div>
+
+		</div>
+	</div>
+</div>
+<hr/>
+<?php }?>
+<hr/>
+<div class="container">
+
+	<div class="row">
+		<form
+			action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"
+			method="post" enctype="multipart/form-data">
+			<input type="hidden" name="competicion_id"
+				value="<?=$competicion->id?>" />
+
+			<div class="row">
+				<label for="n_nombre"> Nombre </label> <input id="n_nombre"
+					class="form-control" name="nombre" type="text" value="" />
+
+			</div>
+
+			<div class="row">
+				<label for="n_info"> Info </label>
+				<textarea id="n_info" class="form-control" name="info"></textarea>
+
+			</div>
+
+			<div class="row">
+				<label for="n_logotipo"> Logotipo </label> <input id="n_logotipo"
+					class="form-control" name="logotipo" type="file" value="" />
+
+			</div>
+
+			<div class="row">
+				<input type="submit" class="form-control" name="inscribirequipo"
+					value="Añadir Nuevo Equipo" />
+			</div>
+		</form>
+	</div>
 </div>

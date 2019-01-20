@@ -8,6 +8,7 @@
   <div class="row">
     <div class="col-lg-12" style="margin-top: 10px;">
     <?php
+   
     if($competiciones){?>
     
       <table class="table table-hover table-bordered table-condensed">
@@ -17,7 +18,7 @@
       	<td>Acciones</td>
       </tr>
       <?php foreach($competiciones as $competicion){?>
-      
+     
        <tr>
          <td><?=$competicion->id?></td>
          <td><?=$competicion->nombre?></td>

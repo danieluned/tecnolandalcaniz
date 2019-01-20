@@ -19,8 +19,6 @@ class Competiciones extends Admin_Controller
       
       redirect('admin','refresh');
     }
-    $this->load->model('competicion');
- 
   }
  
   /**
@@ -55,7 +53,9 @@ class Competiciones extends Admin_Controller
       }else{
           
           // El formulario de la competicion es correcto, guardalo en el sistema
-          $this->competicion->insertpost();
+          $competicion = new Competicion(); 
+          $competicion->cargar($_POST);
+          $competicion->guardarDB();
           redirect('admin/competiciones','refresh');
       }
   }
@@ -74,17 +74,17 @@ class Competiciones extends Admin_Controller
       }
       // Configurar formulario
       $this->load->library('form_validation');
-      $this->form_validation->set_rules('c_nombre','Nombre','trim');
+      $this->form_validation->set_rules('nombre','Nombre','trim');
       
       // Comprobar el formulario recibido con el creado
       if( $this->form_validation->run() === FALSE ){
           
-          // Si es incorrecto mostrarle la información necesaria para crear la competicion
+          // Si es incorrecto mostrarle la información necesaria para editar la competicion
           $this->render('admin/competiciones/crear');
           
       }else{
           // El formulario de la competicion es correcto, guardalo en el sistema
-          $this->competicion->updatepost();
+          $this->data['competicion']->cargar($_POST)->guardarDB();
           redirect('admin/competiciones','refresh');
       }
   }
@@ -94,7 +94,8 @@ class Competiciones extends Admin_Controller
    */
   public function borrar($id){
   
-      $this->competicion->borrar($id);
+      $this->competicion->get($id)->borrarDB();
+       
       $this->session->set_flashdata('message','Borrado');
      
       redirect('admin/competiciones','refresh');
@@ -106,32 +107,103 @@ class Competiciones extends Admin_Controller
   public function ver($id){
       //Titulo de la página
       
-      $this->data['competicion'] = $this->competicion->get($id);
-      $this->data['title'] = 'Competición: '.$this->data['competicion']->nombre;
-      if(is_null($this->data['competicion']) ){
+      $this->data['competicion'] = $competicion = $this->competicion->get($id);
+     
+      if(is_null($competicion)){
           $this->session->set_flashdata('message','Seleciona una competición');
           redirect('admin/competiciones','refresh');
       }
+      $this->data['title'] = 'Competición: '.$competicion->nombre;
+        
+      if (isset($_POST['inscribirequipo'])){
+          $equipo = new Inscritoequipo();
+          $equipo->cargar($_POST);
+          $equipo->guardarDB();
       
-      
-      
-      
-      if(isset($_POST['inscrito'])){
-          $this->competicion->actualizarInscrito($id,explode("\n", str_replace("\r", "", $_POST['inscrito'])));
+          if (isset($_FILES['logotipo'])){
+              $path = 
+                  APPPATH. "..". 
+                  DIRECTORY_SEPARATOR."assets".
+                  DIRECTORY_SEPARATOR."images".
+                  DIRECTORY_SEPARATOR."competiciones".
+                  DIRECTORY_SEPARATOR.$equipo->competicion_id.
+                  DIRECTORY_SEPARATOR."inscritoequipo".
+                  DIRECTORY_SEPARATOR.$equipo->id.
+                  DIRECTORY_SEPARATOR; 
+              
+              $config = array();
+              $config['upload_path']  = $path;
+              $config['allowed_types'] = '*';
+              if (!is_dir($path)) {
+                  $this->load->helper("ficheros");
+                  createPath($path);        
+              }
+              $this->load->library('upload', $config);
+              if ( ! $this->upload->do_upload('logotipo'))
+              {
+                  $error = array('error' => $this->upload->display_errors());
+                  
+                 
+              }
+              else
+              {
+                  $data = array('upload_data' => $this->upload->data())
+                  ;
+                  $equipo->logotipo = $_FILES['logotipo']['name'];
+                  $equipo->guardarDB();
+              
+              }
+          }
+          
           $this->session->set_flashdata('message','Actualizado Lista de Participantes');
+         
       }
-      if(isset($_POST['inscritoequipo'])){
-          $this->competicion->actualizarInscritoEquipo($id,explode("\n", str_replace("\r", "", $_POST['inscritoequipo'])));
-          $this->session->set_flashdata('message','Actualizado Lista de Equipos');
-      }
-      if(isset($_POST['inscritojugadoresequipo'])){
-          $this->competicion->actualizarInscritoEquipo($id,explode("\n", str_replace("\r", "", $_POST['inscritoequipo'])));
-          $this->session->set_flashdata('message','Actualizado Lista de Equipos');
+      if (isset($_POST['inscribirjugadorequipo'])){
+          $inscrito = new Inscrito();
+          $inscrito->cargar($_POST);
+          $inscrito->guardarDB();
+          
+          if (isset($_FILES['logotipo'])){
+              $path =
+              APPPATH. "..".
+              DIRECTORY_SEPARATOR."assets".
+              DIRECTORY_SEPARATOR."images".
+              DIRECTORY_SEPARATOR."competiciones".
+              DIRECTORY_SEPARATOR.$inscrito->competicion_id.
+              DIRECTORY_SEPARATOR."inscrito".
+              DIRECTORY_SEPARATOR.$inscrito->id.
+              DIRECTORY_SEPARATOR;
+              
+              $config = array();
+              $config['upload_path']  = $path;
+              $config['allowed_types'] = '*';
+              if (!is_dir($path)) {
+                  $this->load->helper("ficheros");
+                  createPath($path);
+              }
+              $this->load->library('upload', $config);
+              if ( ! $this->upload->do_upload('logotipo'))
+              {
+                  $error = array('error' => $this->upload->display_errors());
+                  
+                  
+              }
+              else
+              {
+                  $data = array('upload_data' => $this->upload->data())
+                  ;
+                  $inscrito->logotipo = $_FILES['logotipo']['name'];
+                  $inscrito->guardarDB();
+                  
+              }
+          }
+          
+          $this->session->set_flashdata('message','Actualizado Lista de Participantes');
+          
       }
       
-      $this->data['inscrito'] = $this->competicion->getInscrito($id);
-      $this->data['inscritoequipo'] = $this->competicion->getInscritoEquipo($id);
       
       $this->render('admin/competiciones/ver');  
   }
+
 }

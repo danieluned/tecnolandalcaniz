@@ -4,7 +4,7 @@
 	<div class="agilecontactw3ls" id="agilecontactw3ls">
 		<div class="container">
 			<h3>Login</h3>
-			<?php echo form_open('',array());?>
+			<form action=""/>
 				<div class="col-sm-offset-3 col-md-6 agilecontactw3ls-grid agilecontactw3ls-grid-1">
 					<div style="color:red"><?php echo $this->session->flashdata('message');?></div>
 					
