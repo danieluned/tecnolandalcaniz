@@ -71,9 +71,11 @@ class Inscrito extends MY_Model {
             
             $this->db->update('inscrito', $this, array("id" => $this->id ));
         }else{
-            unset($this->id);
+            $this->db->select('ifnull(max(id),0) as total from inscrito where competicion_id = '.$this->competicion_id) ;
+            $total = $this->db->get()->result()[0]->total;
+            $this->id =  $total+1;
             $this->db->insert('inscrito', $this);
-            $this->id = $this->db->insert_id();
+            
             
         }
         

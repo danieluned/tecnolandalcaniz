@@ -8,28 +8,12 @@
  */
 class Competicion extends CI_Model {
 
-        public $id;
-        public $nombre;
-        public $info;
-        public $maxequipos;
-        public $minequipos; 
-        public $maxjugadoresequipo; 
-        public $minjugadoresequipo;
-        public $minjugadores; 
-        public $maxjugadores;
-        public $inicioinscripcion; 
-        public $fininscripcion;
-        public $iniciofaseregular; 
-        public $finfaseregular; 
-        public $iniciofechapresencial; 
-        public $finfechapresencial; 
-        public $costeinscripcion; 
-        public $costeinscripcionequipo; 
-        public $ganar; 
-        public $empatar; 
-        public $perder;
-        public $fecha;
-        public $modo;
+        public $id; // Identificador 
+        public $competicion_id; // Competicion a la que pertenece la jornada
+        public $fechainicio; 
+        public $fechafin; 
+        public $info; 
+        public $tipo;
        
         /**
          * devuelve todas las competiciones de la base de datos o bien filtra por id 
