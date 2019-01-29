@@ -20,7 +20,7 @@ $( document ).ready(function() {
 	});
 	*/
 	$('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').hide();
-	
+	$("div > a[target='_blank']").hide();
 
 	
 	
