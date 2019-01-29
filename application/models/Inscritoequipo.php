@@ -44,10 +44,10 @@ class Inscritoequipo extends MY_Model {
             $v_competiciones = array();
             $where = array();
             if($id){
-                $where["id = "] = $id; 
+                $where["id"] = $id; 
             }
             if($competicion_id){
-                $where["competicion_id = "] = $competicion_id;
+                $where["competicion_id"] = $competicion_id;
             }
             $query = $this->db->get_where('inscritoequipo',$where);
             foreach($query->result() as $compeDB){

@@ -102,6 +102,60 @@ class Competiciones extends Admin_Controller
   }
   
   /**
+   * Permite gestiona las partidas de una competicion, los emparejamientos y resultados
+   * @param int $id
+   */
+  public function partidas($id){
+      $this->data['competicion'] = $competicion = $this->competicion->get($id); 
+      if(is_null($competicion)){
+          $this->session->set_flashdata('message','Seleciona una competición');
+          redirect('admin/competiciones','refresh');
+      }
+      $this->data['equipos'] = $competicion->getInscritoequipo;
+      if (isset($_POST['guardar_jornada'])){
+          $jornada = new Jornada();
+          $jornada->cargar($_POST); 
+          $jornada->guardarDB();
+      }
+      if(isset($_POST['guardar_partida'])){
+          $partida = new Partida(); 
+          $partida->cargar($_POST); 
+          $partida->guardarDB();
+          
+          if(isset($_POST['local']) || isset($_POST['visitante'])){
+              $je = new Juegaequipo();
+              $je->competicion_id =$partida->competicion_id;
+              $je->partida_id = $partida->id; 
+              $je->borrarEquiposPartida();
+          }
+          if(isset($_POST['local'])){
+              $je = new Juegaequipo(); 
+              $je->competicion_id =$partida->competicion_id; 
+              $je->partida_id = $partida->id; 
+              $je->equipoinscrito_id = $_POST['local'];
+              $je->guardarDB();
+          }
+          if(isset($_POST['visitante'])){
+              $je = new Juegaequipo();
+              $je->competicion_id =$partida->competicion_id;
+              $je->partida_id = $partida->id;
+              $je->equipoinscrito_id = $_POST['visitante'];
+              $je->guardarDB();
+          }
+      }
+      if(isset($_POST['borrar_jornada'])){
+          $jornada = new Jornada();
+          $jornada->cargar($_POST);
+          $jornada->borrarDB();
+      }
+      if(isset($_POST['borrar_partida'])){
+          $partida = new Partida();
+          $partida->cargar($_POST);
+          $partida->borrarDB();
+      }
+      $this->render('admin/competiciones/partidas');  
+  }
+  /**
    * Permite ver y añadir una lista de equipos/jugadores a la competición
    */
   public function ver($id){
@@ -218,5 +272,5 @@ class Competiciones extends Admin_Controller
       
       $this->render('admin/competiciones/ver');  
   }
-
+    
 }

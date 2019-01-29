@@ -141,6 +141,19 @@ class Competicion extends MY_Model {
             return $v_inscritoequipo;
         }
         
-
+        public function getJornadas(){
+            $query = $this->db->get_where('jornada',array('competicion_id'=> $this->id));
+            $v_jornadas = array(); 
+            foreach($query->result() as $inscritoDB){
+                $inscrito = new Jornada();
+                $inscrito->cargar($inscritoDB);
+                $v_jornadas[] = $inscrito;
+            }
+            return $v_jornadas;
+        }
+   
+        public function generarPartidas(){
+            
+        }
 } 
 ?>

@@ -1,3 +1,10 @@
+.agilecontactw3ls > .container > p ,.agilecontactw3ls > .container label{
+	color:white;
+}
+.navbar-inverse {
+
+    background-color: #262626;
+}
 .row {
   display: flex;
   flex-wrap: wrap;

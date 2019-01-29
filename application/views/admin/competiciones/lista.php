@@ -23,7 +23,8 @@
          <td><?=$competicion->id?></td>
          <td><?=$competicion->nombre?></td>
           <td>
-           <?=anchor ('admin/competiciones/ver/'.$competicion->id,'<i class="fab fa-angellist"></i>')?>
+          <?=anchor ('admin/competiciones/partidas/'.$competicion->id,'Partidas ')?>
+           <?=anchor ('admin/competiciones/ver/'.$competicion->id,'Participantes ')?>
            <?=anchor('admin/competiciones/editar/'.$competicion->id,'<i class="fas fa-edit"></i>')?>
             <?=anchor('admin/competiciones/borrar/'.$competicion->id,'<i style="color:red;" class="fas fa-trash-alt"></i>',array('class'=>'borrar'));?>
           </td>

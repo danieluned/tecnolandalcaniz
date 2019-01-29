@@ -1,109 +1,102 @@
-<?php 
+<?php
 /**
- * Modelo Competicion, 
+ * Modelo Competicion,
  * Tiene las funciones relacionadas con la base de datos
  * para manejar una competicion
  * @author Usuario
  *
  */
-class Competicion extends CI_Model {
-
-        public $id;
-        public $nombre;
-        public $info;
-        public $maxequipos;
-        public $minequipos; 
-        public $maxjugadoresequipo; 
-        public $minjugadoresequipo;
-        public $minjugadores; 
-        public $maxjugadores;
-        public $inicioinscripcion; 
-        public $fininscripcion;
-        public $iniciofaseregular; 
-        public $finfaseregular; 
-        public $iniciofechapresencial; 
-        public $finfechapresencial; 
-        public $costeinscripcion; 
-        public $costeinscripcionequipo; 
-        public $ganar; 
-        public $empatar; 
-        public $perder;
-        public $fecha;
-        public $modo;
+class Partida extends MY_Model {
+    /** Propiedades basicas de la base de datos */
+    public $id;
+    public $competicion_id;
+    public $jornada_id;
+    public $resultado;
+    public $horainicio;
+    public $comentario;
+    public $verificado;
+    public $estado; 
+    public $info;
+    
+    public function cargar($datosDB){
+        $datosDB = object_to_array($datosDB);
+        $this->id = $datosDB['id'];
+        $this->competicion_id = $datosDB['competicion_id'];
+        $this->jornada_id = $datosDB['jornada_id'];
+        $this->resultado = $datosDB['resultado'];
+        $this->horainicio = $datosDB['horainicio'];
+        $this->comentario = $datosDB['verificado'];
+        $this->estado = $datosDB['estado'];
+        $this->info = $datosDB['info'];
+        return $this;
+    }
+    /**
+     * devuelve todas o bien filtra por id
+     * datos
+     * @return
+     */
+    public function get($id = null,$competicion_id = null){
+        if($id!=null && $competicion_id !=null){
+            // Devolver solo uno
+            $query = $this->db->get_where('partida',array("id" =>$id, "competicion_id"=>$competicion_id));
+            $this->cargar($query->result()[0]);
+            return $this;
+            
+        }else{
+            // Devolver array
+            $v_competiciones = array();
+            $where = array();
+            if($id){
+                $where["id"] = $id;
+            }
+            if($competicion_id){
+                $where["competicion_id"] = $competicion_id;
+            }
+            $query = $this->db->get_where('partida',$where);
+            foreach($query->result() as $compeDB){
+                $com = new Partida();
+                $v_competiciones[] = $com->cargar($compeDB);
+            }
+            return $v_competiciones;
+        }
+        
+    }
+    
+    
+    /**
+     * Inserta una competicion en la base de datos del contenido proviniento del post
+     */
+    public function guardarDB(){
        
-        /**
-         * devuelve todas las competiciones de la base de datos o bien filtra por id 
-         * datos
-         * @return 
-         */
-        public function get($id = null){
-            if($id!=null){
-                
-                $query = $this->db->get_where('competicion',array("id =" =>$id)); 
-                return $query->result()[0];
-            }else{
-                $query = $this->db->get('competicion');
-                return $query->result();
-            }
-           
+        if($this->id){
+            //Si ya tenia un id asignado actualizamos         
+            $this->db->update('partida', $this, array("id" => $this->id ));
+        }else{
+            $this->db->select('ifnull(max(id),0) as total from partida where competicion_id = '.$this->competicion_id) ;
+            $total = $this->db->get()->result()[0]->total;
+            $this->id =  $total+1;
+            $this->db->insert('partida', $this);                     
+        }       
+        return $this;
+    }
+    
+    
+    public function borrarDB(){
+        // delete user from users table should be placed after remove from group
+        $this->db->delete('partida', array('id' => $this->id, 'competicion_id'=>$this->competicion_id));
+        $this->db->delete('juegaequipo', array('partida_id' => $this->id, 'competicion_id'=>$this->competicion_id));
+        return $this;
+    }
+    
+    public function getJuegaEquipos(){
+        $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id));
+        $v_equipos = array();
+        foreach($query->result() as $datosEquipo){
+            $e = new Juegaequipo(); 
+            $v_equipos[] = $e->cargar($datosEquipo); 
         }
-
-        /**
-         * Inserta una competicion en la base de datos del contenido proviniento del post
-         */
-        public function insertpost()
-        {   
-            $competicion = array();
-            
-            foreach($_POST as $name => $value){
-                
-                if(substr($name,0,strlen("c_"))=== "c_"){
-                    $competicion[substr($name,strlen("c_"),strlen($name))] = $value;
-                }
-            }
-            $competicion['fecha'] = date('Y-m-d H:i:s');
-          
-            $this->db->insert('competicion', $competicion);
-        }
-
-        public function updatepost()
-        {
-            $competicion = array();
-            
-            foreach($_POST as $name => $value){
-                
-                if(substr($name,0,strlen("c_"))=== "c_"){
-                    $competicion[substr($name,strlen("c_"),strlen($name))] = $value;
-                }
-            }
-            $competicion['fecha'] = date('Y-m-d H:i:s');
-            $this->db->update('competicion', $competicion, array('id' => $competicion['id']));
-        }
-        
-        
-        
-        public function borrar($id){
-            // delete user from users table should be placed after remove from group
-            $this->db->delete('competicion', array('id' => $id));
-        }
-        
-        
-        
-        public function actualizarInscrito($id,$lista){
-            foreach ($lista as $key => $nick){ 
-                  $this->db->query("insert into inscrito (id, competicion_id, nombre) values 
-                                    (".$key.",".$this->id.", '".$nick."') on duplicate key update 
-                                     nombre = '".$nick."'");
-            }
-            $this->db->query("delete from inscrito where id > ".count($lista));
-        }
-        public function actualizarInscritoEquipo($id,$lista){
-            foreach ($lista as $key => $nick){
-                $this->db->query("insert into inscritoequipo (id, competicion_id, nombre) values
-                                    (".$key.",".$this->id.", '".$nick."') on duplicate key update
-                                     nombre = '".$nick."'");
-            }
-            $this->db->query("delete from inscritoequipo where id > ".count($lista));
-        }
-} 
+        return $v_equipos;
+    }
+    
+}
 ?>
