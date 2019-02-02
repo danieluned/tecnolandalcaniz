@@ -19,8 +19,8 @@ $( document ).ready(function() {
 		alert(event);
 	});
 	*/
-	$('img[alt="www.000webhost.com"]').hide();
-	
+	$('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').hide();
+	$("div > a[target='_blank']").hide();
 
 	
 	
@@ -41,6 +41,27 @@ $( document ).ready(function() {
 	if ($("#saludar").size()>0){
 		escribir();
 	}
+	
+	
+	$(".borrar").on("click", function(e) {
+		var r = confirm("¿Borrar!?");
+		if(!r){
+			 e.preventDefault();	
+		}
+	});
+	
 
+	  $('textarea[data-limit-rows=true]')
+	    .on('keypress', function (event) {
+	        var textarea = $(this),
+	            text = textarea.val(),
+	            numberOfLines = (text.match(/\n/g) || []).length + 1,
+	            maxRows = parseInt(textarea.attr('rows'));
+
+	        if (event.which === 13 && numberOfLines === maxRows ) {
+	          return false;
+	        }
+	    });
+	  
+	 
 });
-

@@ -48,7 +48,80 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!-- TTF --> <link rel="stylesheet" href="<?= assets()?>fonts/fontawesome-webfont.ttf" type="text/css" media="all">
 <!-- //Font-Awesome-File-Links -->
+<!-- Custom-JavaScript-File-Links -->
 
+		<!-- Default-JavaScript -->   <script type="text/javascript" src="<?= assets()?>js/jquery-2.1.4.min.js"></script>
+		<!-- Bootstrap-JavaScript --> <script type="text/javascript" src="<?= assets()?>js/bootstrap.min.js"></script>
+
+		<!-- Resopnsive-Slider-JavaScript -->
+			<script src="<?= assets()?>js/responsiveslides.min.js"></script>
+			
+			<script>
+				$(function () {
+					$("#slider").responsiveSlides({
+						auto: true,
+						nav: true,
+						speed: 1000,            // Integer: Speed of the transition, in milliseconds
+						timeout: 5500,          // Integer: Time between slide transitions, in milliseconds
+						namespace: "callbacks",
+						pager: true,
+					});
+				});
+			</script>
+			
+		<!-- //Resopnsive-Slider-JavaScript -->
+
+		<!-- Tab-JavaScript -->
+			<script src="<?= assets()?>js/cbpFWTabs.js"></script>
+			<script>
+				(function() {
+					[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+						new CBPFWTabs( el );
+					});
+				})();
+			</script>
+		<!-- //Tab-JavaScript -->
+
+		<!-- Owl-Carousel-JavaScript -->
+			<script src="<?= assets()?>js/owl.carousel.js"></script>
+			<script>
+				$(document).ready(function() {
+					$("#owl-demo, #owl-demo1, #owl-demo2, #owl-demo3, #owl-demo4, #owl-demo5, #owl-demp6").owlCarousel({
+						autoPlay: 1000,
+						items : 6,
+						itemsDesktop : [1024,4],
+						itemsDesktopSmall : [414,3]
+					});
+				});
+			</script>
+		<!-- //Owl-Carousel-JavaScript -->
+
+		<!-- Stats-Number-Scroller-Animation-JavaScript -->
+			<script src="<?= assets()?>js/waypoints.min.js"></script> 
+			<script src="<?= assets()?>js/counterup.min.js"></script> 
+			<script>
+				jQuery(document).ready(function( $ ) {
+					$('.counter').counterUp({
+						delay: 10,
+						time: 1000
+					});
+				});
+			</script>
+		<!-- //Stats-Number-Scroller-Animation-JavaScript -->
+
+		<!-- Popup-Box-JavaScript -->
+			<script src="<?= assets()?>js/jquery.chocolat.js"></script>
+			<script type="text/javascript">
+				$(function() {
+					$('.w3portfolioaits-item a').Chocolat();
+				});
+			</script>
+		<!-- //Popup-Box-JavaScript -->
+
+		
+
+	<!-- //Custom-JavaScript-File-Links -->
+			<script src="<?= assets()?>js/cabecera.js"></script> 
 <!--  Custom  -->
 <?php echo $before_head;?>
 </head>
@@ -83,6 +156,7 @@
 				<div id="navbar" class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
 					<?php if ($this->ion_auth->is_admin()){?>
+					<li><a href="<?php echo site_url('admin/competiciones'); ?>">Competiciones</a></li>
 						<li><a href="<?php echo site_url('admin/grupos'); ?>">Grupos</a></li>
       					<li><a href="<?php echo site_url('admin/usuarios'); ?>">Usuarios</a></li>
 					<?php }?>

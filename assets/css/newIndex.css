@@ -1,0 +1,196 @@
+ html, body {
+  height: 100%;
+}
+ body{
+    background-color: black;
+ }
+ header{
+    
+    font-weight: bold;
+}
+section{
+    min-height: 100%;
+    //height: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: black;
+}
+
+
+#navHeader{
+    display: inline-block;
+    background-color: transparent;
+    font-size: 20px;
+    color: wait;
+}
+
+.navbar .nav-item{
+    margin-left: 50px;
+    margin-right: 50px;
+    color:orange;
+}
+
+.header-liga, .equipos{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#navLogo{
+    max-height: 70px;
+    overflow: visible;
+}
+.ligas{
+    background: url('../img/Fondo_1.png') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+.header-liga{
+    //background-color: lightblue;   
+    height: 150px;        
+}
+.header-liga img{
+    height: 250px;
+    overflow: visible;
+    z-index: 1;
+}
+.body-liga{
+    border: 1px solid #7b7b7b;
+    border-radius: 4px;
+    padding-top: 100px;
+    background-color: #ffffffd4;
+}
+
+.competicion{
+    /*-webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.75);*/
+}
+
+.competicion h3{
+    padding: 5px;
+}
+
+.header-competicion{
+    height: 200px;
+}
+.incono_h3{
+    max-height: 30px;
+}
+.small_incono_h3{
+    max-height: 20px;
+}
+.footer-competicion{
+    border-top: 1px solid;
+
+
+    
+}
+.competicion .container-fluid{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.galeria{
+    background: url('../img/Fondo_2.png') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+
+
+.header-galeria, .body-galeria, .header-videos, .body-videos{
+    padding-top: 25px;
+    padding-bottom: 25px;   
+}
+.galeria .container{
+    border: 1px solid #7b7b7b;
+    border-radius: 4px;
+    padding: 25px;
+    background-color: #ffffffd4;
+    /*padding-top: 25px;
+    padding-bottom: 25px;  */ 
+}
+
+.videos .container{
+    border: 1px solid #7b7b7b;
+    border-radius: 4px;
+    background-color: #ffffffd4;
+    padding-top: 25px;
+    padding-bottom: 25px;   
+}
+
+
+
+.contenedor-blanco{
+    //background-color: white;
+}
+.jornada, .partidas, .resultados, .lista-resultados{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.equipos{
+    padding-top: 75px;
+    /*border: silver 75px solid;
+    border-image-source: url("../img/marco-top.png");
+    border-image-slice: 75;*/
+}
+.equipo img{
+    max-height: 100px;
+    width: auto;
+    border-bottom: solid;
+    border-color: lightgrey;
+    border-width: 1px;
+}
+.equipo h6{
+
+}      
+.partidas{
+    /*border: silver 75px solid;
+    border-image-source: url("../img/marco-mid.png");
+    border-image-slice: 75;*/
+}  
+.partida img, .resultado img{
+    max-height: 70px;
+    max-width: 100%;
+    display: inline;
+}
+.partida{
+    background-image: url("../img/fondo_partida.gif");
+    background-image: no-repeat;
+    background-image: fixed;
+    background-image: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
+.partida h5{
+    text-align: center;
+    display: inline;
+}
+.contacto ul{
+    list-style: none;
+}
+.contacto .rss a{
+    display: block;
+}
+.contacto img{
+    height: 50px;
+}
+
+footer{
+    background-color: #ffffffd4;
+    padding-top: 50px;
+    padding-bottom: 25px;
+}
+footer h4{
+    width: 100%;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+
+}

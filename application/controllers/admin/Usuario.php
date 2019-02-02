@@ -29,12 +29,12 @@ class Usuario extends MY_Controller
                     redirect('admin','refresh');
                 }else{
                     $this->session->set_flashdata('message',$this->ion_auth->errors());
-                    redirect('admin/usuario/login','refresh');
+                    redirect('admin/login','refresh');
                 }
             }
         }
         $this->load->helper('form');
-        $this->render('admin/login','admin_template');
+        $this->render('admin/usuario/login','admin_template');
     }
     public function logout()
     {
