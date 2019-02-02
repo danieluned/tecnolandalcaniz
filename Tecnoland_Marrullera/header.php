@@ -32,7 +32,7 @@
                         <div class="container">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <img id="navLogo" src="img/Alien_vec_letras_blanco.png">
+                                    <img id="navLogo" src="<?= assets()?>images/Alien_vec_letras_blanco.png">
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>

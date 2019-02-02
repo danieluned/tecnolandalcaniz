@@ -1,12 +1,9 @@
-       <!DOCTYPE html>
-        <?php 
-            include 'header.php';
-        ?>
+
         <!-- Ligas -->
         <section class="ligas">            
             <div class="container ">                    
                 <div class="row header-liga text-center">
-                    <img src="img/Liga_png.png" class="rounded mx-auto d-block">
+                    <img src="<?= assets()?>images/Liga_png.png" class="rounded mx-auto d-block">
                 </div>
                 <div class="row body-liga">
                     <div class="container-fluid">
@@ -16,20 +13,20 @@
                                     <div >
                                         <div class="row header-competicion">
                                             <div class="col">
-                                                <img src="img/call-of-duty.png">
+                                                <img src="<?= assets()?>images/call-of-duty.png">
                                                 <!--<h3>Call Of Duty Black Ops 4</h3>-->
                                             </div>
                                         </div>
                                         <div class="row body-competicion">
                                             <div class="col">
-                                                <h3><img class="incono_h3" src="img/iconos/Concurso_png.png"> 500€ </h3>
-                                                <h3><img class="small_incono_h3" src="img/iconos/Concurso_png.png"> 250€ </h3>
-                                                <h3><img class="incono_h3" src="img/iconos/Torneo_png.png"> 5 vs 5 </h3>
+                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png"> 500€ </h3>
+                                                <h3><img class="small_incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png"> 250€ </h3>
+                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Torneo_png.png"> 5 vs 5 </h3>
                                             </div>
                                         </div>
                                         <div class="row footer-competicion">
                                             <div class="col">
-                                                <h3><img class="incono_h3" src="img/iconos/Información_png.png"> Detalles </h3>
+                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Información_png.png"> Detalles </h3>
                                             </div>
                                         </div>
                                     </div>
@@ -40,20 +37,20 @@
                                     <div >
                                         <div class="row header-competicion">
                                             <div class="col">
-                                                <img src="img/cs-go.png">
+                                                <img src="<?= assets()?>images/cs-go.png">
                                                 <!--<h3>Call Of Duty Black Ops 4</h3>-->
                                             </div>
                                         </div>
                                         <div class="row body-competicion">
                                             <div class="col">
-                                                <h3><img class="incono_h3" src="img/iconos/Concurso_png.png"> 500€ </h3>
-                                                <h3><img class="small_incono_h3" src="img/iconos/Concurso_png.png"> 250€ </h3>
-                                                <h3><img class="incono_h3" src="img/iconos/Torneo_png.png"> 5 vs 5 </h3>
+                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png"> 500€ </h3>
+                                                <h3><img class="small_incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png"> 250€ </h3>
+                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Torneo_png.png"> 5 vs 5 </h3>
                                             </div>
                                         </div>
                                         <div class="row footer-competicion">
                                             <div class="col">
-                                                <h3><img class="incono_h3" src="img/iconos/Información_png.png"> Detalles </h3>
+                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Información_png.png"> Detalles </h3>
                                             </div>
                                         </div>
                                     </div>
@@ -62,14 +59,10 @@
                         </div>                   
                     </div>                        
                 </div>                    
-            </div>
-            
+            </div>          
 
            
-            
-
-            
-  
+        
         </section>
         <!-- Galeries -->
         <section class="galeria">
@@ -121,11 +114,3 @@
          -->
 
 
-        <!-- 
-            Footer 
-        -->
-        <?php 
-            include 'footer.php';
-        ?>
-  </body>
-</html>

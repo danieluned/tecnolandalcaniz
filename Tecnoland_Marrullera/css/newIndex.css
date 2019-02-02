@@ -40,7 +40,7 @@ section{
     overflow: visible;
 }
 .ligas{
-    background: url('../img/Fondo_1.png') no-repeat fixed center;
+    background: url('../images/Fondo_1.png') no-repeat fixed center;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -50,7 +50,7 @@ section{
     //background-color: lightblue;   
     height: 150px;        
 }
-.header-liga img{
+.header-liga images{
     height: 250px;
     overflow: visible;
     z-index: 1;
@@ -93,7 +93,7 @@ section{
 }
 
 .galeria{
-    background: url('../img/Fondo_2.png') no-repeat fixed center;
+    background: url('../images/Fondo_2.png') no-repeat fixed center;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -134,10 +134,10 @@ section{
 .equipos{
     padding-top: 75px;
     /*border: silver 75px solid;
-    border-image-source: url("../img/marco-top.png");
+    border-image-source: url("../images/marco-top.png");
     border-image-slice: 75;*/
 }
-.equipo img{
+.equipo images{
     max-height: 100px;
     width: auto;
     border-bottom: solid;
@@ -149,16 +149,16 @@ section{
 }      
 .partidas{
     /*border: silver 75px solid;
-    border-image-source: url("../img/marco-mid.png");
+    border-image-source: url("../images/marco-mid.png");
     border-image-slice: 75;*/
 }  
-.partida img, .resultado img{
+.partida images, .resultado images{
     max-height: 70px;
     max-width: 100%;
     display: inline;
 }
 .partida{
-    background-image: url("../img/fondo_partida.gif");
+    background-image: url("../images/fondo_partida.gif");
     background-image: no-repeat;
     background-image: fixed;
     background-image: center;
@@ -178,7 +178,7 @@ section{
 .contacto .rss a{
     display: block;
 }
-.contacto img{
+.contacto images{
     height: 50px;
 }
 

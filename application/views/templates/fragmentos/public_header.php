@@ -1,13 +1,13 @@
-
+<!DOCTYPE html>
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bst4/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="<?= assets()?>css/bst4/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <link rel="stylesheet" type="text/css" href="css/newIndex.css">
+        <link rel="stylesheet" type="text/css" href="<?= assets()?>css/newIndex.css">
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
                         <div class="container">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <img id="navLogo" src="img/Alien_vec_letras_blanco.png">
+                                    <img id="navLogo" src="<?= assets()?>images/Alien_vec_letras_blanco.png">
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
