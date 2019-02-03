@@ -1,0 +1,27 @@
+.equipo .container{
+    border: 1px solid #7b7b7b;
+    border-radius: 4px;
+    padding: 25px;
+    background-color: #ffffffd4;
+    /*padding-top: 25px;
+    padding-bottom: 25px;  */ 
+}
+
+.logo-equipo{
+	max-height: 200px;
+}
+
+.header-jugadores{
+	border-bottom: solid 4px;
+}
+
+.header-jugador img{
+	max-height: 100px;
+	margin: 0 auto;
+}
+
+.jugador{
+	margin: 20px;
+	padding: 20px;
+}
+

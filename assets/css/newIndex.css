@@ -126,16 +126,14 @@ section{
 
 .contenedor-blanco{
     //background-color: white;
-}
+}/*
 .jornada, .partidas, .resultados, .lista-resultados{
     padding-top: 25px;
     padding-bottom: 25px;
 }
 .equipos{
     padding-top: 75px;
-    /*border: silver 75px solid;
-    border-image-source: url("../images/marco-top.png");
-    border-image-slice: 75;*/
+    
 }
 .equipo img{
     max-height: 100px;
@@ -144,14 +142,7 @@ section{
     border-color: lightgrey;
     border-width: 1px;
 }
-.equipo h6{
-
-}      
-.partidas{
-    /*border: silver 75px solid;
-    border-image-source: url("../images/marco-mid.png");
-    border-image-slice: 75;*/
-}  
+ 
 .partida img, .resultado img{
     max-height: 70px;
     max-width: 100%;
@@ -171,7 +162,7 @@ section{
 .partida h5{
     text-align: center;
     display: inline;
-}
+}*/
 .contacto ul{
     list-style: none;
 }

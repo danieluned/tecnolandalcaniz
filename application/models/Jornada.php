@@ -103,5 +103,36 @@ class Jornada extends MY_Model {
         }
         return $v_partidas;
     }
+    
+    
+    public function getPartidasPendientes(){
+        // Devolver array
+        $v_partidas = array();
+        $where = array();
+        $where["jornada_id"] = $this->id;
+        $where["competicion_id"] = $this->competicion_id;
+        $where["estado"] = "pendiente";
+        $query = $this->db->get_where('partida',$where);
+        foreach($query->result() as $compeDB){
+            $com = new Partida();
+            $v_partidas[] = $com->cargar($compeDB);
+        }
+        return $v_partidas;
+    }
+    
+    public function getPartidasCerradas(){
+        // Devolver array
+        $v_partidas = array();
+        $where = array();
+        $where["jornada_id"] = $this->id;
+        $where["competicion_id"] = $this->competicion_id;
+        $where["estado"] = 'cerrada';
+        $query = $this->db->get_where('partida',$where);
+        foreach($query->result() as $compeDB){
+            $com = new Partida();
+            $v_partidas[] = $com->cargar($compeDB);
+        }
+        return $v_partidas;
+    }
 }
 ?>

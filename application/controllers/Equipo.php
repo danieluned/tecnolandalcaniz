@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Liga extends Public_Controller {
+class Equipo extends Public_Controller {
 
 	/**
 	 *  Metodo Index
@@ -9,10 +9,8 @@ class Liga extends Public_Controller {
 	 *  
 	 *  Llama a la portada de la pagina de inicio
 	 */
-	public function detallesLiga($id=1)
-	{
-	    $competicion = $this->competicion->get($id);
-	    $this->data['competicion'] = $competicion;
-		$this->render('liga');
+    public function detallesEquipo($id=1)
+	{   
+		$this->render('equipo');
 	}
 }

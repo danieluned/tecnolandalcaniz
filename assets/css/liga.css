@@ -5,3 +5,48 @@
    -o-background-size: cover;
    background-size: cover;
 }
+
+.jornada, .partidas, .resultados, .lista-resultados{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.equipos{
+    padding-top: 75px;
+    
+}
+.equipo img{
+    max-height: 100px;
+    width: auto;
+    border-bottom: solid;
+    border-color: lightgrey;
+    border-width: 1px;
+}
+ 
+.partida img, .resultado img{
+    max-height: 70px;
+    max-width: 100%;
+    display: inline;
+}
+.partida{
+    background-image: url("../images/fondo_partida.gif");
+    background-image: no-repeat;
+    background-image: fixed;
+    background-image: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
+.partida h5{
+    text-align: center;
+    display: inline;
+}
+
+.sponsors-liga{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.body-organiza img, .body-colabora img{
+	max-height: 100px;
+}
