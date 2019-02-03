@@ -1,7 +1,8 @@
-<article class="liga">
+<link rel="stylesheet" type="text/css" href="<?= assets()?>css/liga.css">
+<section class="liga">
                 <div class="container ">                    
                     <div class="row header-liga text-center">
-                        <img src="img/Liga_png.png" class="rounded mx-auto d-block">
+                        <img src="<?= assets()?>images/Liga_png.png" class="rounded mx-auto d-block">
                     </div>
                     <div class="row body-liga">
                         <div class="container-fluid">
@@ -197,4 +198,4 @@
                         </div>                        
                     </div>                    
                 </div>
-            </article>
+            </section>

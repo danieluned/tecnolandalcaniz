@@ -26,7 +26,9 @@
                                         </div>
                                         <div class="row footer-competicion">
                                             <div class="col">
-                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Información_png.png"> Detalles </h3>
+                                                <a href="<?php echo site_url('Liga');?>">
+                                                    <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Información_png.png"> Detalles </h3>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
