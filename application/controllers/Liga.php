@@ -9,8 +9,10 @@ class Liga extends Public_Controller {
 	 *  
 	 *  Llama a la portada de la pagina de inicio
 	 */
-	public function index()
+	public function zorra($id = 1)
 	{
+	    $competicion = $this->competicion->get($id);
+	    $this->data['competicion'] = $competicion;
 		$this->render('liga');
 	}
 }
