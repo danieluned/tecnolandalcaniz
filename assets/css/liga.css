@@ -5,7 +5,14 @@
    -o-background-size: cover;
    background-size: cover;
 }
-
+.body-liga{
+	border: silver 21px solid;
+	border-image-source: url('../images/marcos/Marco_1.png');
+	border-image-slice: 21 fill;
+	background-clip: padding-box;
+	padding: 20px;
+	padding-top: 30px;
+}
 .jornada, .partidas, .resultados, .lista-resultados{
     padding-top: 25px;
     padding-bottom: 25px;
@@ -14,14 +21,50 @@
     padding-top: 75px;
     
 }
-.equipo img{
-    max-height: 100px;
-    width: auto;
-    border-bottom: solid;
-    border-color: lightgrey;
+.header-equipos h2{
+	//background-image: url('../images/fondos/titulos/14624.png');
+	background-size: contain no-repeat;
+
+	padding: 10px;
+
+}
+.equipos fieldset, .organiza fieldset, .colabora fieldset{
+	
+	width: 100%;
+	border: white 3px groove;
+}
+.equipos legend, .colabora legend, .organiza legend{
+	width:auto;
+	padding:0 10px;
+}
+.equipo{
+	padding:15px;
+}
+.equipo figure{
+	margin: 0;
+	padding: 5px;
+	//border-bottom: solid;
+    border-color: black;
     border-width: 1px;
 }
+
+.equipo img{
+    max-height: 80px;
+    width: auto;
+}
+
+.equipo img:hover {
+	-webkit-transform:scale(1.3);
+	transform:scale(1.3);
+}
  
+.logo-equipo-small{
+	max-height: 40px;
+}
+.logo-equipo-small:hover{
+	-webkit-transform:scale(1.3);
+	transform:scale(1.3);
+}
 .partida img, .resultado img{
     max-height: 70px;
     max-width: 100%;
@@ -43,10 +86,13 @@
     display: inline;
 }
 
-.sponsors-liga{
-	padding-top: 50px;
-	padding-bottom: 50px;
+.sponsors-liga fieldset{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border:none;
+	border-top: solid;
 }
 .body-organiza img, .body-colabora img{
 	max-height: 100px;
+	max-width: 80%;
 }

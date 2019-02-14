@@ -15,8 +15,13 @@ section{
     padding-bottom: 50px;
     background-color: black;
 }
-
-
+@font-face {
+  font-family: 'Furore';
+  src: url('../fonts/Viga-Regular.ttf');
+}
+div{
+    font-family: Furrore;
+}
 #navHeader{
     display: inline-block;
     background-color: transparent;
@@ -40,7 +45,8 @@ section{
     overflow: visible;
 }
 .ligas{
-    background: url('../images/Fondo_1.png') no-repeat fixed center;
+    //background: url('../images/Fondo_1.png') no-repeat fixed center;
+    background: url('../images/fondos/fondo_netllar.jpg') no-repeat fixed center;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -56,10 +62,14 @@ section{
     z-index: 1;
 }
 .body-liga{
-    border: 1px solid #7b7b7b;
+    border: 1px solid #ffffff85;
     border-radius: 4px;
     padding-top: 100px;
     background-color: #ffffffd4;
+    
+
+    padding: 20px;
+    padding-top: 100px;
 }
 
 .competicion{
@@ -74,6 +84,9 @@ section{
 
 .header-competicion{
     height: 200px;
+}
+.header-competicion img{
+    max-width: 100%;
 }
 .incono_h3{
     max-height: 30px;
@@ -105,22 +118,29 @@ section{
     padding-top: 25px;
     padding-bottom: 25px;   
 }
-.galeria .container{
+.galeria .container, .videos .container, .body-liga{
     border: 1px solid #7b7b7b;
     border-radius: 4px;
     padding: 25px;
     background-color: #ffffffd4;
     /*padding-top: 25px;
     padding-bottom: 25px;  */ 
+    border: silver 21px solid;
+    border-image-source: url('../images/marcos/Marco_1.png');
+    border-image-slice: 21 fill;
+    background-clip: padding-box;
+}
+.body-liga{
+    padding-top: 100px;
 }
 
-.videos .container{
+/*.videos .container{
     border: 1px solid #7b7b7b;
     border-radius: 4px;
     background-color: #ffffffd4;
     padding-top: 25px;
     padding-bottom: 25px;   
-}
+}*/
 
 
 
@@ -184,4 +204,7 @@ footer h4{
     border-width: 1px;
     border-color: lightgrey;
 
+}
+footer ul{
+    padding: 0;
 }

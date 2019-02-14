@@ -1,0 +1,43 @@
+.encuentro{
+	background: url('../images/fondos/fondo_netllar.jpg') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+.encuentro-head{    
+    height: 150px;        
+}
+.encuentro-head img{
+    height: 250px;
+    overflow: visible;
+    z-index: 1;
+}
+.body-encuentro{
+	border: 1px solid #ffffff85;
+    border-radius: 4px;
+    padding-top: 100px;
+    background-color: #ffffffd4;
+    
+
+    padding: 20px;
+    padding-top: 100px;
+
+    border: silver 21px solid;
+    border-image-source: url('../images/marcos/Marco_1.png');
+    border-image-slice: 21 fill;
+    background-clip: padding-box;
+}
+.twitch, .oponentes{
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+.oponente img{
+	max-height: 100px;
+}
+
+.twitch iframe{
+	max-width: 90%;
+}
+
+ 
