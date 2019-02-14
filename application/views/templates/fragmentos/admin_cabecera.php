@@ -160,6 +160,10 @@
 						<li><a href="<?php echo site_url('admin/grupos'); ?>">Grupos</a></li>
       					<li><a href="<?php echo site_url('admin/usuarios'); ?>">Usuarios</a></li>
 					<?php }?>
+					<?php if ($this->ion_auth->in_group("capitanes")){?>
+						<li><a href="<?php echo site_url('admin/competiciones'); ?>">Partidas</a></li>
+						
+					<?php }?>
 						<li><a href="<?php echo site_url('admin/usuario/perfil');?>">Perfil</a></li>
 						<li class="divider"></li>
 						<li><a href="<?php echo site_url('admin/usuario/logout');?>">Logout</a></li>

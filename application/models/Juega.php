@@ -8,26 +8,36 @@
  */
 class Juega extends MY_Model {
     /** Propiedades basicas de la base de datos */
-    public $id;
     public $competicion_id;
-    public $jornada_id;
-    public $resultado;
-    public $horainicio;
-    public $comentario;
-    public $verificado;
-    public $estado; 
-    public $info;
+    public $partida_id;
+    public $jugadorinscrito_id;
+    public $puntuacion;
+    public $presentado;
+    public $posicion; 
+    public $aceptafecha;
+    public $conforme;
     
+    public function __construct(){
+        $this->competicion_id = 0;
+        $this->partida_id = 0;
+        $this->jugadorinscrito_id = 0;
+        $this->puntuacion = 0;
+        $this->presentado = 0;
+        $this->posicion = 0;   
+        $this->aceptafecha = 0;
+        $this->conforme = 0;
+    }
     public function cargar($datosDB){
         $datosDB = object_to_array($datosDB);
-        $this->id = $datosDB['id'];
         $this->competicion_id = $datosDB['competicion_id'];
-        $this->jornada_id = $datosDB['jornada_id'];
-        $this->resultado = $datosDB['resultado'];
-        $this->horainicio = $datosDB['horainicio'];
-        $this->comentario = $datosDB['verificado'];
-        $this->estado = $datosDB['estado'];
-        $this->info = $datosDB['info'];
+        $this->partida_id = $datosDB['partida_id'];
+        $this->jugadorinscrito_id = $datosDB['jugadorinscrito_id'];
+        $this->puntuacion = $datosDB['puntuacion'];
+        $this->presentado = $datosDB['presentado'];
+        $this->posicion = $datosDB['posicion'];
+        $this->aceptafecha = $datosDB['aceptafecha'];
+        $this->conforme = $datosDB['conforme'];
+        
         return $this;
     }
     /**
@@ -35,26 +45,30 @@ class Juega extends MY_Model {
      * datos
      * @return
      */
-    public function get($id = null,$competicion_id = null){
-        if($id!=null && $competicion_id !=null){
+    public function get($competicion_id= null,$partida_id = null, $jugadorinscrito_id = null){
+        if($competicion_id!=null && $partida_id !=null && $jugadorinscrito_id != null){
             // Devolver solo uno
-            $query = $this->db->get_where('partida',array("id" =>$id, "competicion_id"=>$competicion_id));
-            $this->cargar($query->result()[0]);
-            return $this;
+            $query = $this->db->get_where('juega',array("competicion_id" =>$competicion_id, "partida_id"=>$partida_id,"jugadorinscrito_id"=>$jugadorinscrito_id));
+            $com = new Juega();
+            $com->cargar($query->result()[0]);
+            return $com;
             
         }else{
             // Devolver array
             $v_competiciones = array();
             $where = array();
-            if($id){
-                $where["id"] = $id;
-            }
             if($competicion_id){
                 $where["competicion_id"] = $competicion_id;
             }
-            $query = $this->db->get_where('partida',$where);
+            if($partida_id){
+                $where["partida_id"] = $partida_id;
+            }
+            if($jugadorinscrito_id){
+                $where["jugadorinscrito_id"] = $jugadorinscrito_id;
+            }
+            $query = $this->db->get_where('juegaequipo',$where);
             foreach($query->result() as $compeDB){
-                $com = new Partida();
+                $com = new Juega();
                 $v_competiciones[] = $com->cargar($compeDB);
             }
             return $v_competiciones;
@@ -67,29 +81,22 @@ class Juega extends MY_Model {
      * Inserta una competicion en la base de datos del contenido proviniento del post
      */
     public function guardarDB(){
-       
-        if($this->id){
-            //Si ya tenia un id asignado actualizamos         
-            $this->db->update('partida', $this, array("id" => $this->id ));
-        }else{
-            $this->db->select('ifnull(max(id),0) as total from partida where competicion_id = '.$this->competicion_id) ;
-            $total = $this->db->get()->result()[0]->total;
-            $this->id =  $total+1;
-            $this->db->insert('partida', $this);                     
-        }       
+        
+        //Si ya tenia un id asignado actualizamos
+        $this->db->replace('juega', $this,array("competicion_id" =>$this->competicion_id, "partida_id"=>$this->partida_id,"jugadorinscrito_id"=>$this->jugadorinscrito_id));
         return $this;
     }
-    
     
     public function borrarDB(){
         // delete user from users table should be placed after remove from group
-        $this->db->delete('partida', array('id' => $this->id, 'competicion_id'=>$this->competicion_id));
+        $this->db->delete('juega',array("competicion_id" =>$this->competicion_id, "partida_id"=>$this->partida_id,"jugadorinscrito_id"=>$this->jugadorinscrito_id));
         return $this;
     }
-    
-    public function getEquipos(){
-        $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id));
+    public function getJugador(){
+        $query = $this->db->get_where("inscrito", array("id"=>$this->jugadorinscrito_id,"competicion_id"=>$this->competicion_id));
+        $ei = new Inscritoequipo();
+        $ei->cargar($query->result()[0]);
+        return $ei;
     }
-    
 }
 ?>

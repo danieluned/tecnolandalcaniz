@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `competicion` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(200) NULL,
   `info` TEXT NULL,
+  `logotipo` VARCHAR(200) NULL,
   `maxequipos` INT NULL DEFAULT 0,
   `minequipos` INT NULL DEFAULT 0,
   `maxjugadoresequipo` INT NULL DEFAULT 0,
@@ -51,6 +52,10 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `partida`
+-- 
+
+-- Pendiente: aun no se ha jugado y esta prevista que se juegue 
+-- fechada: los jugadores han se
 -- -----------------------------------------------------
 
 
@@ -62,7 +67,19 @@ CREATE TABLE IF NOT EXISTS `partida` (
   `horainicio` DATETIME NULL,
   `comentario` VARCHAR(200) NULL,
   `verificado` TINYINT NULL DEFAULT 0,
-  `estado` ENUM('pendiente', 'cerrada', 'jugando', 'disputa', 'verificando') NULL,
+  `mapa1` VARCHAR(60) NULL,
+  `mapa1_resultado` VARCHAR(45) NULL,
+  `mapa2` VARCHAR(60) NULL, 
+  `mapa2_resultado` VARCHAR(45) NULL,
+  `mapa3` VARCHAR(60) NULL, 
+  `mapa3_resultado` VARCHAR(45) NULL,
+  `mapa4` VARCHAR(60) NULL, 
+  `mapa4_resultado` VARCHAR(45) NULL,
+  `mapa5` VARCHAR(60) NULL, 
+  `mapa5_resultado` VARCHAR(45) NULL,
+  `propone_fecha` INT NULL,
+  `estado` ENUM('pendiente','cerrada', 'jugando', 'disputa', 'verificando') NULL,
+  
   `info` VARCHAR(200) NULL,
   PRIMARY KEY (`id`, `competicion_id`),
   INDEX `fk_partida_competicion_idx` (`competicion_id` ASC) ,
@@ -218,9 +235,11 @@ CREATE TABLE IF NOT EXISTS `juegaequipo` (
   `competicion_id` INT NOT NULL,
   `partida_id` INT NOT NULL,
   `equipoinscrito_id` INT NOT NULL,
-  `presentado` TINYINT NULL,
-  `puntuacion` DOUBLE NULL,
-  `conforme` ENUM('conforme', 'noconforme', 'sincontestar') NULL DEFAULT 'sincontestar',
+  `presentado` TINYINT NULL DEFAULT 0,
+  `puntuacion` DOUBLE NULL DEFAULT 0,
+  `posicion`  INT NULL DEFAULT 1,
+  `aceptafecha` INT NULL DEFAULT 0,
+  `conforme` INT NULL DEFAULT 0,
   PRIMARY KEY (`competicion_id`, `partida_id`, `equipoinscrito_id`))
 ENGINE = InnoDB;
 
@@ -234,9 +253,11 @@ CREATE TABLE IF NOT EXISTS `juega` (
   `competicion_id` INT NOT NULL,
   `partida_id` INT NOT NULL,
   `jugadorinscrito_id` INT NOT NULL,
-  `puntuacion` DOUBLE NULL,
-  `presentado` TINYINT NULL,
-  `conforme` ENUM('conforme', 'noconforme', 'sincontestar') NULL DEFAULT 'sincontestar',
+  `puntuacion` DOUBLE NULL DEFAULT 0,
+  `presentado` TINYINT NULL DEFAULT 0,
+  `posicion`  INT NULL DEFAULT 0,
+  `aceptafecha` INT NULL DEFAULT 0,
+  `conforme` INT NULL DEFAULT 0,
   PRIMARY KEY (`competicion_id`, `partida_id`, `jugadorinscrito_id`))
 ENGINE = InnoDB;
 

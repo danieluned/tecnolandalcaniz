@@ -39,6 +39,31 @@ hr {
     border-top: 5px solid #8c8b8b;
 }
 </style> 
+<script>
+$(function(){ 
+	$("select[name='local']").trigger('change'); 
+	$("select[name='visitante']").trigger('change'); 
+});
+function alineacion(competicion_id, partida_id, equipo_id, html_destino){
+	
+	   var url = '<?=site_url("admin/competiciones/alineacion/")?>'+competicion_id+'/'+partida_id+'/'+equipo_id;
+	    $.getJSON( url, function( data ) {
+		     
+	    	  var items = [];
+	    	  $.each( data.inscritos, function( key, val ) {
+		    	 var juega = '';
+		    	$.each( data.alineados,function(key2,val2){
+					if(val.id == val2.id){
+						juega = 'checked';
+					} 
+		    	});
+		    	items.push( "<li><label>"+val.nombre+"<input type='checkbox' value='"+val.id+"' name='jugadores[]' "+juega+"/></li>" );
+	    	  });
+	    	 
+	    	  $(html_destino).html("<ul>"+ items.join("") +"</ul>");
+	   });
+}
+</script>
 <div role="main">
 	<section class="jumbotron text-center">
 		<div class="container">
@@ -149,7 +174,7 @@ foreach ($jornadas as $jornada) {
     				
         		</div>  				
 				<form
-					action="<?=site_url("admin/competiciones/partidas/".$competicion->id)?>#p_<?=$partida->id?>"
+					action="<?=site_url("admin/competiciones/partidas/".$competicion->id)?>"
 					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="competicion_id"
 						value="<?=$competicion->id?>" /> 
@@ -172,20 +197,20 @@ foreach ($jornadas as $jornada) {
 					</div>
 
 					<div class="row">
-						<label for="p_comentario_<?=$partida->id?>"> Comentario</label> <input id="p_comentario_<?=$partida->id?>"
-							class="form-control" name="comentario" type="text" max-length="200"
-							 />
+						<label for="p_comentario_<?=$partida->id?>"> Comentario</label> <textarea id="p_comentario_<?=$partida->id?>"
+							class="form-control" name="comentario"  ><?=$partida->comentario?></textarea>
+							 
 
 					</div>
-				<div class="row">
+					<div class="row">
 						<label for="p_verificado_<?=$partida->id?>"> Verificado</label> <input id="p_verificado_<?=$partida->id?>"
-							class="form-control" name="verificado" type="checkbox" 
+							class="form-control" name="verificado" type="checkbox"  value="1" <?=$partida->verificado?"checked='checked'":""?>
 							 />
 
 					</div> 
 					<div class="row">
 						<label for="p_estado_<?=$partida->id?>"> Estado</label> 
-						<select name="p_estado_<?=$partida->id?>">
+						<select name="estado" id="p_estado_<?=$partida->id?>">
 							<option value="pendiente" <?=$partida->estado == "pendiente"?"selected":""?>>Pendiente</option>
 							<option value="cerrada" <?=$partida->estado == "cerrada"?"selected":""?>>Cerrada</option>
 							<option value="jugando" <?=$partida->estado == "jugando"?"selected":""?>>Jugando</option>
@@ -195,20 +220,53 @@ foreach ($jornadas as $jornada) {
 
 					</div>
 					<div class="row">
+						<label for="p_propone_fecha_<?=$partida->id?>"> Id del equipo que esta proponiendo fecha</label> 
+						<input id="p_propone_fecha_<?=$partida->id?>" class="form-control" name="propone_fecha" type="number" value="<?=$partida->propone_fecha?>"/>
+					</div>
+					<div class="row">
 						<label for="p_info_<?=$partida->id?>"> Info</label> <input id="p_info_<?=$partida->id?>"
-							class="form-control" name="info" type="text" 
+							class="form-control" name="info" type="text"  value="<?=$partida->info?>"
 							 />
 
 					</div>
 					<div class="row">
-						<label for="p_visitante_<?=$partida->id?>">Visitante</label>
-						<select id="p_visitante_<?=$partida->id?>" name="visitante">
+						<label for="p_mapa1_<?=$partida->id?>"> Mapa 1</label> 
+						<input id="p_mapa1_<?=$partida->id?>" class="form-control" name="mapa1" type="text" value="<?=$partida->mapa1?>" />
+
+					</div>
+					<div class="row">
+						<label for="p_mapa1_resultado_<?=$partida->id?>"> Mapa 1 Resultado</label> 
+						<input id="p_mapa1_resultado_<?=$partida->id?>" class="form-control" name="mapa1_resultado" type="text" value="<?=$partida->mapa1_resultado?>" />
+					</div>
+					<div class="row">
+						<label for="p_mapa2_<?=$partida->id?>"> Mapa 2</label> 
+						<input id="p_mapa2_<?=$partida->id?>" class="form-control" name="mapa2" type="text" value="<?=$partida->mapa2?>" />
+
+					</div>
+					<div class="row">
+						<label for="p_mapa2_resultado_<?=$partida->id?>"> Mapa 2 Resultado</label> 
+						<input id="p_mapa2_resultado_<?=$partida->id?>" class="form-control" name="mapa2_resultado" type="text"  value="<?=$partida->mapa2_resultado?>"/>
+					</div>
+					<div class="row">
+						<label for="p_mapa3_<?=$partida->id?>"> Mapa 3 </label> 
+						<input id="p_mapa3_<?=$partida->id?>" class="form-control" name="mapa3" type="text"  value="<?=$partida->mapa3?>"/>
+
+					</div>
+					<div class="row">
+						<label for="p_mapa3_resultado_<?=$partida->id?>"> Mapa 3 Resultado</label> 
+						<input id="p_mapa3_resultado_<?=$partida->id?>"class="form-control" name="mapa3_resultado" type="text" value="<?=$partida->mapa3_resultado?>"/>
+					</div>
+					
+					
+					<div class="row">
+						<label for="p_local_<?=$partida->id?>">Local</label>
+						<select id="p_local_<?=$partida->id?>" name="local" onchange="alineacion(<?=$competicion->id?>,<?=$partida->id?>,this.value,p_local_jugadores_<?=$partida->id?>)">
 							<option>Sin seleccionar</option>
 							<?php 
-							$equipospartida = $partida->getJuegaEquipos();
+							$local = $partida->getJuegaEquipoLocal();
 							foreach($equipos as $equipo){?>
 							    <option <?php 
-							    if(count($equipospartida)>1 && $equipospartida[1]->equipoinscrito_id == $equipo->id ){
+							    if($local && $local->equipoinscrito_id == $equipo->id ){
 							        echo "selected";
 							    }?> value="<?=$equipo->id?>"><?=$equipo->id?> <?=$equipo->nombre?></option>
 							<?php 
@@ -216,21 +274,25 @@ foreach ($jornadas as $jornada) {
 							?>
 						</select>
 					</div>
-					
+					<div class="row" id="p_local_jugadores_<?=$partida->id?>">						
+					</div>
 					<div class="row">
-						<label for="p_local_<?=$partida->id?>">Visitante</label>
-						<select id="p_local_<?=$partida->id?>" name="local">
+						<label for="p_visitante_<?=$partida->id?>">Visitante</label>
+						<select id="p_visitante_<?=$partida->id?>" name="visitante" onchange="alineacion(<?=$competicion->id?>,<?=$partida->id?>,this.value,p_visitante_jugadores_<?=$partida->id?>)">
 						<option>Sin seleccionar</option>
 							<?php 
+							$visitante = $partida->getJuegaEquipoVisitante();
 							foreach($equipos as $equipo){?>
 							    <option <?php 
-							    if(count($equipospartida)>0 && $equipospartida[0]->equipoinscrito_id == $equipo->id ){
+							    if($visitante && $visitante->equipoinscrito_id == $equipo->id ){
 							        echo "selected";
 							    }?> value="<?=$equipo->id?>"><?=$equipo->id?> <?=$equipo->nombre?></option>
 							<?php 
 							}
 							?>
 						</select>
+					</div>
+					<div class="row" id="p_visitante_jugadores_<?=$partida->id?>">						
 					</div>
 					<div class="row">
 						<input type="submit" class="form-control"
@@ -254,7 +316,7 @@ foreach ($jornadas as $jornada) {
     }
     
     ?>
-<div class="col-md-4 nuevo-boton">
+		<div class="col-md-4 nuevo-boton">
 					<div class="card mb-4 box-shadow">
 					<div class="img new" id="p_new"></div>
 					
@@ -265,50 +327,8 @@ foreach ($jornadas as $jornada) {
 						value="<?=$competicion->id?>" /> 
 				   
 				     <input
-						type="hidden" name="jornada_id" value="<?=$jornada->id?>" />
-					<div class="row">
-						<label for="p_resultado">Resultado</label> 
-						<input id="p_resultado"
-							class="form-control" name="resultado" type="text"
-							 max-length="45"/>
-
-					</div>
-
-					<div class="row">
-						<label for="p_horainicio"> Hora inicio </label>
-						<input id="p_horainicio" class="form-control" name="horainicio" type="datetime-local" />
-
-					</div>
-
-					<div class="row">
-						<label for="p_comentario"> Comentario</label> <input id="p_comentario"
-							class="form-control" name="comentario" type="text" max-length="200"
-							 />
-
-					</div>
-				<div class="row">
-						<label for="p_verificado"> Verificado</label> <input id="p_verificado"
-							class="form-control" name="verificado" type="checkbox" 
-							 />
-
-					</div> 
-					<div class="row">
-						<label for="p_estado_<?=$partida->id?>"> Estado</label> 
-						<select name="p_estado_<?=$partida->id?>">
-							<option value="pendiente">Pendiente</option>
-							<option value="cerrada" >Cerrada</option>
-							<option value="jugando" >Jugando</option>
-							<option value="disputa" >Disputa</option>
-							<option value="verificando" >Verificando</option>
-						</select>
-
-					</div>
-					<div class="row">
-						<label for="p_info"> Info</label> <input id="p_info"
-							class="form-control" name="info" type="text" 
-							 />
-
-					</div>
+						type="hidden" name="jornada_id" value="<?=$jornada->id?>" />					
+					
 					<div class="row">
 						<input type="submit" class="form-control"
 							name="guardar_partida" value="Añadir Partida" />
@@ -343,34 +363,7 @@ foreach ($jornadas as $jornada) {
     									
     
     
-    								<div class="row">
-    									<label for="n_fechainicio"> Fecha inicio</label> 
-    									<input id="n_fechainicio"
-    										class="form-control" name="fechainicio" type="datetime-local"
-    										 />
-    									
-    								</div>
-   								 <div class="row">
-    									<label for="n_fechaifin"> Fecha fin</label> 
-    									<input id="n_fechaifin"
-    										class="form-control" name="fechafin" type="datetime-local"
-    										 />
-    									
-    								</div>
-    								<div class="row">
-    									<label for="n_info"> Información </label> 
-    									<input
-    										id="n_info" class="form-control" name="info"
-    										type="text"/>
-    
-    								</div>
-    								<div class="row">
-    									<label for="n_tipo"> Tipo </label> 
-    									<input
-    										id="n_tipo" class="form-control" name="tipo"
-    										type="text" />
-    
-    								</div>
+    						
     								<div class="row">
     									<input type="submit" class="form-control"
     										name="guardar_jornada" value="Añadir Jornada" />

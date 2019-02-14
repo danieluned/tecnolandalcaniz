@@ -36,8 +36,10 @@ class Jornada extends MY_Model {
         if($id!=null && $competicion_id !=null){
             // Devolver solo uno
             $query = $this->db->get_where('jornada',array("id" =>$id, "competicion_id"=>$competicion_id));
-            $this->cargar($query->result()[0]);
-            return $this;
+           
+            $com = new Jornada();
+            $com->cargar($query->result()[0]);
+            return $com;
             
         }else{
             // Devolver array
@@ -51,7 +53,7 @@ class Jornada extends MY_Model {
             }
             $query = $this->db->get_where('jornada',$where);
             foreach($query->result() as $compeDB){
-                $com = new Inscrito();
+                $com = new Jornada();
                 $v_jornadas[] = $com->cargar($compeDB);
             }
             return $v_jornadas;

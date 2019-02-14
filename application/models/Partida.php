@@ -15,6 +15,17 @@ class Partida extends MY_Model {
     public $horainicio;
     public $comentario;
     public $verificado;
+    public $mapa1;
+    public $mapa1_resultado;
+    public $mapa2;
+    public $mapa2_resultado;
+    public $mapa3;
+    public $mapa3_resultado;
+    public $mapa4;
+    public $mapa4_resultado;
+    public $mapa5;
+    public $mapa5_resultado;
+    public $propone_fecha;
     public $estado; 
     public $info;
     
@@ -25,7 +36,19 @@ class Partida extends MY_Model {
         $this->jornada_id = $datosDB['jornada_id'];
         $this->resultado = $datosDB['resultado'];
         $this->horainicio = $datosDB['horainicio'];
-        $this->comentario = $datosDB['verificado'];
+        $this->comentario = $datosDB['comentario'];
+        $this->verificado = $datosDB['verificado'];
+        $this->mapa1 = $datosDB['mapa1'];
+        $this->mapa1_resultado = $datosDB['mapa1_resultado'];
+        $this->mapa2 = $datosDB['mapa2'];
+        $this->mapa2_resultado = $datosDB['mapa2_resultado'];
+        $this->mapa3 = $datosDB['mapa3'];
+        $this->mapa3_resultado = $datosDB['mapa3_resultado'];
+        $this->mapa4 = $datosDB['mapa4'];
+        $this->mapa4_resultado = $datosDB['mapa4_resultado'];
+        $this->mapa5 = $datosDB['mapa5'];
+        $this->mapa5_resultado = $datosDB['mapa5_resultado'];
+        $this->propone_fecha = $datosDB['propone_fecha'];
         $this->estado = $datosDB['estado'];
         $this->info = $datosDB['info'];
         return $this;
@@ -39,8 +62,10 @@ class Partida extends MY_Model {
         if($id!=null && $competicion_id !=null){
             // Devolver solo uno
             $query = $this->db->get_where('partida',array("id" =>$id, "competicion_id"=>$competicion_id));
-            $this->cargar($query->result()[0]);
-            return $this;
+            $com = new Partida();
+            $com->cargar($query->result()[0]);
+            
+            return $com;
             
         }else{
             // Devolver array
@@ -88,15 +113,27 @@ class Partida extends MY_Model {
         return $this;
     }
     
-    public function getJuegaEquipos(){
-        $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id));
-        $v_equipos = array();
-        foreach($query->result() as $datosEquipo){
-            $e = new Juegaequipo(); 
-            $v_equipos[] = $e->cargar($datosEquipo); 
-        }
-        return $v_equipos;
+
+    public function getJuegaEquipoLocal(){
+        $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id,"posicion"=>0));
+        $e = new Juegaequipo();
+        $e->cargar($query->result()[0]);      
+        return $e;
     }
-    
+    public function getJuegaEquipoVisitante(){
+        $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id,"posicion"=>1));
+        $e = new Juegaequipo();
+        $e->cargar($query->result()[0]);
+        return $e;
+    }
+    public function borrarEquipoLocal(){
+        $this->db->delete('juegaequipo', array('partida_id' => $this->id, 'competicion_id'=>$this->competicion_id , "posicion"=>0));
+    }
+    public function borrarEquipoVisitante(){
+        $this->db->delete('juegaequipo', array('partida_id' => $this->id, 'competicion_id'=>$this->competicion_id , "posicion"=>1));
+    }
+    public function borrarJugadores(){
+        $this->db->delete('juega', array('partida_id' => $this->id, 'competicion_id'=>$this->competicion_id));
+    }
 }
 ?>

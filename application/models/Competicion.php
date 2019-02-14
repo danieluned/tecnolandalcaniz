@@ -11,6 +11,7 @@ class Competicion extends MY_Model {
         public $id;
         public $nombre;
         public $info;
+        public $logotipo;
         public $maxequipos;
         public $minequipos; 
         public $maxjugadoresequipo; 
@@ -46,6 +47,7 @@ class Competicion extends MY_Model {
             $this->id = $datosDB['id'];
             $this->nombre = $datosDB['nombre'];
             $this->info = $datosDB['info'];
+            $this->logotipo = $datosDB['logotipo']; 
             $this->maxequipos = $datosDB['maxequipos'];
             $this->minequipos = $datosDB['minequipos'];
             $this->maxjugadoresequipo = $datosDB['maxjugadoresequipo'];
@@ -76,8 +78,9 @@ class Competicion extends MY_Model {
             if($id!=null){
                 
                 $query = $this->db->get_where('competicion',array("id =" =>$id));
-                $this->cargar($query->result()[0]);
-                return $this; 
+                $com = new Competicion(); 
+                $com->cargar($query->result()[0]);
+                return $com; 
                 
             }else{
                 $v_competiciones = array();
@@ -154,6 +157,29 @@ class Competicion extends MY_Model {
    
         public function generarPartidas(){
             
+        }
+        
+        public function getAlineacion($competicion_id,$partida_id,$equipo_id){
+            $equipo = $this->inscritoequipo->get($equipo_id,$competicion_id);
+            $jugadores = $equipo->getInscrito();
+            $arrayj = array(); 
+            foreach($jugadores as $jugador){
+                $arrayj[] = $jugador->id; 
+            }
+            
+            $this->db->where(array("competicion_id" =>$competicion_id
+                , "partida_id"=>$partida_id));          
+            $this->db->where_in("jugadorinscrito_id",$arrayj);
+            $query = $this->db->get('juega');
+            $alineanos = $query->result();
+            $alin = array(); 
+            $i = 0; 
+            foreach($alineanos as $row){ 
+                
+                $alin[$i] = $this->inscrito->get($row->jugadorinscrito_id,$competicion_id);
+                 $i++; 
+            }
+            return array("inscritos"=>$jugadores,"alineados"=>$alin);
         }
 } 
 ?>

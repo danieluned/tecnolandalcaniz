@@ -36,8 +36,9 @@ class Inscritoequipo extends MY_Model {
         if($id!=null && $competicion_id !=null){
             // Devolver solo uno
             $query = $this->db->get_where('inscritoequipo',array("id =" =>$id, "competicion_id = "=>$competicion_id));
-            $this->cargar($query->result()[0]);
-            return $this;
+            $com = new InscritoEquipo();
+            $com->cargar($query->result()[0]);
+            return $com;
             
         }else{
             // Devolver array 

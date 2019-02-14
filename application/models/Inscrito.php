@@ -10,8 +10,9 @@ class Inscrito extends MY_Model {
     /** Propiedades basicas de la base de datos */
     public $id;
     public $competicion_id;
-    public $equipoinscrito_id;
     public $nombre;
+    public $equipoinscrito_id;
+    public $users_id;
     public $logotipo;
     public $info;
     public $fecha;
@@ -21,10 +22,12 @@ class Inscrito extends MY_Model {
         $this->id = $datosDB['id'];
         $this->competicion_id = $datosDB['competicion_id'];
         $this->nombre = $datosDB['nombre'];
+        $this->equipoinscrito_id = $datosDB['equipoinscrito_id'];
+        $this->users_id = $datosDB['users_id'];
         $this->logotipo = $datosDB['logotipo'];
         $this->info = $datosDB['info'];
         $this->fecha = $datosDB['fecha'];
-        $this->equipoinscrito_id = $datosDB['equipoinscrito_id'];
+       
         return $this;
     }
     /**
@@ -36,8 +39,9 @@ class Inscrito extends MY_Model {
         if($id!=null && $competicion_id !=null){
             // Devolver solo uno
             $query = $this->db->get_where('inscrito',array("id =" =>$id, "competicion_id = "=>$competicion_id));
-            $this->cargar($query->result()[0]);
-            return $this;
+            $com = new Inscrito();
+            $com->cargar($query->result()[0]);
+            return $com;
             
         }else{
             // Devolver array

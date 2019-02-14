@@ -13,7 +13,9 @@ class Juegaequipo extends MY_Model {
     public $equipoinscrito_id;
     public $presentado;
     public $puntuacion;
+    public $aceptafecha;
     public $conforme;
+    public $posicion;
     
     public function __construct(){
         $this->competicion_id = 0;
@@ -21,7 +23,8 @@ class Juegaequipo extends MY_Model {
         $this->equipoinscrito_id = 0;
         $this->presentado = 0;
         $this->puntuacion = 0;
-        $this->conforme = "sincontestar";
+        $this->conforme = 0;
+        $this->posicion = 0;
     }
     public function cargar($datosDB){
         $datosDB = object_to_array($datosDB);
@@ -31,7 +34,7 @@ class Juegaequipo extends MY_Model {
         $this->presentado = $datosDB['presentado'];
         $this->puntuacion = $datosDB['puntuacion'];
         $this->conforme = $datosDB['conforme'];
-        
+        $this->posicion = $datosDB['posicion'];
         return $this;
     }
     /**
@@ -43,8 +46,9 @@ class Juegaequipo extends MY_Model {
         if($competicion_id!=null && $partida_id !=null && $equipoinscrito_id != null){
             // Devolver solo uno
             $query = $this->db->get_where('juegaequipo',array("competicion_id" =>$competicion_id, "partida_id"=>$partida_id,"equipoinscrito_id"=>$equipoinscrito_id));
-            $this->cargar($query->result()[0]);
-            return $this;
+            $com = new Juegaequipo();
+            $com->cargar($query->result()[0]);
+            return $com;
             
         }else{
             // Devolver array

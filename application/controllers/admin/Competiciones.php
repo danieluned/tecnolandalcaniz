@@ -102,6 +102,14 @@ class Competiciones extends Admin_Controller
   }
   
   /**
+   * Devuelve un json con los jugadores del equipo y su alineacion
+   */
+  public function alineacion($competicion_id, $partida_id, $equipo_id){
+      $listaJugadores = $this->competicion->getAlineacion($competicion_id,$partida_id,$equipo_id);
+      $this->data = $listaJugadores;
+      $this->render(null,"json");
+  }
+  /**
    * Permite gestiona las partidas de una competicion, los emparejamientos y resultados
    * @param int $id
    */
@@ -122,25 +130,34 @@ class Competiciones extends Admin_Controller
           $partida->cargar($_POST); 
           $partida->guardarDB();
           
-          if(isset($_POST['local']) || isset($_POST['visitante'])){
-              $je = new Juegaequipo();
-              $je->competicion_id =$partida->competicion_id;
-              $je->partida_id = $partida->id; 
-              $je->borrarEquiposPartida();
-          }
           if(isset($_POST['local'])){
+              $partida->borrarEquipoLocal();
               $je = new Juegaequipo(); 
-              $je->competicion_id =$partida->competicion_id; 
+              $je->competicion_id = $partida->competicion_id; 
               $je->partida_id = $partida->id; 
+              $je->posicion = 0; 
               $je->equipoinscrito_id = $_POST['local'];
               $je->guardarDB();
           }
           if(isset($_POST['visitante'])){
+              $partida->borrarEquipoVisitante();
               $je = new Juegaequipo();
               $je->competicion_id =$partida->competicion_id;
               $je->partida_id = $partida->id;
+              $je->posicion = 1;
               $je->equipoinscrito_id = $_POST['visitante'];
               $je->guardarDB();
+          }
+          if(isset($_POST['jugadores'])){
+              $partida->borrarJugadores();
+              foreach($_POST['jugadores'] as $key => $id){
+                  $je = new Juega(); 
+                  $je->jugadorinscrito_id = $id;
+                  $je->competicion_id =$partida->competicion_id;
+                  $je->partida_id = $partida->id;
+                  $je->guardarDB();
+              }
+          
           }
       }
       if(isset($_POST['borrar_jornada'])){
@@ -155,6 +172,7 @@ class Competiciones extends Admin_Controller
       }
       $this->render('admin/competiciones/partidas');  
   }
+  
   /**
    * Permite ver y añadir una lista de equipos/jugadores a la competición
    */
