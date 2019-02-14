@@ -3,12 +3,13 @@
         <section class="ligas">            
             <div class="container ">                    
                 <div class="row header-liga text-center">
-                    <img src="<?= assets()?>images/Liga_png.png" class="rounded mx-auto d-block">
+                    <img src="<?= assets()?>images/ligas/liga_cod_netllar.png" class="rounded mx-auto d-block">
                 </div>
                 <div class="row body-liga">
                     <div class="container-fluid">
                         <div class="row competiciones justify-content-around ">
-                            <div class="col-6 competicion ">
+                            
+                            <div class="col-sm-12 col-md-12 col-lg-6 competicion ">
                                 <div class="container-fluid text-center">
                                     <div >
                                         <div class="row header-competicion">
@@ -18,10 +19,17 @@
                                             </div>
                                         </div>
                                         <div class="row body-competicion">
-                                            <div class="col">
-                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png"> 500€ </h3>
-                                                <h3><img class="small_incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png"> 250€ </h3>
-                                                <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Torneo_png.png"> 5 vs 5 </h3>
+                                            <div class="col-6">
+                                                <img class="incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png">
+                                                <h3> 500€ </h3>
+                                            </div>
+                                            <div class="col-6">
+                                                <img class="small_incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png">
+                                                <h3> 250€ </h3>
+                                            </div>
+                                            <div class="col-12">                                                      
+                                                <img class="incono_h3" src="<?= assets()?>images/iconos/Torneo_png.png">
+                                                <h3> 5 vs 5 </h3>
                                             </div>
                                         </div>
                                         <div class="row footer-competicion">
@@ -34,13 +42,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 competicion ">
+
+                            <!--<div class="col-6 competicion ">
                                 <div class="container-fluid text-center">
                                     <div >
                                         <div class="row header-competicion">
                                             <div class="col">
                                                 <img src="<?= assets()?>images/cs-go.png">
-                                                <!--<h3>Call Of Duty Black Ops 4</h3>-->
+                                                <h3>Call Of Duty Black Ops 4</h3>
                                             </div>
                                         </div>
                                         <div class="row body-competicion">
@@ -57,7 +66,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
+
                         </div>                   
                     </div>                        
                 </div>                    
@@ -94,10 +104,10 @@
                     </div>
                 </div>
                 <div class="row body-videos">
-                    <div class="col-6">
+                    <div class="col-sm-12 col-md-12 col-lg-6">
                         <iframe width="100%" height="315" src="https://www.youtube.com/embed/uhLNxnw6n6E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-12 col-md-12 col-lg-6">
                         <iframe width="100%" height="315" src="https://www.youtube.com/embed/TwxjcvxOhtE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>

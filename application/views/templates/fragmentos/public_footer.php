@@ -2,13 +2,13 @@
             <div class="container">
                 <div class="row justify-content-around">
 
-                    <div class="col-4 informacion">
+                    <div class="col-sm-12 col-md-4 informacion">
                         <h4>Tecnoland</h4>
                         <p>
                             Tecnoland Alcañiz es una asociación sin animo de lucro dedicada a la organización de eventos relacionados con la informática, nuevas tecnologías y videojuegos en toda la comunidad de Aragón.
                         </p>
                     </div>
-                    <div class="col-4 contacto">
+                    <div class="col-sm-12 col-md-4 contacto">
                         <div class="container-fluid">
                             <div class="row">
                                 <h4>Contacto</h4>     

@@ -25,3 +25,12 @@
 	padding: 20px;
 }
 
+.caret {
+  border-left: solid 70px transparent; 
+  border-right: solid 70px transparent; 
+  border-bottom: solid 70px #fff;
+  filter: drop-shadow(0 0 30px #333);
+  height: 0; 
+  width: 0; 
+}
+
