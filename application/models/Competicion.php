@@ -121,7 +121,19 @@ class Competicion extends MY_Model {
             $this->db->delete('competicion', array('id' => $this->id));
             return $this;
         }
-        
+        public function borrarJornadasDB(){
+            // delete user from users table should be placed after remove from group
+           
+            return $this;
+        }
+        public function borrarPartidasDB(){
+            // delete user from users table should be placed after remove from group
+            $this->db->delete('jornada', array('competicion_id' => $this->id));
+            $this->db->delete('partida', array('competicion_id' => $this->id));
+            $this->db->delete('juegaequipo', array('competicion_id' => $this->id)); 
+            $this->db->delete('juega',array('competicion_id' => $this->id));
+            return $this;
+        }
         public function getInscrito(){
             $query = $this->db->get_where('inscrito',array('competicion_id'=>$this->id));
             $v_inscrito = array();
@@ -180,6 +192,100 @@ class Competicion extends MY_Model {
                  $i++; 
             }
             return array("inscritos"=>$jugadores,"alineados"=>$alin);
+        }
+        
+        /**
+         * Genera las partidas en base a la cantidad de equipos inscritos y la cantidad de vueltas a realizar 
+         */
+        public function generarPartidasEquiposDB($vueltas){
+            
+            $equipos = $this->getInscritoEquipo();
+           
+            $equipos_ids = array();
+            $equipos_ids_i = array();
+            $max = count($equipos);
+            if($max%2!=0){
+                $libre = new Inscritoequipo(); 
+                $libre->id = -1; 
+                $libre->nombre = "LIBRE";
+                $equipos[] = $libre;
+                $max++;
+            }
+            for($i= 0 ; $i< $max ;$i++){
+                $equipos_ids[$i] = $equipos[$i]->id;
+                $equipos_ids_i[$i]  = $equipos[$max-1-$i]->id;
+            }
+            $rondas = array();
+            for($i = 0; $i<$vueltas;$i++){
+                if($i%2==0){
+                    $ronda = $this->roundRobin($equipos_ids);
+                }else{
+                    $ronda = $this->roundRobin($equipos_ids_i);
+                }
+                $rondas = array_merge($rondas,$ronda);                            
+            }
+            
+           
+            foreach($rondas as $round => $games){
+                $jornada = new Jornada();
+                $jornada->competicion_id = $this->id;
+                $jornada->guardarDB();
+                             
+                foreach($games as $play){
+                    $partida = new Partida();
+                    $partida->competicion_id = $this->id ;
+                    $partida->jornada_id = $jornada->id;
+                    $partida->guardarDB();
+                    $juegalocal = new Juegaequipo();
+                    $juegavisi = new Juegaequipo();
+                    $juegalocal->equipoinscrito_id = $play["Home"];
+                    $juegavisi->equipoinscrito_id = $play["Away"];
+                    $juegalocal->competicion_id = $this->id;
+                    $juegavisi->competicion_id = $this->id;
+                    $juegalocal->partida_id = $partida->id;
+                    $juegavisi->partida_id = $partida->id;
+                    $juegalocal->posicion = 0;
+                    $juegavisi->posicion = 1;
+                    
+                    if($play["Home"] == -1){                    
+                        $partida->comentario = "LIBRE";
+                        $partida->guardarDB();                        
+                    }else{                      
+                        $juegalocal->guardarDB();
+                    }
+                    if($play["Away"] == -1){                       
+                        $partida->comentario = "LIBRE";
+                        $partida->guardarDB();
+                    }else{
+                        
+                        $juegavisi->guardarDB();
+                    }
+                }
+            }                            
+        }
+        private function roundRobin( array $teams ){
+            
+            if (count($teams)%2 != 0){
+                array_push($teams,"bye");
+            }
+            $away = array_splice($teams,(count($teams)/2));
+            $home = $teams;
+            for ($i=0; $i < count($home)+count($away)-1; $i++)
+            {
+                for ($j=0; $j<count($home); $j++)
+                {
+                    $round[$i][$j]["Home"]=$home[$j];
+                    $round[$i][$j]["Away"]=$away[$j];
+                }
+                if(count($home)+count($away)-1 > 2)
+                {
+                    $s = array_splice( $home, 1, 1 );
+                    $slice = array_shift( $s  );
+                    array_unshift($away,$slice );
+                    array_push( $home, array_pop($away ) );
+                }
+            }
+            return $round;
         }
 } 
 ?>

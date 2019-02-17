@@ -69,12 +69,15 @@ function alineacion(competicion_id, partida_id, equipo_id, html_destino){
 		<div class="container">
 			<h1 class="jumbotron-heading"><?=$competicion->nombre?></h1>
 			<p class="lead text-muted"><?=$competicion->info?></p>
-			<!-- 
+			
       <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      
+        <a href="<?=site_url("admin/competiciones/partidas/".$competicion->id."?generarpartidasequipos")?>" class="btn btn-primary my-2">Generar partidas</a>
+        
+        <a href="<?=site_url("admin/competiciones/partidas/".$competicion->id."?borrarpartidas")?>" class="btn btn-secondary my-2">Borrar Partidas</a>
+         
       </p>
-       -->
+       
 		</div>
 	</section>
 

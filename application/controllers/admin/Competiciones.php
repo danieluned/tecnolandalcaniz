@@ -12,21 +12,22 @@ class Competiciones extends Admin_Controller
   function __construct()
   {
     parent::__construct();
-    if(!$this->ion_auth->in_group('admin'))
-    {
-      $this->session->set_flashdata('message','You are not allowed to visit the Groups page');
     
-      
-      redirect('admin','refresh');
-    }
   }
- 
+  
   /**
    * Muestra todas las competiciones creadas
    */
   public function index(){
       $this->data['title'] = 'Competiciones'; 
-      $this->data['competiciones'] = $this->competicion->get();
+      if($this->ion_auth->in_group('admin')){
+          $this->data['competiciones'] = $this->competicion->get();
+      }else if($this->ion_auth->in_group('capitan')){ 
+          
+          $this->data['competiciones'] = $this->competicion->get();
+         
+      }
+      
       $this->render('admin/competiciones/lista');
   }
   
@@ -34,6 +35,12 @@ class Competiciones extends Admin_Controller
    * Muestra el formulario para crear una competicion
    */
   public function crear(){
+      if(!$this->ion_auth->in_group('admin'))
+      {
+          $this->session->set_flashdata('message','You are not allowed to visit this page');        
+          redirect('admin','refresh');
+      }
+      
       //Titulo de la página
       $this->data['title'] = 'Crear competición'; 
       $this->data['crear'] = true;       
@@ -63,6 +70,11 @@ class Competiciones extends Admin_Controller
    * Edita los parametros generales de una competicion 
    */
   public function editar($id = null){
+      if(!$this->ion_auth->in_group('admin'))
+      {
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
       
       //Titulo de la página
       $this->data['title'] = 'Editar competición';
@@ -93,7 +105,10 @@ class Competiciones extends Admin_Controller
    * Borra una competición 
    */
   public function borrar($id){
-  
+      if(!$this->ion_auth->in_group('admin')){     
+          $this->session->set_flashdata('message','You are not allowed to visit this page');      
+          redirect('admin','refresh');
+      }
       $this->competicion->get($id)->borrarDB();
        
       $this->session->set_flashdata('message','Borrado');
@@ -105,6 +120,10 @@ class Competiciones extends Admin_Controller
    * Devuelve un json con los jugadores del equipo y su alineacion
    */
   public function alineacion($competicion_id, $partida_id, $equipo_id){
+      if(!$this->ion_auth->in_group('admin')){
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
       $listaJugadores = $this->competicion->getAlineacion($competicion_id,$partida_id,$equipo_id);
       $this->data = $listaJugadores;
       $this->render(null,"json");
@@ -114,12 +133,26 @@ class Competiciones extends Admin_Controller
    * @param int $id
    */
   public function partidas($id){
+      if(!$this->ion_auth->in_group('admin')){
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
       $this->data['competicion'] = $competicion = $this->competicion->get($id); 
       if(is_null($competicion)){
           $this->session->set_flashdata('message','Seleciona una competición');
           redirect('admin/competiciones','refresh');
       }
       $this->data['equipos'] = $competicion->getInscritoequipo;
+      
+      if (isset($_GET['generarpartidasequipos'])){
+          $competicion->borrarJornadasDB();
+          $competicion->borrarPartidasDB();
+          $competicion->generarPartidasEquiposDB(2);
+      }
+      if (isset($_GET['borrarpartidas'])){
+          $competicion->borrarJornadasDB();
+          $competicion->borrarPartidasDB();
+      }
       if (isset($_POST['guardar_jornada'])){
           $jornada = new Jornada();
           $jornada->cargar($_POST); 
@@ -177,16 +210,21 @@ class Competiciones extends Admin_Controller
    * Permite ver y añadir una lista de equipos/jugadores a la competición
    */
   public function ver($id){
+      if(!$this->ion_auth->in_group('admin')){
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
       //Titulo de la página
       
       $this->data['competicion'] = $competicion = $this->competicion->get($id);
-     
+      
       if(is_null($competicion)){
           $this->session->set_flashdata('message','Seleciona una competición');
           redirect('admin/competiciones','refresh');
       }
       $this->data['title'] = 'Competición: '.$competicion->nombre;
-        
+      
+     
       if (isset($_POST['inscribirequipo'])){
           $equipo = new Inscritoequipo();
           $equipo->cargar($_POST);

@@ -8,42 +8,42 @@
           <?php
           echo form_label('First name','first_name');
           echo form_error('first_name');
-          echo form_input('first_name',set_value('first_name',$usuario->first_name),'class="form-control"');
+          echo form_input('first_name',set_value('first_name',$current_user->first_name),'class="form-control"');
           ?>
         </div>
         <div class="form-group">
           <?php
           echo form_label('Last name','last_name');
           echo form_error('last_name');
-          echo form_input('last_name',set_value('last_name',$usuario->last_name),'class="form-control"');
+          echo form_input('last_name',set_value('last_name',$current_user->last_name),'class="form-control"');
           ?>
         </div>
         <div class="form-group">
           <?php
           echo form_label('Company','company');
           echo form_error('company');
-          echo form_input('company',set_value('company',$usuario->company),'class="form-control"');
+          echo form_input('company',set_value('company',$current_user->company),'class="form-control"');
           ?>
         </div>
         <div class="form-group">
           <?php
           echo form_label('Phone','phone');
           echo form_error('phone');
-          echo form_input('phone',set_value('phone',$usuario->phone),'class="form-control"');
+          echo form_input('phone',set_value('phone',$current_user->phone),'class="form-control"');
           ?>
         </div>
         <div class="form-group">
           <?php
           echo form_label('Username','username');
           echo form_error('username');
-          echo form_input('username',set_value('username',$usuario->username),'class="form-control" readonly');
+          echo form_input('username',set_value('username',$current_user->username),'class="form-control" readonly');
           ?>
         </div>
         <div class="form-group">
           <?php
           echo form_label('Email','email');
           echo form_error('email');
-          echo form_input('email',set_value('email',$usuario->email),'class="form-control" readonly');
+          echo form_input('email',set_value('email',$current_user->email),'class="form-control" readonly');
           ?>
         </div>
         <div class="form-group">
