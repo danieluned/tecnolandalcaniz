@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="row footer-competicion">
                                             <div class="col">
-                                                <a href="<?php echo site_url('Liga');?>">
+                                                <a href="<?php echo site_url('callofduty');?>">
                                                     <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Información_png.png"> Detalles </h3>
                                                 </a>
                                             </div>

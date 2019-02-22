@@ -63,7 +63,11 @@ class Partida extends MY_Model {
             // Devolver solo uno
             $query = $this->db->get_where('partida',array("id" =>$id, "competicion_id"=>$competicion_id));
             $com = new Partida();
-            $com->cargar($query->result()[0]);
+            $result = $query->result(); 
+            if(!$result){
+                return null; 
+            }
+            $com->cargar($result[0]);
             
             return $com;
             
@@ -117,14 +121,22 @@ class Partida extends MY_Model {
     public function getJuegaEquipoLocal(){
         $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id,"posicion"=>0));
         $e = new Juegaequipo();
-        $e->cargar($query->result()[0]);      
+        $result = $query->result();
+        if(!$result){
+            return null;
+        }
+        $e->cargar($result[0]);      
         return $e;
     }
     
     public function getJuegaEquipoVisitante(){
         $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id,"posicion"=>1));
         $e = new Juegaequipo();
-        $e->cargar($query->result()[0]);
+        $result = $query->result();
+        if(!$result){
+            return null;
+        }
+        $e->cargar($result[0]);
         return $e;
     }
     public function borrarEquipoLocal(){

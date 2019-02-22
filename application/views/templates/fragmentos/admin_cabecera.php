@@ -148,7 +148,7 @@
 					</button>
 					<!-- Logo -->
 					<div class="logo">
-						<a class="navbar-brand logo-w3l button" href="<?= base_url()?>"><img src="<?= assets()?>images/snText.png" style="width:34px;height:34px;" class="d-inline-block align-top" alt=""> <span class="hidden-xs">TECNOLAND</span> <span>ADMIN<span></span> </a>
+						<a class="navbar-brand logo-w3l button" href="<?= base_url()?>"><img src="<?= assets()?>images/snText.png" style="width:34px;height:34px;" class="d-inline-block align-top" alt=""> <span>TECNOLAND</span> </a>
 					</div>
 					<!-- //Logo -->
 				</div>

@@ -39,7 +39,7 @@ class Usuario extends Public_Controller {
             'id' => 'password',
             'type' => 'password',
         ];
-        $this->render('auth' . DIRECTORY_SEPARATOR . 'login');
+        $this->render('auth' . DIRECTORY_SEPARATOR . 'login','admin_template');
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Usuario extends Public_Controller {
 				'type' => 'password',
 			];
 
-			$this->render('auth' . DIRECTORY_SEPARATOR . 'login');
+			$this->render('auth' . DIRECTORY_SEPARATOR . 'login','admin_template');
 		}
 	}
 
@@ -160,7 +160,7 @@ class Usuario extends Public_Controller {
 			];
 
 			// render
-			$this->render('auth' . DIRECTORY_SEPARATOR . 'change_password');
+			$this->render('auth' . DIRECTORY_SEPARATOR . 'change_password','admin_template');
 		}
 		else
 		{
@@ -220,7 +220,7 @@ class Usuario extends Public_Controller {
 
 			// set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->render('auth' . DIRECTORY_SEPARATOR . 'forgot_password');
+			$this->render('auth' . DIRECTORY_SEPARATOR . 'forgot_password','admin_template');
 		}
 		else
 		{
@@ -313,7 +313,7 @@ class Usuario extends Public_Controller {
 				$this->data['code'] = $code;
 
 				// render
-				$this->render('auth' . DIRECTORY_SEPARATOR . 'reset_password');
+				$this->render('auth' . DIRECTORY_SEPARATOR . 'reset_password','admin_template');
 			}
 			else
 			{
@@ -414,7 +414,7 @@ class Usuario extends Public_Controller {
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
 
-			$this->render('auth' . DIRECTORY_SEPARATOR . 'deactivate_user');
+			$this->render('auth' . DIRECTORY_SEPARATOR . 'deactivate_user','admin_template');
 		}
 		else
 		{

@@ -69,6 +69,10 @@ class Competicion extends MY_Model {
             $this->modo = $datosDB['modo'];
             return $this;
         }
+        
+        public function getEquipo($user_id){
+            
+        }
         /**
          * devuelve todas las competiciones de la base de datos o bien filtra por id 
          * datos
@@ -79,7 +83,11 @@ class Competicion extends MY_Model {
                 
                 $query = $this->db->get_where('competicion',array("id =" =>$id));
                 $com = new Competicion(); 
-                $com->cargar($query->result()[0]);
+                $result = $query->result();
+                if(!$result){
+                    return null;
+                }
+                $com->cargar($result[0]);
                 return $com; 
                 
             }else{
@@ -166,19 +174,20 @@ class Competicion extends MY_Model {
             }
             return $v_jornadas;
         }
-   
-        public function generarPartidas(){
-            
-        }
-        
+       
         public function getAlineacion($competicion_id,$partida_id,$equipo_id){
             $equipo = $this->inscritoequipo->get($equipo_id,$competicion_id);
+            if(!$equipo){
+                return array("inscritos"=>array(),"alineados"=>array(),"equipo"=>null);
+            }
             $jugadores = $equipo->getInscrito();
             $arrayj = array(); 
             foreach($jugadores as $jugador){
                 $arrayj[] = $jugador->id; 
             }
-            
+            if (count($arrayj) == 0){
+                return array("inscritos"=>array(),"alineados"=>array(),"equipo"=>$equipo);
+            }
             $this->db->where(array("competicion_id" =>$competicion_id
                 , "partida_id"=>$partida_id));          
             $this->db->where_in("jugadorinscrito_id",$arrayj);
@@ -191,7 +200,7 @@ class Competicion extends MY_Model {
                 $alin[$i] = $this->inscrito->get($row->jugadorinscrito_id,$competicion_id);
                  $i++; 
             }
-            return array("inscritos"=>$jugadores,"alineados"=>$alin);
+            return array("inscritos"=>$jugadores,"alineados"=>$alin, "equipo"=>$equipo);
         }
         
         /**

@@ -38,7 +38,11 @@ class Jornada extends MY_Model {
             $query = $this->db->get_where('jornada',array("id" =>$id, "competicion_id"=>$competicion_id));
            
             $com = new Jornada();
-            $com->cargar($query->result()[0]);
+            $result = $query->result(); 
+            if(!$result){
+                return null;
+            }
+            $com->cargar($result[0]);
             return $com;
             
         }else{

@@ -35,12 +35,34 @@ class Inscrito extends MY_Model {
      * datos
      * @return
      */
-    public function get($id = null,$competicion_id = null){
-        if($id!=null && $competicion_id !=null){
+    public function get($id = null,$competicion_id = null,$user_id = null){
+        if($user_id!=null){
+            // Devolver array donde este participando como inscrito
+            $v_competiciones = array();
+            $where = array();
+            $where['users_id'] = $user_id;
+            if($id){
+                $where["id"] = $id;
+            }
+            if($competicion_id){
+                $where["competicion_id"] = $competicion_id;
+            }
+            $query = $this->db->get_where('inscrito',$where);
+            foreach($query->result() as $compeDB){
+                $com = new Inscrito();
+                $v_competiciones[] = $com->cargar($compeDB);
+            }
+            return $v_competiciones;
+            
+        }else if($id!=null && $competicion_id !=null){
             // Devolver solo uno
             $query = $this->db->get_where('inscrito',array("id =" =>$id, "competicion_id = "=>$competicion_id));
             $com = new Inscrito();
-            $com->cargar($query->result()[0]);
+            $result = $query->result(); 
+            if(!$result){
+                return null;
+            }
+            $com->cargar($result[0]);
             return $com;
             
         }else{
@@ -73,12 +95,12 @@ class Inscrito extends MY_Model {
         if($this->id){
             //Si ya tenia un id asignado actualizamos
             
-            $this->db->update('inscrito', $this, array("id" => $this->id ));
+            $result =  $this->db->update('inscrito', (array)$this, array("id" => $this->id ,"competicion_id"=>$this->competicion_id));
         }else{
             $this->db->select('ifnull(max(id),0) as total from inscrito where competicion_id = '.$this->competicion_id) ;
             $total = $this->db->get()->result()[0]->total;
             $this->id =  $total+1;
-            $this->db->insert('inscrito', $this);
+            $result = $this->db->insert('inscrito',(array) $this);
             
             
         }

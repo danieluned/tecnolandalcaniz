@@ -1,10 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <div class="container" style="margin-top: 60px;">
+  <?php if($this->ion_auth->in_group('admin')){?>
   <div class="row">
     <div class="col-lg-12">
       <a href="<?php echo site_url('admin/competiciones/crear');?>" class="btn btn-primary">Crear competicion</a>
     </div>
   </div>
+  <?php }?>
   <div class="row">
     <div class="col-lg-12" style="margin-top: 10px;">
     <?php
@@ -25,13 +27,21 @@
           <td>
           <?=anchor ('admin/competiciones/partidas/'.$competicion->id,'Partidas ')?>
            <?=anchor ('admin/competiciones/ver/'.$competicion->id,'Participantes ')?>
+           <?php if($this->ion_auth->in_group('admin')){?>
            <?=anchor('admin/competiciones/editar/'.$competicion->id,'<i class="fas fa-edit"></i>')?>
             <?=anchor('admin/competiciones/borrar/'.$competicion->id,'<i style="color:red;" class="fas fa-trash-alt"></i>',array('class'=>'borrar'));?>
+          	<?php }?>
           </td>
         </tr>
      <?php } ?>
      </table>
-   <?php  }?>
+   <?php  }else{ ?>
+      <div class="row">
+        <div class="col-lg-12">
+         <h2>No estas inscrito en ninguna competición</h2>
+        </div>
+  </div>
+   <?php }?>
     
     </div>
   </div>

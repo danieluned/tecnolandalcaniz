@@ -89,7 +89,7 @@ foreach ($equipos as $equipo) {
     
     
     								<div class="row">
-    									<label for="n_nombre"> EQUIPO </label> <input id="n_nombre_<?=$equipo->id?>"
+    									<label for="n_nombre_<?=$equipo->id?>"> EQUIPO </label> <input id="n_nombre_<?=$equipo->id?>"
     										class="form-control" name="nombre" type="text"
     										value="<?=$equipo->nombre?>" />
     
@@ -97,7 +97,7 @@ foreach ($equipos as $equipo) {
     
     								<div class="row">
     									<label for="n_info_<?=$equipo->id?>"> Info </label>
-    									<textarea id="n_info" class="form-control" name="info"><?=$equipo->info?></textarea>
+    									<textarea id="n_info_<?=$equipo->id?>" class="form-control" name="info"><?=$equipo->info?></textarea>
     
     								</div>
     
@@ -172,25 +172,31 @@ foreach ($equipos as $equipo) {
 						name="equipoinscrito_id" value="<?=$equipo->id?>" /> <input
 						type="hidden" name="id" value="<?=$jugador->id?>" />
 					<div class="row">
-						<label for="n_nombre"> Jugador </label> <input id="n_nombre"
+						<label for="n_nombre_<?=$jugador->id?>"> Jugador </label> <input id="n_nombre_<?=$jugador->id?>"
 							class="form-control" name="nombre" type="text"
 							value="<?=$jugador->nombre?>" />
 
 					</div>
 
 					<div class="row">
-						<label for="n_info"> Info </label>
-						<textarea id="n_info" class="form-control" name="info"><?=$jugador->info?></textarea>
+						<label for="n_info_<?=$jugador->id?>"> Info </label>
+						<textarea id="n_info_<?=$jugador->id?>" class="form-control" name="info"><?=$jugador->info?></textarea>
 
 					</div>
 
 					<div class="row">
-						<label for="n_logotipo"> Logotipo </label> <input id="n_logotipo"
+						<label for="n_logotipo_<?=$jugador->id?>"> Logotipo </label> <input id="n_logotipo_<?=$jugador->id?>"
 							class="form-control" name="logotipo" type="file"
 							 />
 
 					</div>
+					<div class="row">
+						<label for="n_user_<?=$jugador->id?>"> Id usuario registrado </label> 
+						<input id="n_user_<?=$jugador->id?>"
+							class="form-control" name="users_id" type="number"  value="<?=$jugador->users_id?>" 
+							 />
 
+					</div>
 					<div class="row">
 						<input type="submit" class="form-control"
 							name="inscribirjugadorequipo" value="Guardar cambios" />
@@ -224,23 +230,7 @@ foreach ($equipos as $equipo) {
 					<input type="hidden" name="competicion_id"
 						value="<?=$competicion->id?>" /> <input type="hidden"
 						name="equipoinscrito_id" value="<?=$equipo->id?>" />
-					<div class="row">
-						<label for="n_nombre"> Jugador Nuevo </label> <input id="n_nombre"
-							class="form-control" name="nombre" type="text" />
-
-					</div>
-
-					<div class="row">
-						<label for="n_info"> Info </label>
-						<textarea id="n_info" class="form-control" name="info"></textarea>
-
-					</div>
-
-					<div class="row">
-						<label for="n_logotipo"> Logotipo </label> <input id="n_logotipo"
-							class="form-control" name="logotipo" type="file" />
-
-					</div>
+				
 
 					<div class="row">
 						<input type="submit" class="form-control"
@@ -283,25 +273,7 @@ if(count($equipos)<$competicion->maxequipos){?>
 								<input type="hidden" name="competicion_id"
 									value="<?=$competicion->id?>" />
 
-								<div class="row">
-									<label for="n_nombre"> Nuevo Equipo </label> <input id="n_nombre"
-										class="form-control" name="nombre" type="text" value="" />
-
-								</div>
-
-								<div class="row">
-									<label for="n_info"> Info </label>
-									<textarea id="n_info" class="form-control" name="info"></textarea>
-
-								</div>
-
-								<div class="row">
-									<label for="n_logotipo"> Logotipo </label> <input
-										id="n_logotipo" class="form-control" name="logotipo"
-										type="file" value="" />
-
-								</div>
-
+								
 								<div class="row">
 									<input type="submit" class="form-control"
 										name="inscribirequipo" value="Añadir Nuevo Equipo" />

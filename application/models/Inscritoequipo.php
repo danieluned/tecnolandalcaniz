@@ -37,7 +37,11 @@ class Inscritoequipo extends MY_Model {
             // Devolver solo uno
             $query = $this->db->get_where('inscritoequipo',array("id =" =>$id, "competicion_id = "=>$competicion_id));
             $com = new InscritoEquipo();
-            $com->cargar($query->result()[0]);
+            $result = $query->result(); 
+            if(!$result){
+                return null;
+            }
+            $com->cargar($result[0]);
             return $com;
             
         }else{
@@ -70,7 +74,7 @@ class Inscritoequipo extends MY_Model {
         if($this->id){
             //Si ya tenia un id asignado actualizamos
             
-            $this->db->update('inscritoequipo', $this, array("id" => $this->id ));
+            $this->db->update('inscritoequipo',(array) $this, array("id" => $this->id ,"competicion_id"=>$this->competicion_id));
         }else{
             $this->db->select('ifnull(max(id),0) as total from inscritoequipo where competicion_id = '.$this->competicion_id) ;
             $total = $this->db->get()->result()[0]->total;

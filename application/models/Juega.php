@@ -50,7 +50,11 @@ class Juega extends MY_Model {
             // Devolver solo uno
             $query = $this->db->get_where('juega',array("competicion_id" =>$competicion_id, "partida_id"=>$partida_id,"jugadorinscrito_id"=>$jugadorinscrito_id));
             $com = new Juega();
-            $com->cargar($query->result()[0]);
+            $result = $query->result(); 
+            if(!$result){
+                return null;
+            }
+            $com->cargar($result[0]);
             return $com;
             
         }else{
@@ -95,7 +99,11 @@ class Juega extends MY_Model {
     public function getJugador(){
         $query = $this->db->get_where("inscrito", array("id"=>$this->jugadorinscrito_id,"competicion_id"=>$this->competicion_id));
         $ei = new Inscritoequipo();
-        $ei->cargar($query->result()[0]);
+        $result = $query->result();
+        if(!$result){
+            return null;
+        }
+        $ei->cargar($result[0]);
         return $ei;
     }
 }

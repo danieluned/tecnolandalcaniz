@@ -15,7 +15,7 @@ if ( ! function_exists('createPath'))
         }
     }*/
     function createPath($path){
-        mkdir($path, null, true);
+       mkdir($path, 755, true);
     }
     
 }
