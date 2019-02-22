@@ -15,13 +15,13 @@ section{
     padding-bottom: 50px;
     background-color: black;
 }
-@font-face {
+/*@font-face {
   font-family: 'Furore';
   src: url('../fonts/Viga-Regular.ttf');
 }
-div{
+*{
     font-family: Furrore;
-}
+}*/
 #navHeader{
     display: inline-block;
     background-color: transparent;
@@ -34,6 +34,18 @@ div{
     margin-right: 50px;
     color:orange;
 }
+.galeria .container, .videos .container, .body-liga{
+    border: 1px solid #7b7b7b;
+    border-radius: 4px;
+    padding: 25px;
+    background-color: #ffffffd4;
+    /*padding-top: 25px;
+    padding-bottom: 25px;  */ 
+    border: silver 21px solid;
+    border-image-source: url('../images/marcos/Marco_1.png');
+    border-image-slice: 21 fill;
+    background-clip: padding-box;
+}
 
 .header-liga, .equipos{
     padding-top: 25px;
@@ -45,12 +57,15 @@ div{
     overflow: visible;
 }
 .ligas{
-    //background: url('../images/Fondo_1.png') no-repeat fixed center;
-    background: url('../images/fondos/fondo_netllar.jpg') no-repeat fixed center;
+   //background: url('../images/Fondo_1.png') no-repeat fixed center;
+   background: url('../images/fondos/fondo_netllar.jpg') no-repeat fixed center;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
+}
+.body-liga{
+    
 }
 .header-liga{
     //background-color: lightblue;   
@@ -62,8 +77,7 @@ div{
     z-index: 1;
 }
 .body-liga{
-    border: 1px solid #ffffff85;
-    border-radius: 4px;
+   
     padding-top: 100px;
     background-color: #ffffffd4;
     
@@ -73,6 +87,17 @@ div{
 }
 
 .competicion{
+    background: url('../images/ligas/cod_fondo_inicio.jpeg') center;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;*/
+    
+    //background-color: #00000063;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px #000;
+    color: #fff;
+    font-weight: bold;
     /*-webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.75);*/
@@ -80,6 +105,8 @@ div{
 
 .competicion h3{
     padding: 5px;
+    font-weight: bold;
+    font-size: 40px;
 }
 
 .header-competicion{
@@ -88,11 +115,19 @@ div{
 .header-competicion img{
     max-width: 100%;
 }
+.body-competicion{
+    background-color: #00000070;
+}
+.body-competicion ,.footer-competicion ,.header-competicion{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    
+}
 .incono_h3{
-    max-height: 30px;
+    max-height: 50px;
 }
 .small_incono_h3{
-    max-height: 20px;
+    max-height: 40px;
 }
 .footer-competicion{
     border-top: 1px solid;
@@ -101,8 +136,7 @@ div{
     
 }
 .competicion .container-fluid{
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding: 25px;
 }
 
 .galeria{
@@ -118,18 +152,7 @@ div{
     padding-top: 25px;
     padding-bottom: 25px;   
 }
-.galeria .container, .videos .container, .body-liga{
-    border: 1px solid #7b7b7b;
-    border-radius: 4px;
-    padding: 25px;
-    background-color: #ffffffd4;
-    /*padding-top: 25px;
-    padding-bottom: 25px;  */ 
-    border: silver 21px solid;
-    border-image-source: url('../images/marcos/Marco_1.png');
-    border-image-slice: 21 fill;
-    background-clip: padding-box;
-}
+
 .body-liga{
     padding-top: 100px;
 }

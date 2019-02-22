@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 /* Mi ruta para la zona de admin */
 $route['admin'] = 'admin/dashboard';
-$route['Liga'] = 'liga/detallesliga';
+$route['LigaCOD'] = 'liga/detallesliga/1';
 $route['encuentro'] = 'encuentro/detallesencuentro';
 
 

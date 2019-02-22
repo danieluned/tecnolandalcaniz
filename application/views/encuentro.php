@@ -10,7 +10,7 @@
 				
 				<div class="row text-center twitch justify-content-around ">	
 					<div>
-						<iframe class="sombra-png-negra" src="https://player.twitch.tv/?channel=tecnoland_oficial" frameborder="0" allowfullscreen="true" scrolling="no" height="300" width="620"></iframe>
+						<iframe class="sombra-png-negra" src="https://player.twitch.tv/?channel=tecnoland_oficial" frameborder="0" allowfullscreen="true" scrolling="no" height="400" width="820"></iframe>
 					</div>
 						
 						<!--<a href="https://www.twitch.tv/tecnoland_oficial?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Ver vídeo en directo de Tecnoland_Oficial en www.twitch.tv</a>-->

@@ -9,23 +9,25 @@
                     <div class="container-fluid">
                         <div class="row competiciones justify-content-around ">
                             
-                            <div class="col-sm-12 col-md-12 col-lg-6 competicion ">
+                            <div class="col-sm-12 col-md-12 col-lg-8 competicion ">
                                 <div class="container-fluid text-center">
                                     <div >
                                         <div class="row header-competicion">
                                             <div class="col">
-                                                <img src="<?= assets()?>images/call-of-duty.png">
+                                                <img src="<?= assets()?>images/ligas/codbo4-logo1.png">
                                                 <!--<h3>Call Of Duty Black Ops 4</h3>-->
                                             </div>
                                         </div>
                                         <div class="row body-competicion">
                                             <div class="col-6">
-                                                <img class="incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png">
                                                 <h3> 500€ </h3>
+                                                <img class="incono_h3 sombra-png-blanca" src="<?= assets()?>images/iconos/medalla-de-oro.png">
+                                                
                                             </div>
                                             <div class="col-6">
-                                                <img class="small_incono_h3" src="<?= assets()?>images/iconos/Concurso_png.png">
                                                 <h3> 250€ </h3>
+                                                <img class="incono_h3 sombra-png-blanca" src="<?= assets()?>images/iconos/segundo.png">
+                                                
                                             </div>
                                             <div class="col-12">                                                      
                                                 <img class="incono_h3" src="<?= assets()?>images/iconos/Torneo_png.png">
@@ -34,8 +36,8 @@
                                         </div>
                                         <div class="row footer-competicion">
                                             <div class="col">
-                                                <a href="<?php echo site_url('Liga');?>">
-                                                    <h3><img class="incono_h3" src="<?= assets()?>images/iconos/Información_png.png"> Detalles </h3>
+                                                <a href="<?php echo site_url('LigaCOD');?>">
+                                                    <img style="background-color: #fff" class="incono_h3" src="<?= assets()?>images/iconos/plus.png">
                                                 </a>
                                             </div>
                                         </div>
