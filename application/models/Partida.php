@@ -120,6 +120,7 @@ class Partida extends MY_Model {
         $e->cargar($query->result()[0]);      
         return $e;
     }
+    
     public function getJuegaEquipoVisitante(){
         $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id,"posicion"=>1));
         $e = new Juegaequipo();

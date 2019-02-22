@@ -29,7 +29,7 @@ class Usuario extends MY_Controller
                     redirect('admin','refresh');
                 }else{
                     $this->session->set_flashdata('message',$this->ion_auth->errors());
-                    redirect('admin/login','refresh');
+                    redirect('admin/usuario/login','refresh');
                 }
             }
         }
@@ -48,15 +48,7 @@ class Usuario extends MY_Controller
         {
             redirect('admin');
         }
-        $this->data['title'] = 'Perfil';
-        $user = $this->ion_auth->user()->row();
-        $this->data['usuario'] = $user;
-        $this->data['current_user_menu'] = '';
-        if($this->ion_auth->in_group('admin'))
-        {
-            $this->data['current_user_menu'] = $this->load->view('templates/fragmentos/admin_menu', NULL, TRUE);
-        }
-        
+        $this->data['title'] = 'Perfil';   
         $this->load->library('form_validation');
         $this->form_validation->set_rules('first_name','First name','trim');
         $this->form_validation->set_rules('last_name','Last name','trim');
