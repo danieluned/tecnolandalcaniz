@@ -284,7 +284,7 @@ class Competiciones extends Admin_Controller
               {
                   $error = array('error' => $this->upload->display_errors());
                   
-                 
+                  $this->session->set_flashdata('message',$error);
               }
               else
               {
@@ -345,7 +345,7 @@ class Competiciones extends Admin_Controller
               {
                   $error = array('error' => $this->upload->display_errors());
                   
-                  
+                  $this->session->set_flashdata('message',$error);
               }
               else
               {
