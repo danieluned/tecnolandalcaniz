@@ -282,9 +282,9 @@ class Competiciones extends Admin_Controller
               $this->load->library('upload', $config);
               if ( ! $this->upload->do_upload('logotipo'))
               {
-                  $error = array('error' => $this->upload->display_errors());
+               
                   
-                  $this->session->set_flashdata('message',$error);
+                  $this->session->set_flashdata('message',$this->upload->display_errors());
               }
               else
               {
@@ -296,7 +296,7 @@ class Competiciones extends Admin_Controller
               }
           }
           
-          $this->session->set_flashdata('message','Actualizado Lista de Participantes');
+          //$this->session->set_flashdata('message','Actualizado Lista de Participantes');
          
       }
       if (isset($_POST['inscribirjugadorequipo'])){
