@@ -39,5 +39,7 @@
 .twitch iframe{
 	max-width: 90%;
 }
-
+th, td{
+	width: 33.33%;
+}
  

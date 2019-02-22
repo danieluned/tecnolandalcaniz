@@ -36,17 +36,17 @@
                                     <img id="navLogo" src="<?= assets()?>images/Alien_vec_letras_blanco.png">
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="<?php echo site_url('inicio');?>"> Inicio <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
+                                    <a class="nav-link" href="<?php echo site_url('LigaCOD');?>"> Liga COD</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
+                                    <a class="nav-link" href="#contacto"> Contacto </a>
                                 </li>
-                                <li class="nav-item">
+                                <!--<li class="nav-item">
                                     <a class="nav-link" href="#">Disabled</a>
-                                </li>                        
+                                </li>-->                        
                             </ul>
                          </div>
                     </div>

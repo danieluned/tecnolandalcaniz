@@ -59,6 +59,7 @@ $route['callofduty'] = 'liga/detallesliga/2';  // Siendo 2 una liga en la base d
 $route['callofduty/(:num)'] = 'liga/partida/2/$1';
 $route['liga/(:num)'] = 'liga/detallesliga/$1';
 $route['liga/(:num)/partida/(:num)'] = 'liga/partida/$1/$2';
+$route['LigaCOD'] = 'liga/detallesliga/1';
 $route['encuentro'] = 'encuentro/detallesencuentro';
 $route['login'] = 'usuario/login';
 
