@@ -537,7 +537,7 @@ class Competiciones extends Admin_Controller
           
           if(isset($_POST['local'])){
               $partida->borrarEquipoLocal();
-              $je = new Juegaequipo(); 
+              $je = new Juegaequipo();
               $je->competicion_id = $partida->competicion_id; 
               $je->partida_id = $partida->id; 
               $je->posicion = 0; 
@@ -584,8 +584,8 @@ class Competiciones extends Admin_Controller
               }
           
           }
-          
-          
+         
+          $partida->actualizarpuntuacionEquiposDB();
       }
       if(isset($_POST['borrar_jornada'])){
           $jornada = new Jornada();

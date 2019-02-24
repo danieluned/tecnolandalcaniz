@@ -224,7 +224,7 @@ foreach ($jornadas as $jornada) {
 					</div>
 					<div class="row">
 						<label for="p_propone_fecha_<?=$partida->id?>"> Id del equipo que esta proponiendo fecha</label> 
-						<input id="p_propone_fecha_<?=$partida->id?>" class="form-control" name="propone_fecha" type="number" value="<?=$partida->propone_fecha?>"/>
+						<input id="p_propone_fecha_<?=$partida->id?>" class="form-control" name="propone_fecha" type="number"  value="<?=$partida->propone_fecha??0?>"/>
 					</div>
 					<div class="row">
 						<label for="p_info_<?=$partida->id?>"> Info</label> <input id="p_info_<?=$partida->id?>"
@@ -267,7 +267,7 @@ foreach ($jornadas as $jornada) {
 						     <option value='<?=$mapa?>' <?=$partida->mapa3==$mapa?'selected':''?>><?=$mapa?></option>
 						<?php }?>
 						</select>
-						<select class="form-control" name="mapa1_resultado" class="form-control">
+						<select class="form-control" name="mapa3_resultado" class="form-control">
 							<option value="0" <?=$partida->mapa3_resultado==0?'selected':''?>>Empate</option>
 							<option value="1" <?=$partida->mapa3_resultado==1?'selected':''?>>Local</option>
 							<option value="2" <?=$partida->mapa3_resultado==2?'selected':''?>>Visitante</option>

@@ -169,7 +169,7 @@ class Partida extends MY_Model {
             $local->guardarDB(); 
         }
         if($visi){
-            $visi->guardarDB();$visi->guardarDB();
+            $visi->guardarDB();
         }
         
     }
