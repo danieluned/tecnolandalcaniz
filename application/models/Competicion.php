@@ -241,16 +241,13 @@ class Competicion extends MY_Model {
                 $jornada->guardarDB();
                              
                 foreach($games as $play){
-                    $jugado = rand(1,100)< 30?true:false;
+                    
                     
                     $partida = new Partida();
                     $partida->competicion_id = $this->id ;
                     $partida->jornada_id = $jornada->id;
-                    if($jugado){
-                        $partida->estado ="cerrada";
-                    }else{
-                        $partida->estado ="pendiente";
-                    }
+                    $partida->estado ="pendiente";
+                    
                    
                     $partida->guardarDB();
                     $juegalocal = new Juegaequipo();
@@ -263,11 +260,7 @@ class Competicion extends MY_Model {
                     $juegavisi->partida_id = $partida->id;
                     $juegalocal->posicion = 0;
                     $juegavisi->posicion = 1;
-                    if($jugado){
-                        $puntos = rand(0,3);
-                        $juegavisi->puntuacion  = $puntos;
-                        $juegalocal->puntuacion = 3 -$puntos;
-                    }
+                    
                     
                     if($play["Home"] == -1){                    
                         $partida->comentario = "LIBRE";

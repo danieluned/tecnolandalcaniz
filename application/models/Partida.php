@@ -139,19 +139,39 @@ class Partida extends MY_Model {
         $compe = $this->competicion->get($this->competicion_id); 
         $local = $this->getJuegaEquipoLocal();      
         $visi = $this->getJuegaEquipoVisitante();
-
+        
         if($puntoslocal > $puntosvisi){
-            $local->puntuacion = $compe->ganar;
-            $visi->puntuacion = $compe->perder;
+            if($local){
+                $local->puntuacion = $compe->ganar;
+            }
+            if($visi){
+                $visi->puntuacion = $compe->perder;
+            }
+            
         }else if($puntoslocal < $puntosvisi){
-            $local->puntuacion = $compe->perder;
-            $visi->puntuacion = $compe->ganar;
+            if($local){
+                $local->puntuacion = $compe->perder;
+            }
+            if($visi){
+                $visi->puntuacion = $compe->ganar;
+            }
+            
         }else{
-            $local->puntuacion = $compe->empate;
-            $visi->puntuacion = $compe->empate;
+            if($local){
+              $local->puntuacion = $compe->empate;
+            }
+            if($visi){
+                $visi->puntuacion = $compe->empate;
+            }
+           
         }
-        $local->guardarDB(); 
-        $visi->guardarDB();
+        if($local){
+            $local->guardarDB(); 
+        }
+        if($visi){
+            $visi->guardarDB();$visi->guardarDB();
+        }
+        
     }
     
     public function borrarDB(){
