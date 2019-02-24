@@ -72,7 +72,7 @@ foreach ($jornadas as $jornada) {
                                               <thead>
                                                 <tr>                                                  
                                                   <th scope="col-4">Local</th>
-                                                  <th scope="col-4"> - </th>
+                                                  <th scope="col-4"> VS </th>
                                                   <th scope="col-4">Visitante</th>                                                             
                                                 </tr>
                                               </thead>
@@ -83,21 +83,26 @@ foreach ($jornadas as $jornada) {
                                                     $equipo0 = $juegaEquipo0->getEquipo();
                                                     $equipo1 = $juegaEquipo1->getEquipo();
                                                     ?>
+                                                
                                                 <tr scope="row">                                                  
                                                   <td scope="col-4">
-                                                    <a href="#">
+                                                    
                                                         <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
-                                                    </a>
-                                                    <p><?=$equipo0->nombre?></p>
+                                                    
+                                                   
                                                    </td>
-                                                  <td scope="col-4"> VS </td>
-                                                  <td scope="col-4">
-                                                    <a href="#">
-                                                        <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
+                                                  <td scope="col-4"> 
+                                                    <a href="<?php echo site_url('encuentro/'.$partida->id.'');?>">
+                                                        Ver </td>
                                                     </a>
-                                                    <p><?=$equipo1->nombre?></p>
+                                                  <td scope="col-4">
+                                                    
+                                                        <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
+                                                    
+                                                   
                                                   </td>
                                                 </tr>
+                                                
                                                 <?php }?>
                                               </tbody>
                                             </table>
@@ -116,7 +121,7 @@ foreach ($jornadas as $jornada) {
 
                                                         <tr>                                                          
                                                           <th scope="col-4">Local</th>
-                                                          <th scope="col-4"> - </th>
+                                                          <th scope="col-4"> VS </th>
                                                           <th scope="col-4">Visitante</th>                                                           
                                                         </tr>
                                                       </thead>
@@ -132,14 +137,14 @@ foreach ($jornadas as $jornada) {
                                                             <a href="#">
                                                                 <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
                                                             </a>
-                                                            <p><?=$equipo0->nombre?></p>
+                                                         
                                                            </td>
-                                                          <td scope="col-4"> <?=$equipos[0]->puntuacion?> - <?=$equipos[1]->puntuacion?> </td>
+                                                          <td scope="col-4"> <?=$juegaEquipo0->puntuacion?> - <?=$juegaEquipo1 ->puntuacion?> </td>
                                                           <td scope="col-4">
                                                             <a href="#">
                                                                 <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
                                                             </a>
-                                                            <p><?=$equipo1->nombre?></p>
+                                                            
                                                           </td>
                                                         </tr>
                                                         <?php }?>
