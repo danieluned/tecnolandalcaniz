@@ -500,6 +500,7 @@ class Competiciones extends Admin_Controller
       
   }
   /**
+   * ROL : admin
    * Permite gestiona las partidas de una competicion, los emparejamientos y resultados
    * @param int $id
    */
@@ -661,22 +662,6 @@ class Competiciones extends Admin_Controller
           
           $equipo = new Inscritoequipo();
           $equipo->cargar($_POST);
-          // Si un capitan modifica un equipo que sea el suyo
-          if($this->ion_auth->in_group('capitan')){
-              // buscar el capitan del equipo 
-              $id = $this->data['current_user']->id; 
-              $capitan_id = null; 
-              foreach($equipo->getInscrito() as $inscrito){
-                  if ($inscrito->users_id ==  $id){
-                      $capitan_id = $inscrito->id;
-                  }
-              }
-              if(!$capitan_id || $capitan_id != $equipo->capitan){
-                  $this->session->set_flashdata('message','No eres capitan para modificar el equipo.');
-                  redirect('admin/competiciones','refresh');
-              }  
-              unset($equipo->capitan);
-          }
           $equipo->guardarDB();
       
           if (isset($_FILES['logotipo'])){
@@ -714,30 +699,12 @@ class Competiciones extends Admin_Controller
               }
           }
           
-          //$this->session->set_flashdata('message','Actualizado Lista de Participantes');
+          $this->session->set_flashdata('message','Actualizado Lista de Participantes');
          
       }
       if (isset($_POST['inscribirjugadorequipo'])){
           $inscrito = new Inscrito();
-          $inscrito->cargar($_POST);
-          if($this->ion_auth->in_group('capitan')){
-              // buscar el capitan del equipo
-              
-              $equipo = $this->inscritoequipo->get($_POST['equipoinscrito_id'],$_POST['competicion_id']);              
-              $id = $this->data['current_user']->id;
-              $capitan_id = null;
-              foreach($equipo->getInscrito() as $inscritov){
-                  if ($inscritov->users_id ==  $id){
-                      $capitan_id = $inscritov->id;
-                  }
-              }
-              if(!$capitan_id || $capitan_id != $equipo->capitan ){
-                  $this->session->set_flashdata('message','No eres capitan para modificar el equipo.');
-                  redirect('admin/competiciones','refresh');
-              }
-             unset($inscrito->users_id);
-          }
-         
+          $inscrito->cargar($_POST);          
           $inscrito->guardarDB();
          
           if (isset($_FILES['logotipo'])){
@@ -779,11 +746,7 @@ class Competiciones extends Admin_Controller
           
       }
       
-      if (isset($_POST['borrarequipo'])){
-          if(!$this->ion_auth->in_group('admin')){
-              $this->session->set_flashdata('message','No se te esta permitido borrar un equipo');
-              redirect('admin','refresh');
-          }
+      if (isset($_POST['borrarequipo'])){        
           $equipo = new Inscritoequipo();
           $equipo->cargar($_POST);
           $jugadores = $equipo->getInscrito();         
@@ -793,23 +756,6 @@ class Competiciones extends Admin_Controller
           $equipo->borrarDB();
       }
       if(isset($_POST['borrarjugador'])){
-          if($this->ion_auth->in_group('capitan')){
-              // buscar el capitan del equipo
-              $inscrito = $this->inscrito->get($_POST['id'],$_POST['competicion_id']);
-              $equipo = $this->inscritoequipo->get($inscrito->equipoinscrito_id,$inscrito->competicion_id);
-              $id = $this->data['current_user']->id;
-              $capitan_id = null;
-              foreach($equipo->getInscrito() as $inscrito){
-                  if ($inscrito->users_id ==  $id){
-                      $capitan_id = $inscrito->id;
-                  }
-              }
-              if(!$capitan_id || $capitan_id != $equipo->capitan || $inscrito->id == $capitan_id){
-                  $this->session->set_flashdata('message','No puedes hacer eso.');
-                  redirect('admin/competiciones','refresh');
-              }
-              
-          }
           $jugador = new Inscrito();
           $jugador->cargar($_POST);
           $jugador->borrarDB();
