@@ -32,6 +32,7 @@ class Competicion extends MY_Model {
         public $fecha;
         public $modo;
         
+      
         /** Propiedades listas de otras tablas  el v_ significa que es un array */
        // private $v_inscrito;
        // private $v_inscritoequipo;
@@ -101,7 +102,12 @@ class Competicion extends MY_Model {
             }
            
         }
-        
+        public function actualizarPuntuaciones(){
+            $partidas = $this->getPartidas(); 
+            foreach($partidas as $partida){
+                $partida->actualizarpuntuacionEquiposDB();
+            }
+        }
         
         /**
          * Inserta una competicion en la base de datos del contenido proviniento del post
@@ -113,13 +119,15 @@ class Competicion extends MY_Model {
                 //Si ya tenia un id asignado actualizamos 
                 
                 $this->db->update('competicion', $this, array("id" => $this->id ));
+                //actualiar puntuaciones
+                $this->actualizarPuntuaciones();
             }else{
                 unset($this->id);
                 $this->db->insert('competicion', $this);
                 $this->id = $this->db->insert_id();
                 
             }
-           
+            
             return $this;
         }
        
@@ -163,7 +171,16 @@ class Competicion extends MY_Model {
             }
             return $v_inscritoequipo;
         }
-        
+        public function getPartidas(){
+            $query = $this->db->get_where('partida',array('competicion_id'=> $this->id));
+            $v_jornadas = array();
+            foreach($query->result() as $inscritoDB){
+                $inscrito = new Partida();
+                $inscrito->cargar($inscritoDB);
+                $v_jornadas[] = $inscrito;
+            }
+            return $v_jornadas;
+        }
         public function getJornadas(){
             $query = $this->db->get_where('jornada',array('competicion_id'=> $this->id));
             $v_jornadas = array(); 
