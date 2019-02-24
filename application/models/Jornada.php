@@ -74,7 +74,7 @@ class Jornada extends MY_Model {
         if($this->id){
             //Si ya tenia un id asignado actualizamos
             
-            $this->db->update('jornada', $this, array("id" => $this->id ));
+            $this->db->update('jornada', $this, array("id" => $this->id ,"competicion_id"=>$this->competicion_id));
         }else{
             $this->db->select('ifnull(max(id),0) as total from jornada where competicion_id = '.$this->competicion_id) ;
             $total = $this->db->get()->result()[0]->total;

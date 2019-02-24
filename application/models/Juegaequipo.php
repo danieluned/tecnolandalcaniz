@@ -22,6 +22,7 @@ class Juegaequipo extends MY_Model {
         $this->partida_id = 0;
         $this->equipoinscrito_id = 0;
         $this->presentado = 0;
+        $this->aceptafecha = 0;
         $this->puntuacion = 0;
         $this->conforme = 0;
         $this->posicion = 0;
@@ -32,6 +33,7 @@ class Juegaequipo extends MY_Model {
         $this->partida_id = $datosDB['partida_id'];
         $this->equipoinscrito_id = $datosDB['equipoinscrito_id'];
         $this->presentado = $datosDB['presentado'];
+        $this->aceptafecha = $datosDB['aceptafecha'];
         $this->puntuacion = $datosDB['puntuacion'];
         $this->conforme = $datosDB['conforme'];
         $this->posicion = $datosDB['posicion'];
@@ -84,7 +86,7 @@ class Juegaequipo extends MY_Model {
     public function guardarDB(){
         
         //Si ya tenia un id asignado actualizamos         
-        $this->db->replace('juegaequipo', $this,array("competicion_id" =>$this->competicion_id, "partida_id"=>$this->partida_id,"equipoinscrito_id"=>$this->equipoinscrito_id));
+       $result =  $this->db->replace('juegaequipo', $this,array("competicion_id" =>$this->competicion_id, "partida_id"=>$this->partida_id,"equipoinscrito_id"=>$this->equipoinscrito_id));
        return $this;
     }
     public function borrarEquiposPartida(){

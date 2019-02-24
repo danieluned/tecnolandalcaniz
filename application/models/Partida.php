@@ -56,7 +56,7 @@ class Partida extends MY_Model {
     /**
      * devuelve todas o bien filtra por id
      * datos
-     * @return
+     * @return Partida
      */
     public function get($id = null,$competicion_id = null){
         if($id!=null && $competicion_id !=null){
@@ -94,21 +94,65 @@ class Partida extends MY_Model {
     
     /**
      * Inserta una competicion en la base de datos del contenido proviniento del post
+     *
      */
     public function guardarDB(){
        
         if($this->id){
             //Si ya tenia un id asignado actualizamos         
-            $this->db->update('partida', $this, array("id" => $this->id ));
+            $this->db->update('partida', $this, array("id" => $this->id ,"competicion_id"=>$this->competicion_id));
         }else{
             $this->db->select('ifnull(max(id),0) as total from partida where competicion_id = '.$this->competicion_id) ;
             $total = $this->db->get()->result()[0]->total;
             $this->id =  $total+1;
             $this->db->insert('partida', $this);                     
-        }       
+        }
+        if($this->estado == 'cerrada'){
+            $this->actualizarpuntuacionEquiposDB();
+        }
         return $this;
     }
     
+    public function actualizarpuntuacionEquiposDB(){
+        $puntoslocal = 0; 
+        if($this->mapa1_resultado == 1 ){
+            $puntoslocal++;
+        }
+        if($this->mapa2_resultado == 1 ){
+            $puntoslocal++;
+        }
+        if($this->mapa3_resultado == 1 ){
+            $puntoslocal++;
+        }
+       
+        
+        $puntosvisi = 0;
+        if($this->mapa1_resultado == 2 ){
+            $puntosvisi++;
+        }
+        if($this->mapa2_resultado == 2 ){
+            $puntosvisi++;
+        }
+        if($this->mapa3_resultado == 2 ){
+            $puntosvisi++;
+        }
+        $compe = $this->competicion->get($this->competicion_id); 
+        $local = $this->getJuegaEquipoLocal();      
+        $visi = $this->getJuegaEquipoVisitante();
+
+        if($puntoslocal > $puntosvisi){
+            $local->puntuacion = $compe->ganar;
+            $visi->puntuacion = $compe->perder;
+        }else if($puntoslocal < $puntosvisi){
+            $local->puntuacion = $compe->perder;
+            $visi->puntuacion = $compe->ganar;
+        }else{
+            $local->puntuacion = $compe->empate;
+            $visi->puntuacion = $compe->empate;
+        }
+        $local->guardarDB(); 
+        $visi->guardarDB();
+    }
     
     public function borrarDB(){
         // delete user from users table should be placed after remove from group
@@ -117,7 +161,7 @@ class Partida extends MY_Model {
         return $this;
     }
     
-
+    
     public function getJuegaEquipoLocal(){
         $query = $this->db->get_where('juegaequipo',array("competicion_id"=>$this->competicion_id,"partida_id"=>$this->id,"posicion"=>0));
         $e = new Juegaequipo();
@@ -147,6 +191,14 @@ class Partida extends MY_Model {
     }
     public function borrarJugadores(){
         $this->db->delete('juega', array('partida_id' => $this->id, 'competicion_id'=>$this->competicion_id));
+    }
+    public function borrarJugadoresA($jugadores){
+        $ids = array(); 
+        foreach($jugadores as $jugador){
+            $ids[] = $jugador->id;
+        }
+        $sql = "delete from juega where competicion_id = ".$this->competicion_id." and partida_id = ".$this->id." and jugadorinscrito_id in (".implode(",",$ids).");" ;
+        $this->db->query($sql);       
     }
 }
 ?>

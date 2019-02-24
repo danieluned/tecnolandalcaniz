@@ -134,7 +134,7 @@ foreach ($jornadas as $jornada) {
                                                             </a>
                                                             <p><?=$equipo0->nombre?></p>
                                                            </td>
-                                                          <td scope="col-4"> <?=$equipos[0]->puntuacion?> - <?=$equipos[1]->puntuacion?> </td>
+                                                          <td scope="col-4"> <?=$juegaEquipo0->puntuacion?> - <?=$juegaEquipo1->puntuacion?> </td>
                                                           <td scope="col-4">
                                                             <a href="#">
                                                                 <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">

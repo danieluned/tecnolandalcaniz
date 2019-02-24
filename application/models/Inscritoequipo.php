@@ -106,5 +106,57 @@ class Inscritoequipo extends MY_Model {
         }
         return $v_inscrito;
     }  
+
+    public function getCapitanUserId(){
+        foreach($this->getInscrito() as $inscrito){
+            if ($inscrito->id ==  $this->capitan){
+                return $inscrito->users_id;
+            }
+        }
+        return null;              
+    }
+  
+    public function getPartidasPendientes(){
+        // Devolver array
+        $v_partidas = array();
+        $sql = "select p.* from partida as p left join juegaequipo as j on p.id = j.partida_id and p.competicion_id = j.competicion_id 
+                    where j.equipoinscrito_id = ".$this->id."
+                    and p.estado = 'pendiente'" ;
+        $query = $this->db->query($sql);
+        foreach($query->result() as $compeDB){
+            $com = new Partida();
+            $v_partidas[] = $com->cargar($compeDB);
+        }
+        return $v_partidas;
+    }
+    
+    public function getPartidasJugando(){
+        // Devolver array
+        $v_partidas = array();
+        $sql = "select p.* from partida as p left join juegaequipo as j on p.id = j.partida_id and p.competicion_id = j.competicion_id
+                    where j.equipoinscrito_id = ".$this->id."
+                    and p.estado = 'jugando'" ;
+        $query = $this->db->query($sql);
+        foreach($query->result() as $compeDB){
+            $com = new Partida();
+            $v_partidas[] = $com->cargar($compeDB);
+        }
+        return $v_partidas;
+    }
+    
+    
+    public function getPartidasCerradas(){
+        // Devolver array
+        $v_partidas = array();
+        $sql = "select p.* from partida as p left join juegaequipo as j on p.id = j.partida_id and p.competicion_id = j.competicion_id
+                    where j.equipoinscrito_id = ".$this->id."
+                    and p.estado = 'cerrada'" ;
+        $query = $this->db->query($sql);
+        foreach($query->result() as $compeDB){
+            $com = new Partida();
+            $v_partidas[] = $com->cargar($compeDB);
+        }
+        return $v_partidas;
+    }
 }
 ?>

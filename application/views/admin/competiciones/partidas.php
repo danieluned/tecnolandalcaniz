@@ -57,10 +57,10 @@ function alineacion(competicion_id, partida_id, equipo_id, html_destino){
 						juega = 'checked';
 					} 
 		    	});
-		    	items.push( "<li><label>"+val.nombre+"<input type='checkbox' value='"+val.id+"' name='jugadores[]' "+juega+"/></li>" );
+		    	items.push( "<input class='form-check-input' id='p_"+val.id+"_"+partida_id+"' type='checkbox' value='"+val.id+"' name='jugadores[]' "+juega+"/><label for='p_"+val.id+"_"+partida_id+"'>"+val.nombre+"</label>" );
 	    	  });
 	    	 
-	    	  $(html_destino).html("<ul>"+ items.join("") +"</ul>");
+	    	  $(html_destino).html(items.join(""));
 	   });
 }
 </script>
@@ -104,7 +104,7 @@ foreach ($jornadas as $jornada) {
 						<div class="card-body">
 							<p class="card-text">
 							
-							
+
     							<form
     								action="<?=site_url("admin/competiciones/partidas/".$competicion->id)?>#j_<?=$jornada->id?>"
     								method="post" enctype="multipart/form-data">
@@ -233,37 +233,52 @@ foreach ($jornadas as $jornada) {
 
 					</div>
 					<div class="row">
-						<label for="p_mapa1_<?=$partida->id?>"> Mapa 1</label> 
-						<input id="p_mapa1_<?=$partida->id?>" class="form-control" name="mapa1" type="text" value="<?=$partida->mapa1?>" />
-
+						<label for="p_mapa1_<?=$partida->id?>">Punto Caliente</label> 
+						<select id="p_mapa1_<?=$partida->id?>" class="form-control" name="mapa1" >
+						<?php foreach($this->mapa->callofdutyPuntocaliente() as $mapa){?>
+						     <option value='<?=$mapa?>' <?=$partida->mapa1==$mapa?'selected':''?>><?=$mapa?></option>
+						<?php }?>
+						</select>
+						<select class="form-control" name="mapa1_resultado" class="form-control">
+							<option value="0" <?=$partida->mapa1_resultado==0?'selected':''?>>Empate</option>
+							<option value="1" <?=$partida->mapa1_resultado==1?'selected':''?>>Local</option>
+							<option value="2" <?=$partida->mapa1_resultado==2?'selected':''?>>Visitante</option>
+						</select>
 					</div>
+					
 					<div class="row">
-						<label for="p_mapa1_resultado_<?=$partida->id?>"> Mapa 1 Resultado</label> 
-						<input id="p_mapa1_resultado_<?=$partida->id?>" class="form-control" name="mapa1_resultado" type="text" value="<?=$partida->mapa1_resultado?>" />
+						<label for="p_mapa2_<?=$partida->id?>">ByD</label> 
+						<select id="p_mapa2_<?=$partida->id?>" class="form-control" name="mapa2" >
+						<?php foreach($this->mapa->callofdutyByD() as $mapa){?>
+						     <option value='<?=$mapa?>' <?=$partida->mapa2==$mapa?'selected':''?>><?=$mapa?></option>
+						<?php }?>
+						</select>
+						<select class="form-control" name="mapa2_resultado" class="form-control">
+							<option value="0" <?=$partida->mapa2_resultado==0?'selected':''?>>Empate</option>
+							<option value="1" <?=$partida->mapa2_resultado==1?'selected':''?>>Local</option>
+							<option value="2" <?=$partida->mapa2_resultado==2?'selected':''?>>Visitante</option>
+						</select>
 					</div>
+					
 					<div class="row">
-						<label for="p_mapa2_<?=$partida->id?>"> Mapa 2</label> 
-						<input id="p_mapa2_<?=$partida->id?>" class="form-control" name="mapa2" type="text" value="<?=$partida->mapa2?>" />
-
-					</div>
-					<div class="row">
-						<label for="p_mapa2_resultado_<?=$partida->id?>"> Mapa 2 Resultado</label> 
-						<input id="p_mapa2_resultado_<?=$partida->id?>" class="form-control" name="mapa2_resultado" type="text"  value="<?=$partida->mapa2_resultado?>"/>
-					</div>
-					<div class="row">
-						<label for="p_mapa3_<?=$partida->id?>"> Mapa 3 </label> 
-						<input id="p_mapa3_<?=$partida->id?>" class="form-control" name="mapa3" type="text"  value="<?=$partida->mapa3?>"/>
-
-					</div>
-					<div class="row">
-						<label for="p_mapa3_resultado_<?=$partida->id?>"> Mapa 3 Resultado</label> 
-						<input id="p_mapa3_resultado_<?=$partida->id?>"class="form-control" name="mapa3_resultado" type="text" value="<?=$partida->mapa3_resultado?>"/>
+						<label for="p_mapa3_<?=$partida->id?>">Control</label> 
+						<select id="p_mapa3_<?=$partida->id?>" class="form-control" name="mapa3" >
+						<?php foreach($this->mapa->callofdutyControl() as $mapa){?>
+						     <option value='<?=$mapa?>' <?=$partida->mapa3==$mapa?'selected':''?>><?=$mapa?></option>
+						<?php }?>
+						</select>
+						<select class="form-control" name="mapa1_resultado" class="form-control">
+							<option value="0" <?=$partida->mapa3_resultado==0?'selected':''?>>Empate</option>
+							<option value="1" <?=$partida->mapa3_resultado==1?'selected':''?>>Local</option>
+							<option value="2" <?=$partida->mapa3_resultado==2?'selected':''?>>Visitante</option>
+						</select>
 					</div>
 					
 					
+					<hr>
 					<div class="row">
 						<label for="p_local_<?=$partida->id?>">Local</label>
-						<select id="p_local_<?=$partida->id?>" name="local" onchange="alineacion(<?=$competicion->id?>,<?=$partida->id?>,this.value,p_local_jugadores_<?=$partida->id?>)">
+						<select class="form-control" id="p_local_<?=$partida->id?>" name="local" onchange="alineacion(<?=$competicion->id?>,<?=$partida->id?>,this.value,p_local_jugadores_<?=$partida->id?>)">
 							<option>Sin seleccionar</option>
 							<?php 
 							$local = $partida->getJuegaEquipoLocal();
@@ -276,12 +291,22 @@ foreach ($jornadas as $jornada) {
 							}
 							?>
 						</select>
-					</div>
-					<div class="row" id="p_local_jugadores_<?=$partida->id?>">						
-					</div>
+					</div> 
+					
+					<p>Alineacion Local</p>
+					<div class="row" class="form-control" id="p_local_jugadores_<?=$partida->id?>">
+					</div>	
+					<div class="row">
+						
+    					<input id="p_local_acepta_<?=$partida->id?>" class="form-check-label" type="checkbox" name="local_aceptafecha" value="1" <?=$local->aceptafecha?"checked":""?>/>
+    					<label for="p_local_acepta_<?=$partida->id?>">acepta fecha local</label>
+    					<input id="p_local_acepta2_<?=$partida->id?>" class="form-check-label" type="checkbox" name="local_aceptaresultado" value="1" <?=$local->conforme?"checked":""?>/>
+						<label for="p_local_acepta2_<?=$partida->id?>">acepta resultados</label>
+    				</div>	
+						<hr>	
 					<div class="row">
 						<label for="p_visitante_<?=$partida->id?>">Visitante</label>
-						<select id="p_visitante_<?=$partida->id?>" name="visitante" onchange="alineacion(<?=$competicion->id?>,<?=$partida->id?>,this.value,p_visitante_jugadores_<?=$partida->id?>)">
+						<select  class="form-control" id="p_visitante_<?=$partida->id?>" name="visitante" onchange="alineacion(<?=$competicion->id?>,<?=$partida->id?>,this.value,p_visitante_jugadores_<?=$partida->id?>)">
 						<option>Sin seleccionar</option>
 							<?php 
 							$visitante = $partida->getJuegaEquipoVisitante();
@@ -295,8 +320,21 @@ foreach ($jornadas as $jornada) {
 							?>
 						</select>
 					</div>
-					<div class="row" id="p_visitante_jugadores_<?=$partida->id?>">						
+					
+					<p>Alineacion visitante</p>
+					<div class="row" class="form-control" id="p_visitante_jugadores_<?=$partida->id?>">						
 					</div>
+					
+					
+    				<div class="row">
+    					
+    					<input id="p_visitante_acepta_<?=$partida->id?>" class="form-check-label" type="checkbox" name="visitante_aceptafecha" value="1" <?=$visitante->aceptafecha?"checked":""?>/>
+						<label for="p_visitante_acepta_<?=$partida->id?>">acepta fecha local</label>
+						<input id="p_visitante_acepta2_<?=$partida->id?>" class="form-check-label" type="checkbox" name="visitante_aceptaresultado" value="1" <?=$visitante->conforme?"checked":""?>/>
+						<label for="p_visitante_acepta2_<?=$partida->id?>">acepta resultados</label>
+					</div>
+    						
+					<hr>
 					<div class="row">
 						<input type="submit" class="form-control"
 							name="guardar_partida" value="Guardar cambios" />

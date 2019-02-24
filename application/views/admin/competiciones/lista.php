@@ -11,38 +11,62 @@
     <div class="col-lg-12" style="margin-top: 10px;">
     <?php
    
-    if($competiciones){?>
+    if($competicionesadmin){?>
     
+    	<h1>Competiciones (admin)</h1>
       <table class="table table-hover table-bordered table-condensed">
       <tr>
       	<td>ID</td>
       	<td>Nombre</td>
       	<td>Acciones</td>
       </tr>
-      <?php foreach($competiciones as $competicion){?>
+      <?php foreach($competicionesadmin as $competicion){?>
      
        <tr>
          <td><?=$competicion->id?></td>
          <td><?=$competicion->nombre?></td>
           <td>
-          <?=anchor ('admin/competiciones/partidas/'.$competicion->id,'Partidas ')?>
-           <?=anchor ('admin/competiciones/ver/'.$competicion->id,'Participantes ')?>
+         
+          	
+          	
            <?php if($this->ion_auth->in_group('admin')){?>
-           <?=anchor('admin/competiciones/editar/'.$competicion->id,'<i class="fas fa-edit"></i>')?>
-            <?=anchor('admin/competiciones/borrar/'.$competicion->id,'<i style="color:red;" class="fas fa-trash-alt"></i>',array('class'=>'borrar'));?>
+           	   <?=anchor ('admin/competiciones/pruebas/'.$competicion->id,'Pruebas ')?>
+                <?=anchor ('admin/competiciones/partidas/'.$competicion->id,'Partidas ')?>
+               <?=anchor ('admin/competiciones/ver/'.$competicion->id,'Participantes ')?>
+               <?=anchor('admin/competiciones/editar/'.$competicion->id,'<i class="fas fa-edit"></i>')?>
+                <?=anchor('admin/competiciones/borrar/'.$competicion->id,'<i style="color:red;" class="fas fa-trash-alt"></i>',array('class'=>'borrar'));?>
           	<?php }?>
           </td>
         </tr>
      <?php } ?>
      </table>
-   <?php  }else{ ?>
-      <div class="row">
-        <div class="col-lg-12">
-         <h2>No estas inscrito en ninguna competición</h2>
-        </div>
-  </div>
-   <?php }?>
-    
+   <?php  }
+    if($competicionescapitan){
+    ?>
+    	<h1>Competiciones</h1>
+      <table class="table table-hover table-bordered table-condensed">
+      <tr>
+      	<td>ID</td>
+      	<td>Nombre</td>
+      	<td>Acciones</td>
+      </tr>
+      <?php foreach($competicionescapitan as $competicion){?>
+     
+       <tr>
+         <td><?=$competicion->id?></td>
+         <td><?=$competicion->nombre?></td>
+          <td>
+          <?php if($this->ion_auth->in_group('capitan')){?>
+                <?=anchor ('admin/competiciones/partidascapitan/'.$competicion->id,'Partidas ')?>
+          	<?php }?>
+          	
+          	
+         
+          </td>
+        </tr>
+     <?php } ?>
+     </table>
+   <?php  }?>
     </div>
   </div>
 </div>

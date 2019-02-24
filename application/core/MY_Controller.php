@@ -18,7 +18,7 @@ class MY_Controller extends CI_Controller {
             $this->data['current_user_menu'] = "";
             if($this->ion_auth->in_group("admin")){
                 $this->data['current_user_menu'] = $this->load->view('templates/fragmentos/admin_menu',NULL,TRUE);
-            }
+            }else
             if($this->ion_auth->in_group("capitan")){
                 $this->data['current_user_menu'] = $this->load->view('templates/fragmentos/capitan_menu',NULL,TRUE);
             }
@@ -49,7 +49,7 @@ class Admin_Controller extends MY_Controller {
         $this->data['current_user_menu'] = "";
         if($this->ion_auth->in_group("admin")){
             $this->data['current_user_menu'] = $this->load->view('templates/fragmentos/admin_menu',NULL,TRUE);
-        }
+        }else
         if($this->ion_auth->in_group("capitan")){
             $this->data['current_user_menu'] = $this->load->view('templates/fragmentos/capitan_menu',NULL,TRUE);
         }
