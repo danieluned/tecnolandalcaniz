@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
-# Tecnoland Web Git Hub dasdasdasd
->>>>>>> 6ce0832621d7098cb3dd644358f57cd8d854e6f5
+# Tecnoland Web Git Hub
+
 Este repositorio contiene la pagina de Tecnoland Web para 
 su desarrollo 
 
