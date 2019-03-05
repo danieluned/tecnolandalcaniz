@@ -62,7 +62,7 @@ $route['liga/(:num)'] = 'liga/detallesliga/$1';
 
 $route['equipo/(:num)/(:num)'] = 'equipo/detallesequipo/$1/$2';
 
-$route['ligacod/partida/(:num)'] = 'encuentro/detallesencuentro/1/$1';
+$route['ligacod/partida/(:num)/(:num)'] = 'encuentro/detallesencuentro/$1/$2';
 
 //$route['encuentro'] = 'encuentro/detallesencuentro';
 $route['login'] = 'usuario/login';

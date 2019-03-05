@@ -92,9 +92,9 @@ foreach ($jornadas as $jornada) {
                                                    
                                                    </td>
                                                   <td scope="col-4"> 
-                                                    <a href="<?php echo site_url('encuentro/'.$partida->id.'');?>">
-                                                        Ver </td>
-                                                    </a>
+                                                    <a href="<?php echo site_url('ligacod/partida/'.$competicion->id.'/'.$partida->id.'');?>">
+                                                        Ver </a></td>
+                                                    
                                                   <td scope="col-4">
                                                     
                                                         <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
