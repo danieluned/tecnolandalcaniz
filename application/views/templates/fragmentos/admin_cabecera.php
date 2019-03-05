@@ -138,7 +138,8 @@
 		<!-- Navigation -->
 		<div class="w3lsnavigation">
 			<nav class="navbar navbar-inverse agilehover-effect wthreeeffect navbar-default navbar-fixed-top" style="padding-bottom: 10px;">
-
+				<!--  Añadimos la normativa de informar al usuario del uso de cookies -->
+			
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
