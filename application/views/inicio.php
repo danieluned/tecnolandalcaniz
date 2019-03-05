@@ -37,7 +37,7 @@
                                         <div class="row footer-competicion">
                                             <div class="col">
 
-                                                <a href="<?php echo site_url('LigaCOD');?>">
+                                                <a href="<?php echo site_url('ligacod');?>">
                                                     <img style="background-color: #fff" class="incono_h3" src="<?= assets()?>images/iconos/plus.png">
                                                 </a>
                                             </div>

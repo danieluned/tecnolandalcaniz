@@ -37,7 +37,7 @@ foreach ($jornadas as $jornada) {
                             <div class="row justify-content-around body-equipos effect5">
                                 <?php foreach($equipos as $equipo){?>                        
                                 <div class="col-sm-4 col-md-3 col-lg-2 equipo ">
-                                    <a href="#">
+                                    <a href="<?php echo site_url('equipo');?>/<?=$competicion->id?>/<?=$equipo->id?>">
                                         <figure class="borde-circular">
                                             <img class="sombra-png-negra" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo->id?>/<?=$equipo->logotipo?>">
                                         </figure>

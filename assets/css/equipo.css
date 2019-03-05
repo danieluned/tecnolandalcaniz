@@ -1,3 +1,13 @@
+
+.equipo{
+
+  background: url('../images/fondos/fondo_netllar.jpg') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+
+}
 .equipo .container{
     border: 1px solid #7b7b7b;
     border-radius: 4px;
@@ -5,24 +15,50 @@
     background-color: #ffffffd4;
     /*padding-top: 25px;
     padding-bottom: 25px;  */ 
+    border: silver 21px solid;
+    border-image-source: url('../images/marcos/Marco_1.png');
+    border-image-slice: 21 fill;
+    background-clip: padding-box;
 }
 
 .logo-equipo{
-	max-height: 200px;
+	max-height: 250px;
 }
 
 .header-jugadores{
 	border-bottom: solid 4px;
 }
 
-.header-jugador img{
-	max-height: 100px;
+.header-jugador{
+	height: 150px;
 	margin: 0 auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .jugador{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #00000063;
 	margin: 20px;
-	padding: 20px;
+	padding: 0px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 30px #000;
+  color: #fff;
+  text-align: center;
+}
+.jugador h3{
+  display: contents;
+
+}
+
+.header-jugador, .body-jugador, .footer-jugador{
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .caret {

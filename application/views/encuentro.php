@@ -35,9 +35,9 @@
 							<thead>
 			    				<tr>
 							      	
-			    				  	<th><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/1/inscritoequipo/2/ESCUDO_BURTON1.png"></th>
-			      					<th> 10/03/2019 </th>
-			      					<th><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/1/inscritoequipo/1/foxxy02.png"></th>
+			    				  	<th><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$local['equipo']->id?>/<?=$local['equipo']->logotipo?>"></th>
+			      					<th> <?=$partida->horainicio?> </th>
+			      					<th><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$visitante['equipo']->id?>/<?=$visitante['equipo']->logotipo?>"></th>
 			    				</tr>
 			  				</thead>
 			  				<tbody>

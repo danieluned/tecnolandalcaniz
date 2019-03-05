@@ -39,7 +39,7 @@
                                     <a class="nav-link" href="<?php echo site_url('inicio');?>"> Inicio <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo site_url('LigaCOD');?>"> Liga COD</a>
+                                    <a class="nav-link" href="<?php echo site_url('ligacod');?>"> Liga COD</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#contacto"> Contacto </a>
