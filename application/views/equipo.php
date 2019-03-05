@@ -32,10 +32,11 @@
 									
 									
 								</div>
-								<div class="row body-jugador text-center">
-									<h3 class="text-center"> <?=$inscrito->nombre?> </h3><br>
-
-									<h3 class="text-center"> <?=$rango?> </h3>
+								<div class="row body-jugador">
+									<div class="col">										
+										<h3> <?=$rango?> </h3>
+										<h3> <?=$inscrito->nombre?> </h3>
+									</div>
 								</div>
 								<!--<div class="footer-jugador">
 									<h3> <?=$rango?> </h3>
@@ -45,6 +46,54 @@
 						</div>					
 					<?php }?>
 				</div>
+				<div class="col-12 resultados">
+                                        <div class="container-fluid">   
+                                            <div class="header-resultados text-center"> 
+                                                <h2> Resultados </h2>
+                                            </div>
+                                            <div class="body-resultados">   
+                                                <table class="table table-striped table-dark text-center sombra-png-negra">
+
+                                                      <thead>
+
+                                                        <tr>                                                          
+                                                          <th scope="col-4">Local</th>
+                                                          <th scope="col-4"> VS </th>
+                                                          <th scope="col-4">Visitante</th>                                                           
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        <?php 
+                                                        $partidasCerradas = $equipo->getPartidasCerradas();
+                                                        foreach($partidasCerradas as $partida){
+                                                            $juegaEquipo0 = $partida->getJuegaEquipoLocal();
+                                                            $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
+                                                            $equipo0 = $juegaEquipo0->getEquipo();
+                                                            $equipo1 = $juegaEquipo1->getEquipo();
+                                                        ?>
+                                                        <tr>                                                          
+                                                          <td scope="col-4">
+                                                            <a href="#">
+                                                                <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
+                                                            </a>
+                                                         
+                                                           </td>
+
+                                                          <td scope="col-4"> <?=$juegaEquipo0->puntuacion?> - <?=$juegaEquipo1->puntuacion?> </td>
+
+                                                          <td scope="col-4">
+                                                            <a href="#">
+                                                                <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
+                                                            </a>
+                                                            
+                                                          </td>
+                                                        </tr>
+                                                        <?php }?>
+                                                      </tbody>
+                                                    </table>
+                                            </div>  
+                                        </div>  
+                                </div>
 				<div class="row competiciones">
 					
 				</div>

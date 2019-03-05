@@ -52,13 +52,21 @@
   text-align: center;
 }
 .jugador h3{
-  display: contents;
-
+  display: block;
 }
 
 .header-jugador, .body-jugador, .footer-jugador{
   padding-top: 5px;
   padding-bottom: 5px;
+}
+.body-jugador{
+  background-color: #00000070;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .caret {

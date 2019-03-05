@@ -3,6 +3,8 @@
 Este repositorio contiene la pagina de Tecnoland Web para 
 su desarrollo 
 
+Cambio sencillito a ver si solo con el GIT push esta bien configurado
+
 ## Enlaces de para trabajar interes
 
 ### Tecnoland Servidor de pruebas
