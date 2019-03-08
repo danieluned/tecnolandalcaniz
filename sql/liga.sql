@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `competicion` (
   `minjugadoresequipo` INT NULL DEFAULT 0,
   `minjugadores` INT NULL DEFAULT 0,
   `maxjugadores` INT NULL DEFAULT 0,
-  `inicioinscripcion` DATETIME NULL,
+  `inicioinscripcion` DATETIME NULL ,
   `fininscripcion` DATETIME NULL,
   `iniciofaseregular` DATETIME NULL,
   `finfaseregular` DATETIME NULL,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `partida` (
   `mapa5` VARCHAR(60) NULL, 
   `mapa5_resultado` VARCHAR(45) NULL,
   `propone_fecha` INT NULL,
-  `estado` ENUM('pendiente','cerrada', 'jugando', 'disputa', 'verificando') NULL,
+  `estado` ENUM('pendiente','cerrada', 'jugando', 'disputa', 'verificando') NULL ,
   
   `info` VARCHAR(200) NULL,
   PRIMARY KEY (`id`, `competicion_id`),
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `jornada` (
   `fechainicio` DATETIME NULL,
   `fechafin` DATETIME NULL,
   `info` TEXT NULL,
-  `tipo` VARCHAR(45) NULL,
+  `estado` ENUM('pendiente','cerrada', 'jugando') NULL,
   PRIMARY KEY (`id`, `competicion_id`),
   INDEX `fk_jornada_competicion1_idx` (`competicion_id` ASC) ,
   CONSTRAINT `fk_jornada_competicion1`

@@ -13,7 +13,7 @@ class Jornada extends MY_Model {
     public $fechainicio;
     public $fechafin;
     public $info;
-    public $tipo;
+    public $estado;
     
     
     public function cargar($datosDB){
@@ -23,7 +23,7 @@ class Jornada extends MY_Model {
         $this->fechainicio = $datosDB['fechainicio'];
         $this->fechafin = $datosDB['fechafin'];
         $this->info = $datosDB['info'];
-        $this->tipo = $datosDB['tipo'];
+        $this->estado = $datosDB['estado'];
         
         return $this;
     }
@@ -140,5 +140,21 @@ class Jornada extends MY_Model {
         }
         return $v_partidas;
     }
+    
+    public function getPartidasJugando(){
+        // Devolver array
+        $v_partidas = array();
+        $where = array();
+        $where["jornada_id"] = $this->id;
+        $where["competicion_id"] = $this->competicion_id;
+        $where["estado"] = 'jugando';
+        $query = $this->db->get_where('partida',$where);
+        foreach($query->result() as $compeDB){
+            $com = new Partida();
+            $v_partidas[] = $com->cargar($compeDB);
+        }
+        return $v_partidas;
+    }
+    
 }
 ?>

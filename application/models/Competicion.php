@@ -191,7 +191,49 @@ class Competicion extends MY_Model {
             }
             return $v_jornadas;
         }
-       
+        
+        
+        public function getJornadasPendientes(){
+            // Devolver array
+            $v_partidas = array();
+            $where = array();
+            $where["competicion_id"] = $this->competicion_id;
+            $where["estado"] = "pendiente";
+            $query = $this->db->get_where('jornada',$where);
+            foreach($query->result() as $compeDB){
+                $com = new Partida();
+                $v_partidas[] = $com->cargar($compeDB);
+            }
+            return $v_partidas;
+        }
+        
+        public function getJornadasCerradas(){
+            // Devolver array
+            $v_partidas = array();
+            $where = array();
+            $where["competicion_id"] = $this->competicion_id;
+            $where["estado"] = 'cerrada';
+            $query = $this->db->get_where('partida',$where);
+            foreach($query->result() as $compeDB){
+                $com = new Partida();
+                $v_partidas[] = $com->cargar($compeDB);
+            }
+            return $v_partidas;
+        }
+        
+        public function getJornadasJugando(){
+            // Devolver array
+            $v_partidas = array();
+            $where = array();
+            $where["competicion_id"] = $this->competicion_id;
+            $where["estado"] = 'jugando';
+            $query = $this->db->get_where('partida',$where);
+            foreach($query->result() as $compeDB){
+                $com = new Partida();
+                $v_partidas[] = $com->cargar($compeDB);
+            }
+            return $v_partidas;
+        }
         public function getAlineacion($competicion_id,$partida_id,$equipo_id){
             $equipo = $this->inscritoequipo->get($equipo_id,$competicion_id);
             if(!$equipo){
@@ -255,6 +297,7 @@ class Competicion extends MY_Model {
             foreach($rondas as $round => $games){
                 $jornada = new Jornada();
                 $jornada->competicion_id = $this->id;
+                $jornada->estado = "pendiente";
                 $jornada->guardarDB();
                              
                 foreach($games as $play){

@@ -137,10 +137,12 @@ foreach ($jornadas as $jornada) {
     
     								</div>
     								<div class="row">
-    									<label for="n_tipo_<?=$jornada->id?>"> Tipo </label> 
-    									<input
-    										id="n_tipo_<?=$jornada->id?>" class="form-control" name="tipo"
-    										type="text" value="<?=$jornada->tipo?>"/>
+    									<label for="n_tipo_<?=$jornada->id?>"> Estado </label> 
+    									<select name="estado" id="n_estado_<?=$jornada->id?>">
+                							<option value="pendiente" <?=$jornada->estado == "pendiente"?"selected":""?>>Pendiente</option>
+                							<option value="cerrada" <?=$jornada->estado == "cerrada"?"selected":""?>>Cerrada</option>
+                							<option value="jugando" <?=$jornada->estado == "jugando"?"selected":""?>>En Curso</option>
+                						</select>
     
     								</div>
     								<div class="row">
