@@ -266,9 +266,7 @@ class Competiciones extends Admin_Controller
           $partida->guardarDB();
       }
       if (isset($_FILES['prueba'])){
-          $path =
-          APPPATH. "..".
-          DIRECTORY_SEPARATOR."assets".
+          $path =             "assets".
           DIRECTORY_SEPARATOR."images".
           DIRECTORY_SEPARATOR."competiciones".
           DIRECTORY_SEPARATOR.$partida->competicion_id.
@@ -416,9 +414,7 @@ class Competiciones extends Admin_Controller
       
       
       if (isset($_FILES['prueba'])){
-          $path =
-          APPPATH. "..".
-          DIRECTORY_SEPARATOR."assets".
+          $path =             "assets".
           DIRECTORY_SEPARATOR."images".
           DIRECTORY_SEPARATOR."competiciones".
           DIRECTORY_SEPARATOR.$partida->competicion_id.
@@ -665,9 +661,7 @@ class Competiciones extends Admin_Controller
           $equipo->guardarDB();
       
           if (isset($_FILES['logotipo'])){
-              $path = 
-                  APPPATH. "..". 
-                  DIRECTORY_SEPARATOR."assets".
+              $path =                 "assets".
                   DIRECTORY_SEPARATOR."images".
                   DIRECTORY_SEPARATOR."competiciones".
                   DIRECTORY_SEPARATOR.$equipo->competicion_id.
@@ -708,9 +702,7 @@ class Competiciones extends Admin_Controller
           $inscrito->guardarDB();
          
           if (isset($_FILES['logotipo'])){
-              $path =
-              APPPATH. "..".
-              DIRECTORY_SEPARATOR."assets".
+              $path =             "assets".
               DIRECTORY_SEPARATOR."images".
               DIRECTORY_SEPARATOR."competiciones".
               DIRECTORY_SEPARATOR.$inscrito->competicion_id.
