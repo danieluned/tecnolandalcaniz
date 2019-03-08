@@ -54,14 +54,16 @@ foreach ($jornadas as $jornada) {
                                                                         
         		</div>
 
-                <div class="row jornada">
+                <div class="row jornadas-en-curso">
                     <div class="container-fluid">
-                        <div class="row header-jornada">
+                        <div class="row header-jornada-en-curso">
                         
                         </div>
-                        <div class=" row body-jornada">
-                            
-                                <div class="col-12 partidas">
+                        <div class=" row body-jornada-en-curso">
+                        <?php
+                            if(count($partidasPendientes)>0){                            
+                                ?>
+                                <div class="col-6 partidas">
                                     <div class="container-fluid">
                                         <div class="header-partidas text-center">
                                             <h2> Partidas </h2>
@@ -77,12 +79,13 @@ foreach ($jornadas as $jornada) {
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                <?php foreach($partidasPendientes as $partida){                                                               
+                                                <?php 
+                                                foreach($partidasPendientes as $partida){                                                               
                                                     $juegaEquipo0 = $partida->getJuegaEquipoLocal();
                                                     $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
                                                     $equipo0 = $juegaEquipo0->getEquipo();
                                                     $equipo1 = $juegaEquipo1->getEquipo();
-                                                    ?>
+                                                ?>
                                                 
                                                 <tr scope="row">                                                  
                                                   <td scope="col-4">
@@ -101,21 +104,25 @@ foreach ($jornadas as $jornada) {
                                                     
                                                    
                                                   </td>
-                                                </tr>
+                                                </tr><?php }?>
                                                 
-                                                <?php }?>
+                                                
                                               </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 resultados">
+                                <?php }
+                                    if(count($partidasCerradas)>0){                                    
+                                    ?>
+                                <div class="col-6 resultados">
                                         <div class="container-fluid">   
                                             <div class="header-resultados text-center"> 
                                                 <h2> Resultados </h2>
                                             </div>
                                             <div class="body-resultados">   
-                                                <table class="table table-striped table-dark text-center sombra-png-negra">
+                                                
+                                            <table class="table table-striped table-dark text-center sombra-png-negra">
 
                                                       <thead>
 
@@ -126,11 +133,12 @@ foreach ($jornadas as $jornada) {
                                                         </tr>
                                                       </thead>
                                                       <tbody>
-                                                        <?php foreach($partidasCerradas as $partida){
-                                                            $juegaEquipo0 = $partida->getJuegaEquipoLocal();
-                                                            $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
-                                                            $equipo0 = $juegaEquipo0->getEquipo();
-                                                            $equipo1 = $juegaEquipo1->getEquipo();
+                                                        <?php 
+                                                            foreach($partidasCerradas as $partida){
+                                                                $juegaEquipo0 = $partida->getJuegaEquipoLocal();
+                                                                $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
+                                                                $equipo0 = $juegaEquipo0->getEquipo();
+                                                                $equipo1 = $juegaEquipo1->getEquipo();
                                                         ?>
                                                         <tr>                                                          
                                                           <td scope="col-4">
@@ -148,15 +156,46 @@ foreach ($jornadas as $jornada) {
                                                             </a>
                                                             
                                                           </td>
-                                                        </tr>
-                                                        <?php }?>
+                                                        </tr><?php }?>
+                                                            
                                                       </tbody>
                                                     </table>
                                             </div>  
                                         </div>  
                                 </div>
-                            
+                                <?php }?>
                         </div>
+                        
+                    </div>
+                </div>
+                <div class="row jornadas-pendientes">
+                    <div class="col-12 headder-jornadas-pendientes">
+                        
+                    </div>                                                                
+                    <div class="col-4 jornada-pendiente">
+                        <div class="conainer-fluid">
+                            <div class="row headder-jornada-pendiente">
+                                <legend class="scheduler-border"><h2> Jornadas pendientes </h2></legend>
+                            </div>
+                            <div class="row body-jornada-pendiente">
+                            <table class="table table-striped table-dark text-center sombra-png-negra">
+                            <thead>
+                                <tr>
+                                    <th scope="col-4">Jornada 1</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td scope="col-4">
+                                    <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
+                                    <samp> - </samp>
+                                    <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                            </div>
+                        </div>                                                                
                     </div>
                 </div>
                   
