@@ -8,7 +8,7 @@
                             Tecnoland Alcañiz es una asociación sin animo de lucro dedicada a la organización de eventos relacionados con la informática, nuevas tecnologías y videojuegos en toda la comunidad de Aragón.
                         </p>
                     </div>
-                    <div id="#contacto" class="col-sm-12 col-md-4 contacto">
+                    <div id="contacto" class="col-sm-12 col-md-4 contacto">
                         <div class="container-fluid">
                             <div class="row">
                                 <h4>Contacto</h4>     
