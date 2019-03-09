@@ -191,9 +191,9 @@ foreach ($jornadasJugando as $jornada) {
                                                         ?>
                                                         <tr>                                                          
                                                           <td scope="col-4">
-                                                            <a href="#">
+                                                            
                                                                 <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">                                                                
-                                                            </a>
+                                                            
                                                             <p><?=$equipo0->nombre?></p>
                                                          
                                                            </td>
@@ -201,9 +201,9 @@ foreach ($jornadasJugando as $jornada) {
                                                           <td scope="col-4"> <?=$juegaEquipo0->puntuacion?> - <?=$juegaEquipo1->puntuacion?> </td>
 
                                                           <td scope="col-4">
-                                                            <a href="#">
+                                                            
                                                                 <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">                                                                
-                                                            </a>
+                                                            
                                                             <p><?=$equipo1->nombre?></p>
                                                             
                                                           </td>
@@ -267,16 +267,15 @@ foreach ($jornadasJugando as $jornada) {
                                         ?>
                                             <tr>
                                                 <td >                                                    
-                                                        <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
+                                                    <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
                                                     <p><?=$equipo0->nombre?></p>
                                                 </td>
                                                 <td>
                                                     <span> VS </span>
                                                 </td>
-                                                <td>
-                                                    
-                                                        <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
-                                                        <p><?=$equipo1->nombre?></p>
+                                                <td>                                                    
+                                                    <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
+                                                    <p><?=$equipo1->nombre?></p>
                                                 </td>
                                             </tr>
                                             <?php }?>
