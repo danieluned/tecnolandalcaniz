@@ -44,6 +44,37 @@ $(function(){
 	$("select[name='local']").trigger('change'); 
 	$("select[name='visitante']").trigger('change'); 
 });
+
+//Formulario de editar equipo 
+function guardarjornada(event,id){
+	event.preventDefault(); //prevent default action 
+	var post_url = "<?=site_url("admin/competiciones/guardarJornada/")?>"; //get form action url 
+	$.ajax({
+		url : post_url,
+		type: "POST",
+        data:  new FormData($("#"+id)[0]),
+        contentType: false,
+        cache: false,
+        processData: false,
+	}).done(function(response){ 
+	});
+	return false;	
+}
+function guardarpartida(event,id){
+	event.preventDefault(); //prevent default action 
+	var post_url = "<?=site_url("admin/competiciones/guardarPartida/")?>"; //get form action url 
+	$.ajax({
+		url : post_url,
+		type: "POST",
+        data:  new FormData($("#"+id)[0]),
+        contentType: false,
+        cache: false,
+        processData: false,
+	}).done(function(response){ 
+	});
+	return false;	
+}
+
 function alineacion(competicion_id, partida_id, equipo_id, html_destino){
 	
 	   var url = '<?=site_url("admin/competiciones/alineacion/")?>'+competicion_id+'/'+partida_id+'/'+equipo_id;
@@ -105,7 +136,7 @@ foreach ($jornadas as $jornada) {
 							<p class="card-text">
 							
 
-    							<form
+    							<form onsubmit="return guardarjornada(event,'e<?=$jornada->id?>')" id="e<?=$jornada->id?>"
     								action="<?=site_url("admin/competiciones/partidas/".$competicion->id)?>#j_<?=$jornada->id?>"
     								method="post" enctype="multipart/form-data">
     								 
@@ -178,7 +209,7 @@ foreach ($jornadas as $jornada) {
     				<span id="p_<?=$partida->id?>"><?=$partida->id?></span>
     				
         		</div>  				
-				<form
+				<form onsubmit="return guardarpartida(event,'p<?=$partida->id?>')" id="p<?=$partida->id?>"
 					action="<?=site_url("admin/competiciones/partidas/".$competicion->id)?>"
 					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="competicion_id"

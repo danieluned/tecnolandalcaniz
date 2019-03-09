@@ -613,7 +613,17 @@ class Competiciones extends Admin_Controller
           $competicion->borrarJornadasDB();
           $competicion->borrarPartidasDB();
       }
-      
+      if (isset($_POST['borrar_jornada'])){       
+          $jornada = new Jornada();
+          $jornada->cargar($_POST);
+          $jornada->borrarDB();
+        
+      }
+      if (isset($_POST['borrar_partida'])){       
+          $partida = new Partida();
+          $partida->cargar($_POST);
+          $partida->borrarDB();
+      }
       $this->render('admin/competiciones/partidas');  
   }
   
