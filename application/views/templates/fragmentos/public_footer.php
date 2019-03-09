@@ -20,22 +20,22 @@
                             <div class="row justify-content-around rss">
                                 <div class="col">
                                     <a href="https://www.facebook.com/tecnolandalcaniz/">
-                                        <img src="<?= assets()?>images/rss/face.png">
+                                        <img src="<?= assets()?>images/rss/face.svg">
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a href="https://www.instagram.com/tecnoland_lanparty">
-                                        <img src="<?= assets()?>images/rss/insta.png">
+                                        <img src="<?= assets()?>images/rss/insta.svg">
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a href="https://twitter.com/TecnolandAlca">
-                                        <img src="<?= assets()?>images/rss/twitter.png">
+                                        <img src="<?= assets()?>images/rss/twitter.svg">
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a href="https://www.youtube.com/channel/UCxjGuaVNmCxyBzC85qSbp0g">
-                                        <img src="<?= assets()?>images/rss/youtube.png">
+                                        <img src="<?= assets()?>images/rss/youtube.svg">
                                     </a>
                                 </div>
                             </div>

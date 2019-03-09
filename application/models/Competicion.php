@@ -197,11 +197,11 @@ class Competicion extends MY_Model {
             // Devolver array
             $v_partidas = array();
             $where = array();
-            $where["competicion_id"] = $this->competicion_id;
+            $where["competicion_id"] = $this->id;
             $where["estado"] = "pendiente";
             $query = $this->db->get_where('jornada',$where);
             foreach($query->result() as $compeDB){
-                $com = new Partida();
+                $com = new Jornada();
                 $v_partidas[] = $com->cargar($compeDB);
             }
             return $v_partidas;
@@ -211,11 +211,11 @@ class Competicion extends MY_Model {
             // Devolver array
             $v_partidas = array();
             $where = array();
-            $where["competicion_id"] = $this->competicion_id;
+            $where["competicion_id"] = $this->id;
             $where["estado"] = 'cerrada';
-            $query = $this->db->get_where('partida',$where);
+            $query = $this->db->get_where('jornada',$where);
             foreach($query->result() as $compeDB){
-                $com = new Partida();
+                $com = new Jornada();
                 $v_partidas[] = $com->cargar($compeDB);
             }
             return $v_partidas;
@@ -225,11 +225,11 @@ class Competicion extends MY_Model {
             // Devolver array
             $v_partidas = array();
             $where = array();
-            $where["competicion_id"] = $this->competicion_id;
+            $where["competicion_id"] = $this->id;
             $where["estado"] = 'jugando';
-            $query = $this->db->get_where('partida',$where);
+            $query = $this->db->get_where('jornada',$where);
             foreach($query->result() as $compeDB){
-                $com = new Partida();
+                $com = new Jornada();
                 $v_partidas[] = $com->cargar($compeDB);
             }
             return $v_partidas;
