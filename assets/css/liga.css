@@ -21,19 +21,20 @@
     padding-top: 75px;
     
 }
+/*
 .header-equipos h2{
 	//background-image: url('../images/fondos/titulos/14624.png');
 	background-size: contain no-repeat;
 
 	padding: 10px;
 
-}
-.equipos fieldset, .organiza fieldset, .colabora fieldset{
+}*/
+.equipos fieldset, .organiza fieldset, .colabora fieldset, .headder-jornadas-pendientes fieldset, .headder-jornadas-cerradas fieldset{
 	
 	width: 100%;
 	border: white 3px groove;
 }
-.equipos legend, .colabora legend, .organiza legend{
+.equipos legend, .colabora legend, .organiza legend, .headder-jornadas-pendientes legend, .headder-jornadas-cerradas legend{
 	width:auto;
 	padding:0 10px;
 }
@@ -89,11 +90,17 @@
 th, td{
 	width: 33.33%;
 }
-.sponsors-liga fieldset{
+td p{
+	margin-bottom: 0px;
+}
+.sponsors-liga fieldset, .headder-jornadas-pendientes fieldset, .headder-jornadas-cerradas fieldset{
 	padding-top: 25px;
 	padding-bottom: 25px;
 	border:none;
 	border-top: solid;
+}
+.collapse .show {
+    display: flex;
 }
 .body-organiza img, .body-colabora img{
 	max-height: 100px;
