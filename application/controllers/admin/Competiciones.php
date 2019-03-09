@@ -747,7 +747,7 @@ class Competiciones extends Admin_Controller
   public function borrarEquipo(){
       $this->data = null;
       $equipo = new Inscritoequipo();
-      $equipo->cargar($_POST);
+      $equipo->cargar($_GET);
       $jugadores = $equipo->getInscrito();
       foreach($jugadores as $jugador){
           $jugador->borrarDB();
@@ -759,7 +759,7 @@ class Competiciones extends Admin_Controller
   public function borrarJugador(){
       $this->data = null;
       $jugador = new Inscrito();
-      $jugador->cargar($_POST);
+      $jugador->cargar($_GET);
       $jugador->borrarDB();
       $this->data = "OK"; 
       $this->render(null,"json");

@@ -2,8 +2,9 @@
 	
 <script type="text/javascript">
 
+	
 
-//Formulario de editar equipo 
+//Formulario de editar jugador 
 function editarjugador(event,id){
 	event.preventDefault(); //prevent default action 
 	var post_url = "<?=site_url("admin/competiciones/inscribirJugadorEquipo/")?>"; //get form action url 
@@ -38,7 +39,7 @@ function nuevojugador(event,id){
 	}).done(function(response){ //
 		var jugador = response.jugador;
 		var ei = jugador.equipoinscrito_id;
-		var html = '<div class="col-md-4">'+
+		var html = '<div class="col-md-4" id="eqj_'+jugador.id+'">'+
 						'<div class="card mb-4 box-shadow" >'+
 							'<div class="img" id="jimge'+ei+"j"+jugador.id+'" style=\'background-image: url("<?=assets()?>images/competiciones/<?=$competicion->id?>/inscrito/'+jugador.id+'/'+jugador.logotipo+'")\'>'+
 								'<span>'+jugador.id+'</span>'+
@@ -69,7 +70,7 @@ function nuevojugador(event,id){
 							'</form>'+
 							'<div class="d-flex justify-content-between align-items-center">'+
 								'<div class="btn-group">'+
-									'<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"  method="post">'+
+									'<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"  method="post" onsubmit="return bj(event,\''+jugador.id+'\',\'eqj_'+jugador.id+'\')" >'+
 										'<input type="hidden" name="competicion_id" value="<?=$competicion->id?>"/>'+
 										'<input type="hidden" name="id" value="'+jugador.id+'"/>'+
 										'<input type="submit" class="btn btn-sm btn-outline-secondary borrar" name="borrarjugador" value="Borrar"/>'+
@@ -86,10 +87,57 @@ function nuevojugador(event,id){
 		});
 		return false;
 }
-//Formulario de editar jugador 
+//Formulario de editar equipo 
+function editarequipo(event,id){
+	event.preventDefault(); //prevent default action 
+	var post_url = "<?=site_url("admin/competiciones/inscribirEquipo/")?>"; //get form action url 
+	$.ajax({
+		url : post_url,
+		type: "POST",
+        data:  new FormData($("#"+id)[0]),
+        contentType: false,
+        cache: false,
+        processData: false,
+	}).done(function(response){ 
+		var bg = $("#eimg"+id);
+		bg = bg.css('background-image').trim();
+		
+        var res = bg.substring(5, bg.length - 2) +"?"+new Date().getTime() ;
+     
+		$("#eimg"+id).css("background-image","url("+res+")");
+	});
+	return false;	
+}
 //Formulario de borrar equipo 
+function be(event,id,target){
+	event.preventDefault(); //prevent default action 
+	var post_url = "<?=site_url("admin/competiciones/borrarEquipo/?competicion_id=".$competicion->id."&id=")?>"+id;  //get form action url 
+	$.ajax({
+		url : post_url,
+		type: "GET",
+        contentType: false,
+        cache: false,
+        processData: false,
+	}).done(function(response){     
+		$( "#"+target ).remove();
+	});
+	return false;	
+}
 //Formulario de borrar jugador
-
+function bj(event,id,target){
+	event.preventDefault(); //prevent default action 
+	var post_url = "<?=site_url("admin/competiciones/borrarJugador/?competicion_id=".$competicion->id."&id=")?>"+id;//get form action url 
+	$.ajax({
+		url : post_url,
+		type: "GET",
+        contentType: false,
+        cache: false,
+        processData: false,
+	}).done(function(response){     
+		$( "#"+target ).remove();
+	});
+	return false;	
+}
 //Formulario de nuevo equipo
 function nuevoequipo(event,id){
 	event.preventDefault(); //prevent default action 
@@ -106,12 +154,12 @@ function nuevoequipo(event,id){
 		var htmlnuevo = '<div class="row img-row" style="display:none" id="eq_'+equipo.id+'">'+
 						'<div class="col-md-12"  >'+
 							'<div class="card mb-4 box-shadow">'+
-								'<div class="img equipo" style=\'background-image: url("<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/'+equipo.id+'/'+equipo.logotipo+'")\'>'+
+								'<div id="eimge'+equipo.id+'" class="img equipo" style=\'background-image: url("<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/'+equipo.id+'/'+equipo.logotipo+'")\'>'+
 									'<span>'+equipo.id+'</span>'+
 								'</div>'+
 								'<div class="card-body">'+
 									'<p class="card-text">'+
-										'<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post" enctype="multipart/form-data">'+
+										'<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post" onsubmit="return editarequipo(event,\'e'+equipo.id+'\')" id="e'+equipo.id+'" enctype="multipart/form-data">'+
 											'<input type="hidden" name="logotipo" value="'+equipo.logotipo+'" />'+
 											'<input type="hidden" name="competicion_id" value="<?=$competicion->id?>" />'+ 
 											'<input type="hidden" name="id" value="'+equipo.id+'" />'+
@@ -140,7 +188,7 @@ function nuevoequipo(event,id){
 									'</p>'+
 									'<div class="d-flex justify-content-between align-items-center">'+
 										'<div class="btn-group">'+
-											'<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post">'+
+											'<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" onsubmit="return be(event,\'b'+equipo.id+'\',\'eq_'+equipo.id+'\')" method="post">'+
 												'<input type="hidden" name="competicion_id" value="<?=$competicion->id?>"/>'+
 												'<input type="hidden" name="id" value="'+equipo.id+'"/>'+
 												'<input type="submit" class="btn btn-sm btn-outline-secondary borrar" name="borrarequipo" value="Borrar"/>'+
@@ -148,7 +196,7 @@ function nuevoequipo(event,id){
 										'</div>'+
 										'<small class="text-muted">Updated '+equipo.fecha+'</small>'+
 									'</div>'+
-									'<form action="<?=site_url("admin/competiciones/inscribirJugadorEquipo/")?>" id="e'+equipo.id+'" onsubmit="return nuevojugador(event,\'e'+equipo.id+'\')" method="post" enctype="multipart/form-data">'+
+									'<form action="<?=site_url("admin/competiciones/inscribirJugadorEquipo/")?>" id="e'+equipo.id+'j" onsubmit="return nuevojugador(event,\'e'+equipo.id+'j\')" method="post" enctype="multipart/form-data">'+
 	            						'<input type="hidden" name="competicion_id" value="<?=$competicion->id?>" />'+
 	            						'<input type="hidden" name="equipoinscrito_id" value="'+equipo.id+'" />'+
 	            				    	'<div class="row">'+
@@ -165,6 +213,7 @@ function nuevoequipo(event,id){
 	});
 	return false;
 }
+
 </script>
 
 <style>
@@ -245,12 +294,12 @@ $equipos = $competicion->getInscritoEquipo();
 foreach ($equipos as $equipo) {
     ?>
 
-    		<div class="row img-row">
-    			<div class="col-md-12"  >
+    		<div class="row img-row" id="eq_<?=$equipo->id?>">
+    			<div class="col-md-12">
     				
     				
 					<div class="card mb-4 box-shadow">
-					<div class="img equipo" style='background-image: url("<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo->id?>/<?=$equipo->logotipo?>")'>
+					<div class="img equipo" id="eimge<?=$equipo->id?>" style='background-image: url("<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo->id?>/<?=$equipo->logotipo?>")'>
 					<span><?=$equipo->id?></span>
     				</div>
 
@@ -258,7 +307,7 @@ foreach ($equipos as $equipo) {
 							<p class="card-text">
 							
 							
-    							<form
+    							<form onsubmit="return editarequipo(event,'e<?=$equipo->id?>')" id="e<?=$equipo->id?>"
     								action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"
     								method="post" enctype="multipart/form-data">
     								<input type="hidden" name="logotipo"
@@ -317,7 +366,7 @@ foreach ($equipos as $equipo) {
 							
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post"> 
+									<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>" method="post" onsubmit="return be(event,'<?=$equipo->id?>','eq_<?=$equipo->id?>')" > 
 									<input type="hidden" name="competicion_id" value="<?=$competicion->id?>"/>
 									<input type="hidden" name="id" value="<?=$equipo->id?>"/>
 									<input type="submit" class="btn btn-sm btn-outline-secondary borrar" name="borrarequipo" value="Borrar EQUIPO"/>
@@ -325,7 +374,7 @@ foreach ($equipos as $equipo) {
 								</div>
 								<small class="text-muted">Updated <?=$equipo->fecha ?></small>
 							</div>
-							<form
+							<form id="e<?=$equipo->id?>j" onsubmit="return nuevojugador(event,'e<?=$equipo->id?>j')"
             					action="<?=site_url("admin/competiciones/inscribirJugadorEquipo/")?>"
             					method="post" enctype="multipart/form-data">
             					<input type="hidden" name="competicion_id"
@@ -346,7 +395,7 @@ foreach ($equipos as $equipo) {
         foreach ($inscrito as $jugador) {
             ?>
 
-<div class="col-md-4">
+<div class="col-md-4" id="eqj_<?=$jugador->id?>">
 			<div class="card mb-4 box-shadow" >
 			<?php 
 			$ruta = "inscritoequipo/".$equipo->id."/".$equipo->logotipo; 
@@ -397,7 +446,7 @@ foreach ($equipos as $equipo) {
 				</form>
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="btn-group">
-						<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"  method="post"> 
+						<form action="<?=site_url("admin/competiciones/ver/".$competicion->id)?>"  method="post" onsubmit="return bj(event,'<?=$jugador->id?>','eqj_<?=$jugador->id?>')"> 
 						<input type="hidden" name="competicion_id" value="<?=$competicion->id?>"/>
 						<input type="hidden" name="id" value="<?=$jugador->id?>"/>
 						<input type="submit" class="btn btn-sm btn-outline-secondary borrar" name="borrarjugador" value="Borrar"/>
