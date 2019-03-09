@@ -15,13 +15,13 @@ section{
     padding-bottom: 50px;
     background-color: black;
 }
-/*@font-face {
+@font-face {
   font-family: 'Furore';
-  src: url('../fonts/Viga-Regular.ttf');
+  src: url('../fonts/Furore.otf');
 }
-*{
-    font-family: Furrore;
-}*/
+body{
+    font-family: Furore;
+}
 #navHeader{
     display: inline-block;
     background-color: transparent;

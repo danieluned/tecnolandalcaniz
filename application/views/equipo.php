@@ -44,12 +44,12 @@
 						</div>					
 					<?php }?>
 				</div>
-				<div class="col-12 resultados">
+				<!--<div class="col-12 resultados">
 							<div class="container-fluid">   
 									<div class="header-resultados text-center"> 
 											<h2> Resultados </h2>
 									</div>
-									<!--<div class="body-resultados">   
+									<div class="body-resultados">   
 											<table class="table table-striped table-dark text-center sombra-png-negra">
 
 														<thead>
@@ -89,9 +89,9 @@
 															<?php }?>
 														</tbody>
 													</table>
-									</div>  -->
+									</div>  
 							</div>  
-			</div>
+			</div>-->
 				<div class="row competiciones">
 					
 				</div>

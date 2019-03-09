@@ -254,7 +254,7 @@ foreach ($jornadasJugando as $jornada) {
                                     <table class="table table-striped table-dark text-center sombra-png-negra">
                                         <thead>
                                             <tr>
-                                                <th >Jornada <?=$jornada->id?></th>
+                                                <th colspan="3">Jornada <?=$jornada->id?></th>
                                             </tr>
                                         </thead>
                                         <tbody> 
