@@ -495,6 +495,98 @@ class Competiciones extends Admin_Controller
     }
       
   }
+  
+  public function guardarJornada(){
+      $this->data= null;
+      $jornada = new Jornada();
+      $jornada->cargar($_POST);
+      $jornada->guardarDB();
+      $this->data['jornada'] = $jornada;
+      $this->data['result'] = "OK"; 
+     
+  }
+  public function guardarPartida(){
+      $this->data = null;
+      $partida = new Partida();
+      $partida->cargar($_POST);
+      $partida->guardarDB();
+      
+      if(isset($_POST['local'])){
+          $partida->borrarEquipoLocal();
+          $je = new Juegaequipo();
+          $je->competicion_id = $partida->competicion_id;
+          $je->partida_id = $partida->id;
+          $je->posicion = 0;
+          $je->equipoinscrito_id = $_POST['local'];
+          if(isset($_POST['local_aceptafecha'])){
+              $je->aceptafecha = 1;
+          }else{
+              $je->aceptafecha = 0;
+          }
+          if(isset($_POST['local_aceptaresultado'])){
+              $je->conforme = 1;
+          }else{
+              $je->aceptafecha = 0;
+          }
+          $je->guardarDB();
+          
+      }
+      if(isset($_POST['visitante'])){
+          $partida->borrarEquipoVisitante();
+          $je = new Juegaequipo();
+          $je->competicion_id =$partida->competicion_id;
+          $je->partida_id = $partida->id;
+          $je->posicion = 1;
+          $je->equipoinscrito_id = $_POST['visitante'];
+          if(isset($_POST['visitante_aceptafecha'])){
+              $je->aceptafecha = 1;
+          }else{
+              $je->aceptafecha = 0;
+          }
+          if(isset($_POST['visitante_aceptaresultado'])){
+              $je->conforme = 1;
+          }else{
+              $je->conforme = 0;
+          }
+          $je->guardarDB();
+      }
+      if(isset($_POST['jugadores'])){
+          $partida->borrarJugadores();
+          foreach($_POST['jugadores'] as $key => $id){
+              $je = new Juega();
+              $je->jugadorinscrito_id = $id;
+              $je->competicion_id =$partida->competicion_id;
+              $je->partida_id = $partida->id;
+              $je->guardarDB();
+          }
+          
+      }
+      
+      $partida->actualizarpuntuacionEquiposDB();
+      $this->data["result"] = "OK"; 
+      $this->data['partida'] = $partida ;
+      $visi = $partida->getJuegaEquipoVisitante();
+      $loc = $partida->getJuegaEquipoLocal();
+      $this->data['local'] = $this->competicion->getAlineacion($partida->competicion_id,$partida->id,$loc->equipoinscrito_id);
+      $this->data['visitante'] =  $this->competicion->getAlineacion($partida->competicion_id,$partida->id,$visi->equipoinscrito_id);
+    
+  }
+  public function borrarJornada(){
+      $this->data = null;
+    $jornada = new Jornada();
+    $jornada->cargar($_POST);
+    $jornada->borrarDB();
+    $this->data['result'] = "OK";
+    
+  }
+ public function borrarPartida(){
+     $this->data = null; 
+    $partida = new Partida();
+    $partida->cargar($_POST);
+    $partida->borrarDB();
+    $this->data['result'] = "OK";   
+ }
+
   /**
    * ROL : admin
    * Permite gestiona las partidas de una competicion, los emparejamientos y resultados
@@ -521,78 +613,7 @@ class Competiciones extends Admin_Controller
           $competicion->borrarJornadasDB();
           $competicion->borrarPartidasDB();
       }
-      if (isset($_POST['guardar_jornada'])){
-          $jornada = new Jornada();
-          $jornada->cargar($_POST); 
-          $jornada->guardarDB();
-      }
-      if(isset($_POST['guardar_partida'])){
-          $partida = new Partida(); 
-          $partida->cargar($_POST); 
-          $partida->guardarDB();
-          
-          if(isset($_POST['local'])){
-              $partida->borrarEquipoLocal();
-              $je = new Juegaequipo();
-              $je->competicion_id = $partida->competicion_id; 
-              $je->partida_id = $partida->id; 
-              $je->posicion = 0; 
-              $je->equipoinscrito_id = $_POST['local'];
-              if(isset($_POST['local_aceptafecha'])){
-                  $je->aceptafecha = 1;
-              }else{
-                  $je->aceptafecha = 0;
-              }
-              if(isset($_POST['local_aceptaresultado'])){
-                  $je->conforme = 1;
-              }else{
-                  $je->aceptafecha = 0;
-              }
-              $je->guardarDB();
-          }
-          if(isset($_POST['visitante'])){
-              $partida->borrarEquipoVisitante();
-              $je = new Juegaequipo();
-              $je->competicion_id =$partida->competicion_id;
-              $je->partida_id = $partida->id;
-              $je->posicion = 1;
-              $je->equipoinscrito_id = $_POST['visitante'];
-              if(isset($_POST['visitante_aceptafecha'])){
-                  $je->aceptafecha = 1;
-              }else{
-                  $je->aceptafecha = 0;
-              }
-              if(isset($_POST['visitante_aceptaresultado'])){
-                  $je->conforme = 1;
-              }else{
-                  $je->conforme = 0;
-              }
-              $je->guardarDB();
-          }
-          if(isset($_POST['jugadores'])){
-              $partida->borrarJugadores();
-              foreach($_POST['jugadores'] as $key => $id){
-                  $je = new Juega(); 
-                  $je->jugadorinscrito_id = $id;
-                  $je->competicion_id =$partida->competicion_id;
-                  $je->partida_id = $partida->id;
-                  $je->guardarDB();
-              }
-          
-          }
-         
-          $partida->actualizarpuntuacionEquiposDB();
-      }
-      if(isset($_POST['borrar_jornada'])){
-          $jornada = new Jornada();
-          $jornada->cargar($_POST);
-          $jornada->borrarDB();
-      }
-      if(isset($_POST['borrar_partida'])){
-          $partida = new Partida();
-          $partida->cargar($_POST);
-          $partida->borrarDB();
-      }
+      
       $this->render('admin/competiciones/partidas');  
   }
   
@@ -634,52 +655,33 @@ class Competiciones extends Admin_Controller
       
       $this->render('admin/competiciones/partidascapitan');
   }
-  /**
-   * Permite ver y añadir una lista de equipos/jugadores a la competición
-   */
-  public function ver($id){
-     
-      if(!$this->ion_auth->in_group('admin')){
-          $this->session->set_flashdata('message','You are not allowed to visit this page');
-          redirect('admin','refresh');
-      }
-      //Titulo de la página
+  
+  public function inscribirEquipo(){
+      $this->data = null;
+      $equipo = new Inscritoequipo();
+      $equipo->cargar($_POST);
+      $equipo->guardarDB();
       
-      $this->data['competicion'] = $competicion = $this->competicion->get($id);
-      
-      if(is_null($competicion)){
-          $this->session->set_flashdata('message','Seleciona una competición');
-          redirect('admin/competiciones','refresh');
-      }
-      $this->data['title'] = 'Competición: '.$competicion->nombre;
-      
-     
-      if (isset($_POST['inscribirequipo'])){
-          
-          $equipo = new Inscritoequipo();
-          $equipo->cargar($_POST);
-          $equipo->guardarDB();
-      
-          if (isset($_FILES['logotipo'])){
-              $path =                 "assets".
-                  DIRECTORY_SEPARATOR."images".
-                  DIRECTORY_SEPARATOR."competiciones".
-                  DIRECTORY_SEPARATOR.$equipo->competicion_id.
-                  DIRECTORY_SEPARATOR."inscritoequipo".
-                  DIRECTORY_SEPARATOR.$equipo->id.
-                  DIRECTORY_SEPARATOR; 
+      if (isset($_FILES['logotipo'])){
+          $path =                 "assets".
+              DIRECTORY_SEPARATOR."images".
+              DIRECTORY_SEPARATOR."competiciones".
+              DIRECTORY_SEPARATOR.$equipo->competicion_id.
+              DIRECTORY_SEPARATOR."inscritoequipo".
+              DIRECTORY_SEPARATOR.$equipo->id.
+              DIRECTORY_SEPARATOR;
               
               $config = array();
               $config['upload_path']  = $path;
               $config['allowed_types'] = '*';
               if (!is_dir($path)) {
                   $this->load->helper("ficheros");
-                  createPath($path);        
+                  createPath($path);
               }
               $this->load->library('upload', $config);
               if ( ! $this->upload->do_upload('logotipo'))
               {
-               
+                  
                   
                   $this->session->set_flashdata('message',$this->upload->display_errors());
               }
@@ -689,20 +691,23 @@ class Competiciones extends Admin_Controller
                   ;
                   $equipo->logotipo = $_FILES['logotipo']['name'];
                   $equipo->guardarDB();
-              
+                  
               }
-          }
-          
-          $this->session->set_flashdata('message','Actualizado Lista de Participantes');
-         
-      }
-      if (isset($_POST['inscribirjugadorequipo'])){
-          $inscrito = new Inscrito();
-          $inscrito->cargar($_POST);          
-          $inscrito->guardarDB();
-         
-          if (isset($_FILES['logotipo'])){
-              $path =             "assets".
+      }    
+     
+      $this->data['result'] = "OK"; 
+      $this->data['equipo'] = $equipo;    
+      
+      $this->render(null,"json");
+  }
+  public function inscribirJugadorEquipo(){
+      $this->data = null;
+      $inscrito = new Inscrito();
+      $inscrito->cargar($_POST);
+      $inscrito->guardarDB();
+      
+      if (isset($_FILES['logotipo'])){
+          $path =             "assets".
               DIRECTORY_SEPARATOR."images".
               DIRECTORY_SEPARATOR."competiciones".
               DIRECTORY_SEPARATOR.$inscrito->competicion_id.
@@ -732,27 +737,52 @@ class Competiciones extends Admin_Controller
                   $inscrito->guardarDB();
                   
               }
-          }
-          
-          $this->session->set_flashdata('message','Actualizado Lista de Participantes');
-          
       }
       
-      if (isset($_POST['borrarequipo'])){        
-          $equipo = new Inscritoequipo();
-          $equipo->cargar($_POST);
-          $jugadores = $equipo->getInscrito();         
-          foreach($jugadores as $jugador){
-              $jugador->borrarDB();
-          }
-          $equipo->borrarDB();
-      }
-      if(isset($_POST['borrarjugador'])){
-          $jugador = new Inscrito();
-          $jugador->cargar($_POST);
+      $this->data['result'] = "OK";
+      $this->data['jugador'] = $inscrito;
+  
+      $this->render(null,"json");
+  }
+  public function borrarEquipo(){
+      $this->data = null;
+      $equipo = new Inscritoequipo();
+      $equipo->cargar($_POST);
+      $jugadores = $equipo->getInscrito();
+      foreach($jugadores as $jugador){
           $jugador->borrarDB();
       }
+      $equipo->borrarDB();
+      $this->data = "OK"; 
+      $this->render(null,"json");
+  }
+  public function borrarJugador(){
+      $this->data = null;
+      $jugador = new Inscrito();
+      $jugador->cargar($_POST);
+      $jugador->borrarDB();
+      $this->data = "OK"; 
+      $this->render(null,"json");
+  }
+  
+  /**
+   * Permite ver y añadir una lista de equipos/jugadores a la competición
+   */
+  public function ver($id){
+     
+      if(!$this->ion_auth->in_group('admin')){
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
+      //Titulo de la página
       
+      $this->data['competicion'] = $competicion = $this->competicion->get($id);
+      
+      if(is_null($competicion)){
+          $this->session->set_flashdata('message','Seleciona una competición');
+          redirect('admin/competiciones','refresh');
+      }
+      $this->data['title'] = 'Competición: '.$competicion->nombre;   
       $this->render('admin/competiciones/ver');  
   }
     
