@@ -131,7 +131,27 @@ class Competicion extends MY_Model {
             return $this;
         }
        
-        
+        public function ranking(){
+           $sql = "
+            i.id, sum(j.puntuacion) puntos
+            from inscritoequipo i
+            left join juegaequipo j on i.competicion_id = j.competicion_id and i.id = j.equipoinscrito_id
+            left join partida p on j.partida_id = p.id and j.competicion_id = p.competicion_id and p.estado = 'cerrada'
+                where i.competicion_id = ".$this->id."
+                group by i.id
+                order by puntos desc
+                ";
+                
+           $this->db->select($sql) ;
+           
+           $resultados = array();
+           $results = $this->db->get()->result();
+           foreach ($results as $row){
+               $eq = $this->inscritoequipo->get($row->id,$this->id); 
+               $resultados[] = array("equipo" => $eq, "puntos" => $row->puntos);
+           }
+           return $resultados;
+        }
         public function borrarDB(){
             // delete user from users table should be placed after remove from group
             $this->db->delete('competicion', array('id' => $this->id));

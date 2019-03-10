@@ -15,11 +15,11 @@ class Partida extends MY_Model {
     public $horainicio;
     public $comentario;
     public $verificado;
-    public $mapa1;
+    public $mapa1;           // Puntocaliente
     public $mapa1_resultado;
-    public $mapa2;
+    public $mapa2;           // Byd
     public $mapa2_resultado;
-    public $mapa3;
+    public $mapa3;           // Control
     public $mapa3_resultado;
     public $mapa4;
     public $mapa4_resultado;
@@ -38,7 +38,7 @@ class Partida extends MY_Model {
         $this->horainicio = $datosDB['horainicio'];
         $this->comentario = $datosDB['comentario'];
         $this->verificado = $datosDB['verificado'];
-        $this->mapa1 = $datosDB['mapa1'];
+        $this->mapa1 = $datosDB['mapa1']; 
         $this->mapa1_resultado = $datosDB['mapa1_resultado'];
         $this->mapa2 = $datosDB['mapa2'];
         $this->mapa2_resultado = $datosDB['mapa2_resultado'];
@@ -174,6 +174,45 @@ class Partida extends MY_Model {
         
     }
     
+    public function resultados(){
+        if($this->estado != 'cerrada'){
+            return null;
+        }
+        $l = $this->getJuegaEquipoLocal(); 
+        $v = $this->getJuegaEquipoVisitante();
+        $local = $l->getEquipo(); 
+        $visitante = $v->getEquipo(); 
+     
+        $mapaslocal = array();
+        $mapasvisitante = array();
+        $puntoslocal = 0; 
+        $puntosvisitante = 0;
+        if($this->mapa1_resultado == 1){
+            $mapaslocal[] = array("mapa"=> $this->mapa1,"categoria" => "Punto caliente");
+            $puntoslocal++;
+        }else if ($this->mapa1_resultado == 2){
+            $mapaslocal[] = array("mapa"=> $this->mapa1,"categoria" => "Punto caliente");
+            $puntosvisitante++;
+        }
+        
+        if($this->mapa2_resultado == 1){
+            $mapaslocal[] = array("mapa"=> $this->mapa2,"categoria" => "Busqueda y Destrucción");
+            $puntoslocal++;
+        }else if ($this->mapa2_resultado == 2){
+            $mapaslocal[] = array("mapa"=> $this->mapa2,"categoria" => "Busqueda y Destrucción");
+            $puntosvisitante++;
+        }
+        
+        if($this->mapa3_resultado == 1){
+            $mapaslocal[] = array("mapa"=> $this->mapa3,"categoria" => "Control");
+            $puntoslocal++;
+        }else if ($this->mapa3_resultado == 2){
+            $mapaslocal[] = array("mapa"=> $this->mapa3,"categoria" => "Control");
+            $puntosvisitante++;;
+        }
+        return array("local"=>array("equipo"=>$local, "mapas"=>$mapaslocal, "puntos" => $puntoslocal), 
+                "visitante" =>array("equipo"=>$visitante, "mapas"=>$mapasvisitante, "puntos" => $puntosvisitante));
+    }
     public function borrarDB(){
         // delete user from users table should be placed after remove from group
         $this->db->delete('partida', array('id' => $this->id, 'competicion_id'=>$this->competicion_id));

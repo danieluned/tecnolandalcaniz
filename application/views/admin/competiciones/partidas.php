@@ -95,6 +95,21 @@ function alineacion(competicion_id, partida_id, equipo_id, html_destino){
 	   });
 }
 </script>
+
+
+<code>
+<p style="margin-top: 100px">Competicion Ranking</p>
+<?php 
+
+ $resultados = $competicion->ranking(); 
+ foreach ($resultados as $resultado){
+     echo $resultado['equipo']->nombre." " .$resultado['puntos']."<br/>"; 
+     
+ }
+ ?>
+
+</code>
+
 <div role="main">
 	<section class="jumbotron text-center">
 		<div class="container">
@@ -218,14 +233,27 @@ foreach ($jornadas as $jornada) {
 						name="id" value="<?=$partida->id?>" />
 				     <input
 						type="hidden" name="jornada_id" value="<?=$jornada->id?>" />
+						
+					
+					
 					<div class="row">
+					<p>Resultados</p>
+					<br>
+					<code>
+						<?php $p = $partida->resultados(); 
+						if($p){
+						
+						echo "(Local) ".$p['local']['equipo']->nombre." ". $p['local']['puntos'] ." vs ". $p['visitante']['puntos']." ".$p['local']['equipo']->nombre." (Visitante)";
+						}  ?>
+					</code>
+					<!-- 
 						<label for="p_resultado_<?=$partida->id?>">Resultado</label> 
 						<input id="p_resultado_<?=$partida->id?>"
 							class="form-control" name="resultado" type="text"
 							value="<?=$partida->resultado?>" max-length="45"/>
-
-					</div>
-
+  -->
+					</div> 
+                  
 					<div class="row">
 						<label for="p_horainicio_<?=$partida->id?>"> Hora inicio </label>
 						<input id="p_horainicio_<?=$partida->id?>" class="form-control" name="horainicio" type="datetime-local" value="<?=date('Y-m-d\TH:i:s',strtotime($partida->horainicio))?>"/>
