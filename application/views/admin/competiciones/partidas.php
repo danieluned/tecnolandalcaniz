@@ -243,7 +243,7 @@ foreach ($jornadas as $jornada) {
 						<?php $p = $partida->resultados(); 
 						if($p){
 						
-						echo "(Local) ".$p['local']['equipo']->nombre." ". $p['local']['puntos'] ." vs ". $p['visitante']['puntos']." ".$p['local']['equipo']->nombre." (Visitante)";
+						echo "(Local) ".$p['local']['equipo']->nombre." ". $p['local']['puntos'] ." vs ". $p['visitante']['puntos']." ".$p['visitante']['equipo']->nombre." (Visitante)";
 						}  ?>
 					</code>
 					<!-- 
