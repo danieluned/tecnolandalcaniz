@@ -38,6 +38,7 @@ body{
     border: 1px solid #7b7b7b;
     border-radius: 4px;
     padding: 25px;
+    background-color: #555252;
     background-color: #ffffffd4;
     /*padding-top: 25px;
     padding-bottom: 25px;  */ 
@@ -140,13 +141,19 @@ body{
 }
 
 .galeria{
-    background: url('../images/Fondo_2.png') no-repeat fixed center;
+    background: url('../images/fondos/Fondo_2.gif') no-repeat fixed center;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
 }
-
+.videos{
+    background: url('../images/fondos/redesSociales.gif') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
 
 .header-galeria, .body-galeria, .header-videos, .body-videos{
     padding-top: 25px;

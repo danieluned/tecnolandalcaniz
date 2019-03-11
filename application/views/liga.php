@@ -188,6 +188,8 @@ foreach ($jornadasJugando as $jornada) {
                                                                 $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
                                                                 $equipo0 = $juegaEquipo0->getEquipo();
                                                                 $equipo1 = $juegaEquipo1->getEquipo();
+                                                                $resultados = $partida->resultados();
+                                                                
                                                         ?>
                                                         <tr>                                                          
                                                           <td scope="col-4">
@@ -198,7 +200,7 @@ foreach ($jornadasJugando as $jornada) {
                                                          
                                                            </td>
 
-                                                          <td scope="col-4"> <?=$juegaEquipo0->puntuacion?> - <?=$juegaEquipo1->puntuacion?> </td>
+                                                          <td scope="col-4"> <?php echo $resultados['local']['puntos']." - ". $resultados['visitante']['puntos']?> </td>
 
                                                           <td scope="col-4">
                                                             
@@ -330,13 +332,16 @@ foreach ($jornadasJugando as $jornada) {
                                                 $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
                                                 $equipo0 = $juegaEquipo0->getEquipo();
                                                 $equipo1 = $juegaEquipo1->getEquipo();
+                                                
+                                                $resultados = $partida->resultados();
+                                                
                                         ?>
                                             <tr>
                                                 <td scope="col-4">
                                                     <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">                                                                                                
                                                 </td>
                                                 
-                                                <td scope="col-4"> <?=$juegaEquipo0->puntuacion?> - <?=$juegaEquipo1->puntuacion?> </td>
+                                                <td scope="col-4"> <?php echo $resultados['local']['puntos']." - ".$resultados['visitante']['puntos']?> </td>
                                                 
                                                 <td scope="col-4">
                                                     <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
