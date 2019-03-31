@@ -25,7 +25,7 @@
 							$ruta = assets().'/images/iconos/Perfil.png';
 						 }
 					?>
-						<div class="col-3 jugador " style="background-image: url('<?=$ruta?>');">
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 jugador " style="background-image: url('<?=$ruta?>');">
 							<div class="container-fluid">
 								
 								<div class="row  header-jugador" >

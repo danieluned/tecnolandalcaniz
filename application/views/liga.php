@@ -363,7 +363,7 @@ foreach ($jornadasJugando as $jornada) {
                                         <legend class="scheduler-border"><h2> Organiza </h2></legend>                               
                                 <div class="row body-organiza justify-content-around">
                                      
-                                        <img src="<?=assets()?>images/sponsor/netllar.gif">
+                                        <img src="<?=assets()?>images/sponsor/netllar_negro.png">
                                         <img src="<?=assets()?>images/icCabecera.png">
                                                           
                                 </div>
