@@ -76,7 +76,7 @@ foreach ($jornadasJugando as $jornada) {
                             $partidasCerradas = array(); 
                             
                             $partidasPendientes_j =$jornada->getPartidasPendientes(); 
-                            
+                            $partidasPendientes_j =array_merge($partidasPendientes_j,$jornada->getPartidasJugando()); 
                             foreach($partidasPendientes_j as $partida){
                                 $partidasPendientes[] = $partida;
                             }

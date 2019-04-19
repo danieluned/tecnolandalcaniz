@@ -165,7 +165,47 @@ class Competiciones extends Admin_Controller
       $this->data = $listaJugadores;
       $this->render(null,"json");
   }
+  public function aceptarcheck(){
+      if(!$this->ion_auth->in_group('admin') && !$this->ion_auth->in_group('capitan') ){
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
+      
+      $partida = $this->partida->get($_POST['id'],$_POST['competicion_id']);
+      if(!$partida || $partida->estado != 'pendiente'){
+          $this->session->set_flashdata('message','Accion invalida');
+          redirect('admin','refresh');
+      }
+      $capitan_local = $partida->getJuegaEquipoLocal()->getEquipo()->getCapitanUserId();
+      $capitan_visitante = $partida->getJuegaEquipoVisitante()->getEquipo()->getCapitanUserId();
+      if($this->data['current_user']->id!=$capitan_local && $this->data['current_user']->id!=$capitan_visitante){
+          $this->session->set_flashdata('message','No eres capitan..');
+          redirect('admin','refresh');
+      }
+      
+      // Plazo de hora  para checkear: desde una hora hasta menos cuarto
+      $horaactual = new DateTime();
+      $min  = (new DateTime($partida->horainicio))->sub(new DateInterval("PT1H"));
+      $max = (new DateTime($partida->horainicio))-> sub(new DateInterval("PT15M"));
+      
 
+      if($min < $horaactual && $horaactual < $max ){
+        // Se puede checkear 
+          $juega = $this->juegaequipo->get($_POST['competicion_id'],$_POST['id'],$_POST['equipo']);
+          $juega->presentado = 1;
+          $juega->guardarDB();
+          
+          
+          if($partida->getJuegaEquipoLocal()->presentado && $partida->getJuegaEquipoVisitante()->presentado){
+              $partida->estado = 'jugando';
+              $partida->guardarDB();
+          }
+      }
+      
+      
+      
+      redirect('admin/competiciones/partidascapitan/'.$_POST['competicion_id'],'refresh');
+  }
   /**
    * Roles: Capitan
    * Acepta la fecha propuesta por parte del capitan
@@ -248,20 +288,31 @@ class Competiciones extends Admin_Controller
           $this->session->set_flashdata('message','Accion invalida');
           redirect('admin','refresh');
       }
-      $capitan_local = $partida->getJuegaEquipoLocal()->getEquipo()->getCapitanUserId();
-      $capitan_visitante = $partida->getJuegaEquipoVisitante()->getEquipo()->getCapitanUserId();
+      
+      $jlocal =  $partida->getJuegaEquipoLocal(); 
+      $local = $jlocal->getEquipo();
+      $capitan_local = $local->getCapitanUserId();
+       
+      $jvisi = $partida->getJuegaEquipoVisitante();
+      $visitante = $jvisi->getEquipo(); 
+      $capitan_visitante = $visitante->getCapitanUserId();
+      
       if($this->data['current_user']->id!=$capitan_local && $this->data['current_user']->id!=$capitan_visitante){
           $this->session->set_flashdata('message','No eres capitan..');
           redirect('admin','refresh');
       }
       
-      
-      $juega = $this->juegaequipo->get($_POST['competicion_id'],$_POST['id'],$_POST['equipo']);
-      $juega->conforme = 1;
-      $juega->guardarDB();
+      if($this->data['current_user']->id == $capitan_visitante){
+          $jvisi->conforme = 1;
+          $jvisi->guardarDB();
+      }
+      if($this->data['current_user']->id == $capitan_local){
+          $jlocal->conforme = 1;
+          $jlocal->guardarDB();
+      }
       
     
-      if($partida->getJuegaEquipoLocal()->conforme && $partida->getJuegaEquipoVisitante()->conforme){
+      if($jlocal->conforme && $jvisi->conforme){
           $partida->estado = 'cerrada';
           $partida->guardarDB();
       }
@@ -325,9 +376,8 @@ class Competiciones extends Admin_Controller
           redirect('admin','refresh');
       }
       $alineacion = $this->competicion->getAlineacion($_POST['competicion_id'],$_POST['id'],$_POST['equipo']);
-      if(isset($_POST['jugadores'])){
-          $partida->borrarJugadoresA($alineacion['inscritos']);
-          
+      $partida->borrarJugadoresA($alineacion['inscritos']);
+      if(isset($_POST['jugadores'])){              
           foreach($_POST['jugadores'] as $key => $id){
               $je = new Juega();
               $je->jugadorinscrito_id = $id;
@@ -340,7 +390,7 @@ class Competiciones extends Admin_Controller
       
       redirect('admin/competiciones/partidascapitan/'.$_POST['competicion_id'],'refresh');
   }
-  public function veralineacion($competicion_id, $partida_id, $equipo_id){
+  public function veralineacion($competicion_id, $partida_id){
       if(!$this->ion_auth->in_group('admin') && !$this->ion_auth->in_group('capitan') ){
           $this->session->set_flashdata('message','You are not allowed to visit this page');
           redirect('admin','refresh');
@@ -358,14 +408,15 @@ class Competiciones extends Admin_Controller
           $this->session->set_flashdata('message','No eres capitan..');
           redirect('admin','refresh');
       }
-       
+
       $jlocal  = $this->competicion->getAlineacion($competicion_id,$partida_id,$equipolocal->equipoinscrito_id);
       $jvisi = $this->competicion->getAlineacion($competicion_id,$partida_id,$equipovisitante->equipoinscrito_id);
       $this->data['local'] = $jlocal;
       $this->data['visitante'] = $jvisi;
       $this->data['competicion'] = $this->competicion->get($competicion_id);
       $this->data['partida'] = $partida;
-      $this->data['modificar'] = $this->data['current_user']->id == $capitan_local?'local':'visitante';
+      $this->data['mlocal'] = $this->data['current_user']->id == $capitan_local;
+      $this->data['mvisi'] = $this->data['current_user']->id == $capitan_visitante;
       $this->render('admin/competiciones/alineacion');
   }
   public function proponerresultado(){
@@ -378,102 +429,127 @@ class Competiciones extends Admin_Controller
           $this->session->set_flashdata('message','Accion invalida');
           redirect('admin','refresh');
       }
+      $jvisi = $partida->getJuegaEquipoVisitante();
+      $visitante = $jvisi->getEquipo();
+      $capitan_visitante = $visitante->getCapitanUserId();
+      
+      $jlocal = $partida->getJuegaEquipoLocal();
+      $local = $jlocal->getEquipo();
+      $capitan_local = $local->getCapitanUserId();
+      
+      if($this->data['current_user']->id!=$capitan_local && $this->data['current_user']->id!=$capitan_visitante){
+          $this->session->set_flashdata('message','No eres capitan..');
+          redirect('admin','refresh');
+      }
+      $puedeproponer = false;
+      if($this->data['current_user']->id == $capitan_local && !$jlocal->conforme){
+          $puedeproponer = true; 
+      }
+      if($this->data['current_user']->id == $capitan_visitante && !$jvisi->conforme){
+          $puedeproponer = true;
+      }
+      
+      if($puedeproponer){
+          if($this->data['current_user']->id == $capitan_local && $this->data['current_user']->id == $capitan_visitante ){
+              $jvisi->conforme = 1;
+              $jvisi->guardarDB();
+              
+              $jlocal->conforme = 1;
+              $jlocal->guardarDB();
+              $partida->estado = "cerrada";
+          }else{
+              if($this->data['current_user']->id == $capitan_visitante){
+                  $jvisi->conforme = 1;
+                  $jvisi->guardarDB();
+                  $jlocal->conforme = 0;
+                  $jlocal->guardarDB();
+              }else{
+                  $jlocal->conforme = 1;
+                  $jlocal->guardarDB();
+                  $jvisi->conforme = 0;
+                  $jvisi->guardarDB();
+              }
+          }
+          
+          $partida->mapa1 = $_POST['mapa1'];
+          $partida->mapa2 = $_POST['mapa2'];
+          $partida->mapa3 = $_POST['mapa3'];
+          $partida->mapa1_resultado = $_POST['mapa1_resultado'];  // El resultado codificado es 0 empate , 1 gana local, 2 gana visitante
+          $partida->mapa2_resultado = $_POST['mapa2_resultado'];
+          $partida->mapa3_resultado = $_POST['mapa3_resultado'];
+          $partida->guardarDB();
+          
+          
+          if (isset($_FILES['prueba'])){
+              $path =             "assets".
+                  DIRECTORY_SEPARATOR."images".
+                  DIRECTORY_SEPARATOR."competiciones".
+                  DIRECTORY_SEPARATOR.$partida->competicion_id.
+                  DIRECTORY_SEPARATOR."pruebas".
+                  DIRECTORY_SEPARATOR;
+                  
+                  
+                  $ext = pathinfo( $_FILES['prueba']['name'], PATHINFO_EXTENSION);
+                  
+                  $config = array();
+                  $config['upload_path']  = $path;
+                  $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                  $config['max_size'] = '500'; // max_size in kb
+                  $config['overwrite'] = TRUE;
+                  $config['file_name'] = "partida_".$partida->id."__".($this->data['current_user']->id==$capitan_local?'local':'visitante').".".$ext;
+                  if (!is_dir($path)) {
+                      $this->load->helper("ficheros");
+                      createPath($path);
+                  }
+                  $this->load->library('upload', $config);
+                  if ( ! $this->upload->do_upload('prueba'))
+                  {
+                      $error = array('error' => $this->upload->display_errors());
+                      
+                      $this->session->set_flashdata('message',$error);
+                  }
+                  else
+                  {
+                      $subecontenidoliga = new Subecontenidoliga();
+                      $a=$this->upload->data();
+                      rename($a['full_path'],$a['file_path'].$config['file_name']);
+                      $subecontenidoliga->competicion_id = $partida->competicion_id;
+                      $subecontenidoliga->filename = $config['file_name'];
+                      $subecontenidoliga->partida_id = $partida->id;
+                      $subecontenidoliga->users_id = $this->data['current_user']->id;
+                      $subecontenidoliga->tipo = "prueba";
+                      $subecontenidoliga->guardarDB();
+                      
+                  }
+          }
+      }
+      
+      redirect('admin/competiciones/partidascapitan/'.$_POST['competicion_id'],'refresh');
+  }
+  
+  
+  public function partida($competicion_id,$id){
+      if(!$this->ion_auth->in_group('admin') && !$this->ion_auth->in_group('capitan') ){
+          $this->session->set_flashdata('message','You are not allowed to visit this page');
+          redirect('admin','refresh');
+      }
+      $this->data['competicion'] = $competicion = $this->competicion->get($competicion_id); 
+      if(is_null($competicion)){
+          $this->session->set_flashdata('message','Seleciona una competición');
+          redirect('admin/competiciones','refresh');
+      }
+      $this->data['partida'] = $partida = $this->partida->get($id,$competicion_id);
+      if(!$partida && !is_array($partida)){
+          $this->session->set_flashdata('message','Accion invalida');
+          redirect('admin','refresh');
+      }
       $capitan_local = $partida->getJuegaEquipoLocal()->getEquipo()->getCapitanUserId();
       $capitan_visitante = $partida->getJuegaEquipoVisitante()->getEquipo()->getCapitanUserId();
       if($this->data['current_user']->id!=$capitan_local && $this->data['current_user']->id!=$capitan_visitante){
           $this->session->set_flashdata('message','No eres capitan..');
           redirect('admin','refresh');
       }
-      
-      
-      
-      $juega = $this->juegaequipo->get($_POST['competicion_id'],$_POST['id'],$_POST['equipo']);
-      $juega->conforme = 1;
-      $juega->guardarDB();
-      
-      
-     
-      $partida->mapa1 = $_POST['mapa1'];
-      $partida->mapa2 = $_POST['mapa2'];
-      $partida->mapa3 = $_POST['mapa3'];
-      $partida->mapa1_resultado = $_POST['mapa1_resultado'];  // El resultado codificado es 0 empate , 1 gana local, 2 gana visitante
-      $partida->mapa2_resultado = $_POST['mapa2_resultado'];
-      $partida->mapa3_resultado = $_POST['mapa3_resultado'];
-      $partida->guardarDB();
-  
-      
-      $local = $partida->getJuegaEquipoLocal();
-      $visitante = $partida->getJuegaEquipoVisitante();
-      if($local->equipoinscrito_id == $juega->equipoinscrito_id){
-          $visitante->conforme = 0;
-          $visitante->guardarDB();
-      }else{
-          $local->conforme = 0;
-          $local->guardarDB();
-      }
-      
-      
-      if (isset($_FILES['prueba'])){
-          $path =             "assets".
-          DIRECTORY_SEPARATOR."images".
-          DIRECTORY_SEPARATOR."competiciones".
-          DIRECTORY_SEPARATOR.$partida->competicion_id.
-          DIRECTORY_SEPARATOR."pruebas".
-          DIRECTORY_SEPARATOR;
-          
-         
-         $ext = pathinfo( $_FILES['prueba']['name'], PATHINFO_EXTENSION);
-          
-          $config = array();
-          $config['upload_path']  = $path;
-          $config['allowed_types'] = '*';
-        
-          $config['file_name'] = "partida_".$partida->id."__".($this->data['current_user']->id==$capitan_local?'local':'visitante').".".$ext;
-          if (!is_dir($path)) {
-              $this->load->helper("ficheros");
-              createPath($path);
-          }
-          $this->load->library('upload', $config);
-          if ( ! $this->upload->do_upload('prueba'))
-          {
-              $error = array('error' => $this->upload->display_errors());
-              
-              $this->session->set_flashdata('message',$error);
-          }
-          else
-          {
-              $subecontenidoliga = new Subecontenidoliga();
-              $data = array('upload_data' => $this->upload->data());
-              $subecontenidoliga->competicion_id = $partida->competicion_id;
-              $subecontenidoliga->filename = $config['file_name'];
-              $subecontenidoliga->partida_id = $partida->id; 
-              $subecontenidoliga->users_id = $this->data['current_user']->id;
-              $subecontenidoliga->tipo = "prueba";
-              $subecontenidoliga->guardarDB();
-              
-          }
-      }
-      redirect('admin/competiciones/partidascapitan/'.$_POST['competicion_id'],'refresh');
-  }
-  
-  
-  public function partida($competicion_id,$id){
-    if(!$this->ion_auth->in_group('admin') && !$this->ion_auth->in_group('capitan') ){
-        $this->session->set_flashdata('message','You are not allowed to visit this page');
-        redirect('admin','refresh');
-    }
-
-    $this->data['competicion'] = $competicion = $this->competicion->get($competicion_id); 
-    if(is_null($competicion)){
-        $this->session->set_flashdata('message','Seleciona una competición');
-        redirect('admin/competiciones','refresh');
-    }
-    $this->data['partida'] = $partida = $this->partida->get($id,$competicion_id); 
-    if(is_null($partida)){
-        $this->session->set_flashdata('message','Seleciona una partida');
-        redirect('admin/competiciones/partidascapitan/'.$competicion_id,'refresh');
-    }
-
+    
     $juegalocal = $partida->getJuegaEquipoLocal();
     if($juegalocal){
         $this->data['local'] = $this->competicion->getAlineacion($competicion_id,$id,$juegalocal->equipoinscrito_id);
@@ -485,15 +561,18 @@ class Competiciones extends Admin_Controller
         $this->data['visitante'] = $this->competicion->getAlineacion($competicion_id,$id,$juegavisitante->equipoinscrito_id);
         $this->data['visitante']['juega'] = $juegavisitante;
     }
- 
-    if ($partida->estado == 'pendiente'){
-        $this->render('admin/competiciones/partidafecha');
-    }else if ($partida->estado == 'jugando'){
-        $this->render('admin/competiciones/partidaresultado');
+    $jornada = $this->jornada->get($partida->jornada_id,$partida->competicion_id);
+    if(!is_array($jornada) && $jornada->estado == "jugando"){
+        if ($partida->estado == 'pendiente' ){
+            $this->render('admin/competiciones/partidacheck');
+        }else if ($partida->estado == 'jugando'){
+            $this->render('admin/competiciones/partidaresultado');
+        }else{
+            $this->render('admin/competiciones/partidacerrada');
+        }
     }else{
         $this->render('admin/competiciones/partidacerrada');
-    }
-      
+    }  
   }
   
   public function guardarJornada(){
@@ -656,9 +735,9 @@ class Competiciones extends Admin_Controller
       $mostrar= array();
       for($i = 0; $i < count($equiposdelcapitan) ; $i++){
           $mostrar[$i]['equipo'] = $equiposdelcapitan[$i];
-          $mostrar[$i]['partidaspendientes'] = $equiposdelcapitan[$i]->getPartidasPendientes();
+          $mostrar[$i]['partidaspendientes'] = $equiposdelcapitan[$i]->getPartidasPendientes(true);
           $mostrar[$i]['partidascerradas'] = $equiposdelcapitan[$i]->getPartidasCerradas();
-          $mostrar[$i]['partidasjugando'] = $equiposdelcapitan[$i]->getPartidasJugando();
+          $mostrar[$i]['partidasjugando'] = $equiposdelcapitan[$i]->getPartidasJugando(true);
       }
       
       $this->data['equipos'] = $mostrar;  
@@ -680,10 +759,13 @@ class Competiciones extends Admin_Controller
               DIRECTORY_SEPARATOR."inscritoequipo".
               DIRECTORY_SEPARATOR.$equipo->id.
               DIRECTORY_SEPARATOR;
-              
+              $ext = pathinfo( $_FILES['logotipo']['name'], PATHINFO_EXTENSION);
               $config = array();
               $config['upload_path']  = $path;
-              $config['allowed_types'] = '*';
+              $config['overwrite'] = TRUE;
+              $config['allowed_types'] = 'gif|jpg|png|jpeg';
+              $config['max_size'] = '500'; // max_size in kb 
+              $config['file_name'] = "icono";
               if (!is_dir($path)) {
                   $this->load->helper("ficheros");
                   createPath($path);
@@ -691,15 +773,13 @@ class Competiciones extends Admin_Controller
               $this->load->library('upload', $config);
               if ( ! $this->upload->do_upload('logotipo'))
               {
-                  
-                  
                   $this->session->set_flashdata('message',$this->upload->display_errors());
               }
               else
-              {
-                  $data = array('upload_data' => $this->upload->data())
-                  ;
-                  $equipo->logotipo = $_FILES['logotipo']['name'];
+              {              
+                  $a=$this->upload->data();
+                  rename($a['full_path'],$a['file_path'].$config['file_name']);
+                  $equipo->logotipo =$config['file_name'];
                   $equipo->guardarDB();
                   
               }
@@ -725,9 +805,13 @@ class Competiciones extends Admin_Controller
               DIRECTORY_SEPARATOR.$inscrito->id.
               DIRECTORY_SEPARATOR;
               
+              $ext = pathinfo( $_FILES['logotipo']['name'], PATHINFO_EXTENSION);;
               $config = array();
               $config['upload_path']  = $path;
-              $config['allowed_types'] = '*';
+              $config['overwrite'] = TRUE;
+              $config['allowed_types'] = 'gif|jpg|png|jpeg';
+              $config['max_size'] = '500'; // max_size in kb
+              $config['file_name'] = "icono";
               if (!is_dir($path)) {
                   $this->load->helper("ficheros");
                   createPath($path);
@@ -740,12 +824,10 @@ class Competiciones extends Admin_Controller
                   $this->session->set_flashdata('message',$error);
               }
               else
-              {
-                  $data = array('upload_data' => $this->upload->data())
-                  ;
-                  $inscrito->logotipo = $_FILES['logotipo']['name'];
-                  $inscrito->guardarDB();
-                  
+              {$a=$this->upload->data();
+              rename($a['full_path'],$a['file_path'].$config['file_name']);
+                  $inscrito->logotipo = $config['file_name'];
+                  $inscrito->guardarDB();  
               }
       }
       

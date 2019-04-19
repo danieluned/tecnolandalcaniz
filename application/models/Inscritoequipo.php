@@ -10,21 +10,21 @@ class Inscritoequipo extends MY_Model {
     /** Propiedades basicas de la base de datos */
     public $id;
     public $competicion_id;
-    public $nombre;
-    public $logotipo;
-    public $info; 
+    public $nombre = "Sin nombre";
+    public $logotipo = 'icono';
+    public $info = "Sin información"; 
     public $fecha;
     public $capitan;
     
     public function cargar($datosDB){
         $datosDB = object_to_array($datosDB);
-        $this->id = $datosDB['id'];
-        $this->competicion_id = $datosDB['competicion_id'];
-        $this->nombre = $datosDB['nombre'];
-        $this->logotipo = $datosDB['logotipo']; 
-        $this->info = $datosDB['info'];
-        $this->fecha = $datosDB['fecha'];
-        $this->capitan = $datosDB['capitan'];
+        $this->id = $datosDB['id']??$this->id;
+        $this->competicion_id = $datosDB['competicion_id']??$this->competicion_id;
+        $this->nombre = $datosDB['nombre']??$this->nombre;
+        $this->logotipo = $datosDB['logotipo']??$this->logotipo; 
+        $this->info = $datosDB['info']??$this->info;
+        $this->fecha = $datosDB['fecha']??$this->fecha;
+        $this->capitan = $datosDB['capitan']??$this->capitan;
         return $this;
     }
     /**
@@ -115,8 +115,8 @@ class Inscritoequipo extends MY_Model {
         }
         return null;              
     }
-  
-    public function getPartidasPendientes(){
+   
+    public function getPartidasPendientes($delajornada = false){
         // Devolver array
         $v_partidas = array();
         $sql = "select p.* from partida as p left join juegaequipo as j on p.id = j.partida_id and p.competicion_id = j.competicion_id 
@@ -125,21 +125,42 @@ class Inscritoequipo extends MY_Model {
         $query = $this->db->query($sql);
         foreach($query->result() as $compeDB){
             $com = new Partida();
-            $v_partidas[] = $com->cargar($compeDB);
+            $com = $com->cargar($compeDB);
+            if($delajornada){
+                $jornada = $this->jornada->get($com->jornada_id,$com->competicion_id);
+                if($jornada->estado == "pendiente"){
+                    $v_partidas[] = $com;
+                }
+            }else{
+                $v_partidas[] = $com;
+            }
         }
         return $v_partidas;
     }
     
-    public function getPartidasJugando(){
+    public function getPartidasJugando($delajornada = false){
         // Devolver array
         $v_partidas = array();
+        $aux = ""; 
+        if($delajornada = true){
+            $aux = " or p.estado = 'pendiente' ";
+        }
         $sql = "select p.* from partida as p left join juegaequipo as j on p.id = j.partida_id and p.competicion_id = j.competicion_id
                     where j.equipoinscrito_id = ".$this->id."
-                    and p.estado = 'jugando'" ;
+                    and (p.estado = 'jugando' ".$aux." )" ;
         $query = $this->db->query($sql);
         foreach($query->result() as $compeDB){
             $com = new Partida();
-            $v_partidas[] = $com->cargar($compeDB);
+            $com = $com->cargar($compeDB);
+            if($delajornada){
+                $jornada = $this->jornada->get($com->jornada_id,$com->competicion_id); 
+                if($jornada->estado == "jugando"){
+                    $v_partidas[] = $com;
+                }
+            }else{
+                $v_partidas[] = $com;
+            }
+            
         }
         return $v_partidas;
     }

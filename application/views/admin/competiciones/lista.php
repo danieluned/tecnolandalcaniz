@@ -46,18 +46,18 @@
     	<h1>Competiciones</h1>
       <table class="table table-hover table-bordered table-condensed">
       <tr>
-      	<td>ID</td>
+      
       	<td>Nombre</td>
       	<td>Acciones</td>
       </tr>
       <?php foreach($competicionescapitan as $competicion){?>
      
        <tr>
-         <td><?=$competicion->id?></td>
+         
          <td><?=$competicion->nombre?></td>
           <td>
           <?php if($this->ion_auth->in_group('capitan')){?>
-                <?=anchor ('admin/competiciones/partidascapitan/'.$competicion->id,'Partidas ')?>
+                <?=anchor ('admin/competiciones/partidascapitan/'.$competicion->id,'Ver Partidas ')?>
           	<?php }?>
           	
           	

@@ -61,12 +61,9 @@ hr {
                     <div class="col-md-12">
                         <h1>Alineacion</h1>
                                  <div class="col-xs4 col-xs-offset-4">
-                                        <p>Jornada <?=$partida->jornada_id?> -
-                                            del dia <?=date('d',strtotime($jornada->fechainicio))?> al
-                                            <?=date('d',strtotime($jornada->fechafin))?></p>
+                                        <p>Jornada <?=$partida->jornada_id?></p>
                                             
                                             <p>Hora de inicio: <?=$partida->horainicio?></p>
-    										<p>id Partida <?=$partida->id?></p>
     							</div>
     				   </div>	
     				   
@@ -74,15 +71,16 @@ hr {
 				   <div class="row">
 				   <?php if($partida->estado == 'pendiente'){?>
 				    	<div class="col-md-12">
-				    		<form action="<?=site_url("admin/competiciones/guardaralineacion")?>" method="post"
-                                        enctype="multipart/form-data">
-                                          <input type="hidden" name="competicion_id" value="<?=$competicion->id?>" />
-                                            <input type="hidden" name="id" value="<?=$partida->id?>" />
-                                            <input type="hidden" name="equipo" value="<?=${$modificar}['equipo']->id?>"/>
-                                            
-				    		<?php 
-				    		$equipo = ${$modificar}['equipo'];
-				    		foreach(${$modificar}['inscritos'] as $jugador){?>
+				    	<?php if($mlocal){?>
+				    	   		 <form action="<?=site_url("admin/competiciones/guardaralineacion")?>" method="post"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="competicion_id" value="<?=$competicion->id?>" />
+                                <input type="hidden" name="id" value="<?=$partida->id?>" />
+                                <input type="hidden" name="equipo" value="<?=$local['equipo']->id?>"/>
+                                
+                                <?php
+                                $equipo = $local['equipo'];
+                                foreach($local['inscritos'] as $jugador){?>
 				    					
 				    		         <div class="col-md-2">
 				    		         <label for="j_<?=$jugador->id?>">
@@ -100,7 +98,7 @@ hr {
 				    		         </div> 
 				    		         <?php 
 				    		         $checked = '';
-				    		         foreach(${$modificar}['alineados'] as $j2){
+				    		         foreach($local['alineados'] as $j2){
 				    		             if($j2->id == $jugador->id){
 				    		             $checked = 'checked';
 				    		             }
@@ -112,6 +110,50 @@ hr {
 				    		<?php }?>
 				    		<input type="submit" class="form-control" value="Guardar Alineacion"/>
 				    		</form>
+				    	<?php }?>
+				    	<?php if($mvisi){?>
+				    	    <form action="<?=site_url("admin/competiciones/guardaralineacion")?>" method="post"
+                            enctype="multipart/form-data">
+                            <input type="hidden" name="competicion_id" value="<?=$competicion->id?>" />
+                            <input type="hidden" name="id" value="<?=$partida->id?>" />
+                            <input type="hidden" name="equipo" value="<?=$visitante['equipo']->id?>"/>
+                            
+                            <?php
+                            $equipo = $visitante['equipo'];
+                            foreach($visitante['inscritos'] as $jugador){?>
+				    					
+				    		         <div class="col-md-2">
+				    		         <label for="j_<?=$jugador->id?>">
+				    		         	<div class="card mb-4 box-shadow" >
+				    		         	<?php 
+                                			$ruta = "inscritoequipo/".$equipo->id."/".$equipo->logotipo; 
+                                			if($jugador->logotipo ){
+                                			 $ruta = "inscrito/".$jugador->id."/".$jugador->logotipo;   
+                                			}
+                                			?>
+										 <div class="img" style='background-image: url("<?=assets()?>images/competiciones/<?=$competicion->id?>/<?=$ruta?>")'>
+											<span><?=$jugador->id?></span>
+											
+    									</div>
+				    		         </div> 
+				    		         <?php 
+				    		         $checked = '';
+				    		         foreach($visitante['alineados'] as $j2){
+				    		             if($j2->id == $jugador->id){
+				    		             $checked = 'checked';
+				    		             }
+				    		         }?>
+				    		         </label>
+				    		         <div><?=$jugador->nombre?></div>
+				    		         <input id="j_<?=$jugador->id?>" type="checkbox" name="jugadores[]" value="<?=$jugador->id?>" <?=$checked?>/>
+				    		  	  </div>
+				    		<?php }?>
+				    		<input type="submit" class="form-control" value="Guardar Alineacion"/>
+				    		</form>
+				    	<?php }?>
+				    		
+				    		
+				    		
 				   		</div>
 				   <?php }else{?>
 				    <div class="row">    

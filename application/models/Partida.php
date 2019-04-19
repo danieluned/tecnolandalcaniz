@@ -242,6 +242,14 @@ class Partida extends MY_Model {
         $e->cargar($result[0]);
         return $e;
     }
+    public function getEquipoVisitante(){
+        $jequi = $this->getJuegaEquipoVisitante(); 
+        return $jequi->getEquipo();
+    }
+    public function getEquipoLocal(){
+        $jequi = $this->getJuegaEquipoLocal();
+        return $jequi->getEquipo();
+    }
     public function borrarEquipoLocal(){
         $this->db->delete('juegaequipo', array('partida_id' => $this->id, 'competicion_id'=>$this->competicion_id , "posicion"=>0));
     }

@@ -10,23 +10,23 @@ class Inscrito extends MY_Model {
     /** Propiedades basicas de la base de datos */
     public $id;
     public $competicion_id;
-    public $nombre;
+    public $nombre = "Sin nombre";
     public $equipoinscrito_id;
-    public $users_id;
-    public $logotipo;
-    public $info;
+    public $users_id = 0;
+    public $logotipo = 'icono';
+    public $info = "Sin información";
     public $fecha;
     
     public function cargar($datosDB){
         $datosDB = object_to_array($datosDB);
-        $this->id = $datosDB['id'];
-        $this->competicion_id = $datosDB['competicion_id'];
-        $this->nombre = $datosDB['nombre'];
-        $this->equipoinscrito_id = $datosDB['equipoinscrito_id'];
-        $this->users_id = $datosDB['users_id'];
-        $this->logotipo = $datosDB['logotipo'];
-        $this->info = $datosDB['info'];
-        $this->fecha = $datosDB['fecha'];
+        $this->id = $datosDB['id']??$this->id;
+        $this->competicion_id = $datosDB['competicion_id']??$this->competicion_id;
+        $this->nombre = $datosDB['nombre']??$this->nombre;
+        $this->equipoinscrito_id = $datosDB['equipoinscrito_id']??$this->equipoinscrito_id;
+        $this->users_id = $datosDB['users_id']??$this->users_id;
+        $this->logotipo = $datosDB['logotipo']??$this->logotipo;
+        $this->info = $datosDB['info']??$this->info;
+        $this->fecha = $datosDB['fecha']??$this->fecha;
        
         return $this;
     }
