@@ -189,6 +189,7 @@ class Competiciones extends Admin_Controller
       $max  = (new DateTime($partida->horainicio))->sub(new DateInterval("PT15M"));
       echo "Fecha min". $min->format('Y-m-d H:i:s');
       echo "Fecha max ". $max->format('Y-m-d H:i:s');
+      echo "Hora actual ". $horaactual->format('Y-m-d H:i:s');
       if($min < $horaactual && $horaactual < $max ){
         // Se puede checkear 
           echo "En fecha";
