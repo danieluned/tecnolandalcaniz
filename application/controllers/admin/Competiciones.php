@@ -187,9 +187,12 @@ class Competiciones extends Admin_Controller
       $horaactual = new DateTime('Europe/Madrid');
       $min  = (new DateTime($partida->horainicio))->sub(new DateInterval("PT1H"));
       $max  = (new DateTime($partida->horainicio))->sub(new DateInterval("PT15M"));
-      
+      echo "Fecha min". $min->format('Y-m-d H:i:s');
+      echo "Fecha max ". $max->format('Y-m-d H:i:s');
+      echo "Hora actual ". $horaactual->format('Y-m-d H:i:s');
       if($min < $horaactual && $horaactual < $max ){
         // Se puede checkear 
+          echo "En fecha";
           $juega = $this->juegaequipo->get($_POST['competicion_id'],$_POST['id'],$_POST['equipo']);
           $juega->presentado = 1;
           $juega->guardarDB();
@@ -198,9 +201,12 @@ class Competiciones extends Admin_Controller
           if($partida->getJuegaEquipoLocal()->presentado && $partida->getJuegaEquipoVisitante()->presentado){
               $partida->estado = 'jugando';
               $partida->guardarDB();
+              echo "Ambas OK";
           }
       }
       
+      
+      die;
       redirect('admin/competiciones/partidascapitan/'.$_POST['competicion_id'],'refresh');
   }
   /**
