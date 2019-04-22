@@ -184,7 +184,8 @@ class Competiciones extends Admin_Controller
       }
       
       // Plazo de hora  para checkear: desde una hora hasta menos cuarto
-      $horaactual = new DateTime('Europe/Madrid');
+      date_default_timezone_set("Europe/Madrid");
+      $horaactual = new DateTime();
       $min  = (new DateTime($partida->horainicio))->sub(new DateInterval("PT1H"));
       $max  = (new DateTime($partida->horainicio))->sub(new DateInterval("PT15M"));
       echo "Fecha min". $min->format('Y-m-d H:i:s');
