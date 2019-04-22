@@ -203,8 +203,6 @@ class Competiciones extends Admin_Controller
           }
       }
       
-      
-      die;
       redirect('admin/competiciones/partidascapitan/'.$_POST['competicion_id'],'refresh');
   }
   /**
