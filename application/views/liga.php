@@ -76,7 +76,7 @@ foreach ($jornadasJugando as $jornada) {
                             $partidasCerradas = array(); 
                             
                             $partidasPendientes_j =$jornada->getPartidasPendientes(); 
-                            $partidasPendientes_j =array_merge($partidasPendientes_j,$jornada->getPartidasJugando()); 
+                                                        
                             foreach($partidasPendientes_j as $partida){
                                 $partidasPendientes[] = $partida;
                             }
@@ -130,6 +130,8 @@ foreach ($jornadasJugando as $jornada) {
                                                     $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
                                                     $equipo0 = $juegaEquipo0->getEquipo();
                                                     $equipo1 = $juegaEquipo1->getEquipo();
+                                                    $fecha = date('d/m/y',$partida->horainicio);
+                                                    
                                                 ?>
                                                 
                                                 <tr scope="row">                                                  
@@ -142,7 +144,7 @@ foreach ($jornadasJugando as $jornada) {
                                                     <td scope="col-4"> 
                                                     <!--<a href="<?php echo site_url('ligacod/partida/'.$competicion->id.'/'.$partida->id.'');?>">
                                                         Ver </a>-->
-                                                        <samp> VS </samp>
+                                                        <samp><?=$fecha?></samp>
                                                     </td>
                                                     
                                                   <td scope="col-4">
