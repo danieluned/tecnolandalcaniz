@@ -130,7 +130,8 @@ foreach ($jornadasJugando as $jornada) {
                                                     $juegaEquipo1 = $partida-> getJuegaEquipoVisitante();
                                                     $equipo0 = $juegaEquipo0->getEquipo();
                                                     $equipo1 = $juegaEquipo1->getEquipo();
-                                                    $fecha = date('d/m/y',$partida->horainicio);
+                                                    $fecha = date('d/m',$partida->horainicio);
+                                                    $hora  = date('h:m',$partida->horainicio);
                                                     
                                                 ?>
                                                 
@@ -145,6 +146,7 @@ foreach ($jornadasJugando as $jornada) {
                                                     <!--<a href="<?php echo site_url('ligacod/partida/'.$competicion->id.'/'.$partida->id.'');?>">
                                                         Ver </a>-->
                                                         <samp><?=$fecha?></samp>
+                                                        <samp><?=$hora?></samp>
                                                     </td>
                                                     
                                                   <td scope="col-4">
@@ -251,6 +253,11 @@ foreach ($jornadasJugando as $jornada) {
                                     $partidasCerradas_j =$jornada->getPartidasCerradas();
                                     foreach($partidasCerradas_j as $partida){
                                         $partidasCerradas[] = $partida;                                   }
+                                                                        
+                                    $fechaInicioJornada = date('d/m',$jornada->fechainicio);
+                                                                        
+                                    $fechaFinJornada = date('d/m',$jornada->fechafin);
+                                    
                                 ?> 
 
                                 <div class="col-sm-12 col-md-6  jornada-pendiente">
@@ -258,7 +265,9 @@ foreach ($jornadasJugando as $jornada) {
                                     <table class="table table-striped table-dark text-center sombra-png-negra">
                                         <thead>
                                             <tr>
-                                                <th colspan="3">Jornada <?=$jornada->id?></th>
+                                                <th colspan="3"><p>Jornada <?=$jornada->id?></p>
+                                                <p><?=$fechaInicioJornada?>-<?=$fechaFinJornada?></p>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody> 
