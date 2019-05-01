@@ -300,20 +300,15 @@ class Competicion extends MY_Model {
                 $max++;
             }
             for($i= 0 ; $i< $max ;$i++){
-                $equipos_ids[$i] = $equipos[$i]->id;
-                $equipos_ids_i[$i]  = $equipos[$max-1-$i]->id;
+                $equipos_ids[$i] = $equipos[$i]->id;             
             }
             $rondas = array();
             for($i = 0; $i<$vueltas;$i++){
-                if($i%2==0){
-                    $ronda = $this->roundRobin($equipos_ids);
-                }else{
-                    $ronda = $this->roundRobin($equipos_ids_i);
-                }
+                $ronda = $this->roundRobin($equipos_ids);
                 $rondas = array_merge($rondas,$ronda);                            
             }
             
-           
+           $i = 1 ; 
             foreach($rondas as $round => $games){
                 $jornada = new Jornada();
                 $jornada->competicion_id = $this->id;
@@ -332,8 +327,14 @@ class Competicion extends MY_Model {
                     $partida->guardarDB();
                     $juegalocal = new Juegaequipo();
                     $juegavisi = new Juegaequipo();
-                    $juegalocal->equipoinscrito_id = $play["Home"];
-                    $juegavisi->equipoinscrito_id = $play["Away"];
+                    if ($i % 2 == 0){
+                        $juegalocal->equipoinscrito_id = $play["Home"];
+                        $juegavisi->equipoinscrito_id = $play["Away"];
+                    }else{
+                        $juegalocal->equipoinscrito_id = $play["Away"];
+                        $juegavisi->equipoinscrito_id = $play["Home"];
+                    }
+                    
                     $juegalocal->competicion_id = $this->id;
                     $juegavisi->competicion_id = $this->id;
                     $juegalocal->partida_id = $partida->id;
@@ -356,6 +357,7 @@ class Competicion extends MY_Model {
                         $juegavisi->guardarDB();
                     }
                 }
+                $i++;
             }                            
         }
         private function roundRobin( array $teams ){
