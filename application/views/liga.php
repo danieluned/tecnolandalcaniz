@@ -148,7 +148,7 @@ foreach ($jornadasJugando as $jornada) {
                                                     <!--<a href="<?php echo site_url('ligacod/partida/'.$competicion->id.'/'.$partida->id.'');?>">
                                                         Ver </a>-->
                                                         <samp><?=date_format(date_create($partida->horainicio),'d/m')?></samp>
-                                                        <samp><?=date_format(date_create($partida->horainicio),'h:m')?></samp>
+                                                        <samp><?=date_format(date_create($partida->horainicio),'H:m')?></samp>
                                                     </td>
                                                     
                                                   <td scope="col-4">
@@ -269,7 +269,7 @@ foreach ($jornadasJugando as $jornada) {
                                         <thead>
                                             <tr>
                                                 <th colspan="3"><p>Jornada <?=$jornada->id?></p>
-                                                <p><?=$fechaInicioJornada?> - <?=$fechaFinJornada?></p>
+                                                <!--<p><?=$fechaInicioJornada?> - <?=$fechaFinJornada?></p>-->
                                                 </th>
                                             </tr>
                                         </thead>
