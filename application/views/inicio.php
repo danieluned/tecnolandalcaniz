@@ -20,12 +20,12 @@
                                         </div>
                                         <div class="row body-competicion">
                                             <div class="col-6">
-                                                <h3> 500€ </h3>
+                                                <h3> 800€ </h3>
                                                 <img class="incono_h3 sombra-png-blanca" src="<?= assets()?>images/iconos/medalla-de-oro.png">
                                                 
                                             </div>
                                             <div class="col-6">
-                                                <h3> 250€ </h3>
+                                                <h3> 400€ </h3>
                                                 <img class="incono_h3 sombra-png-blanca" src="<?= assets()?>images/iconos/segundo.png">
                                                 
                                             </div>
