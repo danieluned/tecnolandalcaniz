@@ -148,7 +148,8 @@ class Competicion extends MY_Model {
            $results = $this->db->get()->result();
            foreach ($results as $row){
                $eq = $this->inscritoequipo->get($row->id,$this->id); 
-               $resultados[] = array("equipo" => $eq, "puntos" => $row->puntos);
+               
+               array_push( $resultados, array("equipo" => $eq, "puntos" => $row->puntos));
            }
            return $resultados;
         }
