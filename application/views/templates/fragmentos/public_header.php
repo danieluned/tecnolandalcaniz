@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
-  <title>TheEvent - Bootstrap Event Template</title>
+  <title>Tecnoland</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+  <meta content="Tecnoland Lan Party Videojuegos Gamer eSports" name="keywords">
+  <meta content="Asociación dedicada a la organización de eventos de videojuegos." name="description">
 
   <!-- Favicons -->
   <link href="<?= assets()?>img/favicon.png" rel="icon">
