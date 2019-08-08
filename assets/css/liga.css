@@ -1,27 +1,43 @@
-.liga{
+.liga {
     background: url('../images/fondos/fondo_netllar.jpg') no-repeat fixed center;
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-   padding-top: 0px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 0px;
 }
-.body-liga{
-	border: silver 21px solid;
-	border-image-source: url('../images/marcos/Marco_1.png');
-	border-image-slice: 21 fill;
-	background-clip: padding-box;
-	padding: 20px;
-	padding-top: 30px;
-}
-.jornadas-en-curso, .partidas, .resultados, .lista-resultados{
-    padding-top: 25px;
+
+.header-liga {
+    padding-top: 125px;
     padding-bottom: 25px;
 }
-.equipos{
-    padding-top: 75px;
-    
+
+#logo-liga-portada {
+    max-height: 300px
 }
+
+.body-liga {
+    /*border: silver 21px solid;
+	border-image-source: url('../images/marcos/Marco_1.png');
+	border-image-slice: 21 fill;
+	background-clip: padding-box;*/
+    background-color: white;
+}
+
+.jornadas-en-curso,
+.partidas,
+.resultados,
+.lista-resultados,
+.sponsors-liga {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.equipos {
+    padding: 50px;
+}
+
+
 /*
 .header-equipos h2{
 	//background-image: url('../images/fondos/titulos/14624.png');
@@ -30,49 +46,61 @@
 	padding: 10px;
 
 }*/
-.equipos fieldset, .organiza fieldset, .colabora fieldset, .headder-jornadas-pendientes fieldset, .headder-jornadas-cerradas fieldset{
-	
-	width: 100%;
-	border: white 3px groove;
-}
-.equipos legend, .colabora legend, .organiza legend, .headder-jornadas-pendientes legend, .headder-jornadas-cerradas legend{
-	width:auto;
-	padding:0 10px;
-}
-.equipo{
-	padding:15px;
-}
-.equipo figure{
-	margin: 0;
-	padding: 5px;
-	//border-bottom: solid;
-    border-color: black;
-    border-width: 1px;
+
+.equipos fieldset,
+.organiza fieldset,
+.colabora fieldset,
+.headder-jornadas-pendientes fieldset,
+.headder-jornadas-cerradas fieldset {
+    width: 100%;
+    border: white 3px groove;
 }
 
-.equipo img{
-    max-height: 80px;
+.equipos legend,
+.colabora legend,
+.organiza legend,
+.headder-jornadas-pendientes legend,
+.headder-jornadas-cerradas legend {
+    width: auto;
+    padding: 0 10px;
+}
+
+.equipo {
+    padding: 15px;
+}
+
+.equipo figure {
+    margin: 0;
+    padding: 5px;
+}
+
+.equipo img {
+    max-height: 200px;
     width: auto;
 }
 
 .equipo img:hover {
-	-webkit-transform:scale(1.3);
-	transform:scale(1.3);
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
 }
- 
-.logo-equipo-small{
-	max-height: 40px;
+
+.logo-equipo-small {
+    max-height: 25px;
 }
-.logo-equipo-small:hover{
-	-webkit-transform:scale(1.3);
-	transform:scale(1.3);
+
+.logo-equipo-small:hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
 }
-.partida img, .resultado img{
+
+.partida img,
+.resultado img {
     max-height: 70px;
     max-width: 100%;
     display: inline;
 }
-.partida{
+
+.partida {
     background-image: url("../images/fondo_partida.gif");
     background-image: no-repeat;
     background-image: fixed;
@@ -83,27 +111,41 @@
     background-size: cover;
     background-position: center center;
 }
-.partida h5{
+
+.partida h5 {
     text-align: center;
     display: inline;
 }
 
-th, td{
-	width: 33.33%;
+th,
+td {
+    width: 33.33%;
 }
-td p{
-	margin-bottom: 0px;
+
+td p {
+    text-align: left;
+    margin-bottom: 0px;
 }
-.sponsors-liga fieldset, .headder-jornadas-pendientes fieldset, .headder-jornadas-cerradas fieldset{
-	padding-top: 25px;
-	padding-bottom: 25px;
-	border:none;
-	border-top: solid;
+
+.sponsors-liga fieldset,
+.headder-jornadas-pendientes fieldset,
+.headder-jornadas-cerradas fieldset {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: none;
+    border-top: solid;
 }
+
 .collapse .show {
     display: flex;
 }
-.body-organiza img, .body-colabora img{
-	max-height: 100px;
-	max-width: 80%;
+
+.colabora {
+    margin-top: 20px;
+}
+
+.body-organiza img,
+.body-colabora img {
+    max-height: 100px;
+    max-width: 80%;
 }

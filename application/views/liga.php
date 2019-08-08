@@ -1,5 +1,6 @@
 <?php 
 $equipos = $competicion->getInscritoEquipo();
+$ranking = $competicion->ranking();
 
 //$jornadas = $competicion->getJornadas();
 
@@ -26,47 +27,44 @@ foreach ($jornadasJugando as $jornada) {
 
 
 <link rel="stylesheet" type="text/css" href="<?= assets()?>css/liga.css">
+
 <section class="liga">
-    <div class="container ">                    
+    <div class="container-fluid">                    
         
-    <div class="row header-liga text-center">
-            <img src="<?= assets()?>images/ligas/liga_cod_netllar.png" class="rounded mx-auto d-block">
+        <div class="row justify-content-around header-liga text-center">
+            <img id="logo-liga-portada" class="sombra-png-negra" src="<?= assets()?>images/ligas/liga_cod_netllar.png" class="rounded mx-auto d-block">
         </div>
         
         <div class="row body-liga">
             <div class="container-fluid">
                 
-                <div class="row equipos justify-content-around text-center">
-                    <div class="container-fluid">
-                        <!--<div class="row justify-content-around header-equipos">
-                            <div class="col-6 text-center">
-                                <h2></h2>
-                            </div>
-                        </div>  -->  
-                        <fieldset>
-                            <legend class="scheduler-border"><h2> Equipos </h2></legend>
-                            <div class="row justify-content-around body-equipos effect5">
-                                <?php foreach($equipos as $equipo){?>                        
-                                <div class="col-sm-4 col-md-3 col-lg-2 equipo ">
-                                    <a href="<?php echo site_url('equipo');?>/<?=$competicion->id?>/<?=$equipo->id?>">
-                                        <figure class="borde-circular">
-                                            <img class="sombra-png-negra" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo->id?>/<?=$equipo->logotipo?>">
-                                        </figure>
-                                    </a>
+                <div class="row equipos justify-content-around text-center section-with-bg">                    
+                    <div class="col-12 section-header ">
+                        <h2> Equipos </h2>
+                    </div>                   
+                    
+                    <div class="col-12  body-equipos effect5">
+                        <div class="container-fluid">
+                            <div class="row justify-content-around">
+                                <?php foreach($ranking as $puntuacion){
+                                    ?>                        
+                                <div class="equipo ">
+                                    
+                                        <figure class="borde-circular">                                       
+                                            <img class="sombra-png-negra" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$puntuacion['equipo']->id?>/<?=$puntuacion['equipo']->logotipo?>">
+                                        </figure>                                    
                                     <h6>
-                                     <?=$equipo->nombre?>
+                                        
                                     </h6>
                                 </div>                                         
-                                <?php }?>        
-                            </div>
-                        </fieldset>
-                    </div>
-           			
-                                                                        
+                                <?php }?>       
+                            </div> 
+                        </div>
+                    </div>                                      
         		</div>
 
                 <div class="row jornadas-en-curso">
-                    <div class="container-fluid">
+                    <div class="container">
                         
                         <?php 
                         
@@ -89,9 +87,9 @@ foreach ($jornadasJugando as $jornada) {
                         
                         ?> 
 
-                        <div class="row header-jornada-en-curso text-center">
+                        <div class="row header-jornada-en-curso text-center section-header">
                             <div class="col-12">
-                                <h2> Jornada <?=$jornada->id?> en curso</h2>
+                                <h2> Jornada en curso</h2>
                             </div>
                         </div>
                         <div class=" row body-jornada-en-curso">
@@ -140,8 +138,8 @@ foreach ($jornadasJugando as $jornada) {
                                                 <tr scope="row">                                                  
                                                   <td scope="col-4">
                                                     
-                                                        <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
-                                                        <p><?=$equipo0->nombre?></p>
+                                                        
+                                                        <p><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>"> <?=$equipo0->nombre?></p>
                                                    
                                                    </td>
                                                     <td scope="col-4"> 
@@ -153,8 +151,8 @@ foreach ($jornadasJugando as $jornada) {
                                                     
                                                   <td scope="col-4">
                                                     
-                                                        <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
-                                                        <p><?=$equipo1->nombre?></p>
+                                                        
+                                                        <p><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>"> <?=$equipo1->nombre?></p>
                                                    
                                                   </td>
                                                 </tr><?php }?>
@@ -200,20 +198,16 @@ foreach ($jornadasJugando as $jornada) {
                                                         <tr>                                                          
                                                           <td scope="col-4">
                                                             
-                                                                <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">                                                                
+                                                                                                                                
                                                             
-                                                            <p><?=$equipo0->nombre?></p>
+                                                            <p><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>"> <?=$equipo0->nombre?></p>
                                                          
                                                            </td>
 
                                                           <td scope="col-4"> <?php echo $resultados['local']['puntos']." - ". $resultados['visitante']['puntos']?> </td>
 
-                                                          <td scope="col-4">
-                                                            
-                                                                <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">                                                                
-                                                            
-                                                            <p><?=$equipo1->nombre?></p>
-                                                            
+                                                          <td scope="col-4">                                                                                                           
+                                                            <p><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>"> <?=$equipo1->nombre?></p>
                                                           </td>
                                                         </tr><?php }?>
                                                             
@@ -231,7 +225,7 @@ foreach ($jornadasJugando as $jornada) {
                     if(count($jornadasPendientes)>0){                                    
                 ?>
                 <div class="row jornadas-pendientes">
-                    <div class="container-fluid">
+                    <div class="container">
                         
                         <div class="row headder-jornadas-pendientes text-center">
                         <div class="col-12">
@@ -283,15 +277,15 @@ foreach ($jornadasJugando as $jornada) {
                                         ?>
                                             <tr>
                                                 <td >                                                    
-                                                    <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>">
-                                                    <p><?=$equipo0->nombre?></p>
+                                                    
+                                                    <p><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo0->id?>/<?=$equipo0->logotipo?>"> <?=$equipo0->nombre?></p>
                                                 </td>
                                                 <td>
                                                     <span> VS </span>
                                                 </td>
                                                 <td>                                                    
-                                                    <img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>">
-                                                    <p><?=$equipo1->nombre?></p>
+                                                    
+                                                    <p><img class="logo-equipo-small sombra-png-blanca" src="<?=assets()?>images/competiciones/<?=$competicion->id?>/inscritoequipo/<?=$equipo1->id?>/<?=$equipo1->logotipo?>"> <?=$equipo1->nombre?></p>
                                                 </td>
                                             </tr>
                                             <?php }?>
@@ -306,7 +300,7 @@ foreach ($jornadasJugando as $jornada) {
                     ?> 
 
                 <div class="row jornadas-cerradas">
-                    <div class="container-fluid">
+                    <div class="container">
                         
                         <div class="row headder-jornadas-cerradas text-center">
                             <div class="col-12">
@@ -369,32 +363,38 @@ foreach ($jornadasJugando as $jornada) {
                         </div>
                     </div>                                    
                 </div>  <?php }?>                
-                <div class="row sponsors-liga">
+                <div class="row sponsors-liga section-with-bg">
                     <div class="container-fluid">
-                        <div class="row organiza text-center">
-                            <div class="container-fluid">        
-                                <fieldset class="fieldset-horizontal">
-                                        <legend class="scheduler-border"><h2> Organiza </h2></legend>                               
+                        <div class="row organiza ">
+                            <div class="container-fluid text-center">                                       
+                                <div class="row  section-header">
+                                    <div class="col-12">
+                                    <h2> Organiza </h2>
+                                    </div>
+                                </div>
                                 <div class="row body-organiza justify-content-around">
                                      
                                         <img src="<?=assets()?>images/sponsor/netllar_negro.png">
                                         <img src="<?=assets()?>images/icCabecera.png">
                                                           
                                 </div>
-                                </fieldset>  
+                                
                             </div>
                         </div>
-                        <div class="row colabora text-center">
+                        <div class="row colabora section-header">
                             <div class="container-fluid">
-                                <fieldset>
-                                        <legend class="scheduler-border"><h2> Colabora </h2></legend>
+                                <div class="row text-center section-header">
+                                        <div class="col-12">
+                                        <h2> Colabora </h2>
+                                        </div>
+                                </div>
                                 <div class="row body-organiza justify-content-around">
                                     
                                     <img src="<?=assets()?>images/sponsor/Logotipo_MPG_Mini.png">
                                     
                                     
                                 </div>
-                                </fieldset>  
+                                
                             </div>
                         </div>
                     </div>
