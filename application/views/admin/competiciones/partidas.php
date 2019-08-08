@@ -97,18 +97,26 @@ function alineacion(competicion_id, partida_id, equipo_id, html_destino){
 </script>
 
 
-<code>
+<div>
 <p style="margin-top: 100px">Competicion Ranking</p>
 <?php 
 
  $resultados = $competicion->ranking(); 
- foreach ($resultados as $resultado){
-     echo $resultado['equipo']->nombre." " .$resultado['puntos']."<br/>"; 
-     
+ ?>
+ <table>
+	<tr>
+		<td>NOMBRE</td><td>Puntos</td><td>Jugados</td><td>Ganados</td><td>Perdidos</td><td>Diferencia mapas</td>
+	</tr>
+<?php
+ foreach ($resultados as $resultado){?>
+	 <tr>
+		<td><?=$resultado['equipo']->nombre?></td><td><?=$resultado['puntos']?></td><td><?=$resultado['jugados']?></td><td><?=$resultado['ganados']?></td><td><?=$resultado['perdidos']?></td><td><?=$resultado['DM']?></td> 
+ 	</tr>
+<?php
  }
  ?>
-
-</code>
+</table>
+</div>
 
 <div role="main">
 	<section class="jumbotron text-center">

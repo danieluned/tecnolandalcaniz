@@ -132,24 +132,33 @@ class Competicion extends MY_Model {
         }
        
         public function ranking(){
-           $sql = "
-            i.id, sum(j.puntuacion) puntos
-            from inscritoequipo i
-            left join juegaequipo j on i.competicion_id = j.competicion_id and i.id = j.equipoinscrito_id
-            left join partida p on j.partida_id = p.id and j.competicion_id = p.competicion_id and p.estado = 'cerrada'
-                where i.competicion_id = ".$this->id."
-                group by i.id
-                order by puntos desc
-                ";
-                
+            $sql = "
+          j.equipoinscrito_id, sum(j.puntuacion) puntos,      
+		   COUNT(*) AS jugados, 
+		  SUM( if(j.puntuacion > j2.puntuacion, 1 ,0 ) ) AS ganados,
+		 SUM( if(j.puntuacion <= j2.puntuacion, 1 ,0 ) )AS perdidos,
+	
+		SUM(
+		if(mapa1_resultado IS NULL OR mapa1_resultado = 0,0,if(mapa1_resultado - 1 = j.posicion, 1,-1)) +
+		if(mapa2_resultado IS NULL OR mapa2_resultado = 0,0,if(mapa2_resultado - 1 = j.posicion, 1,-1)) +
+		if(mapa3_resultado IS NULL OR mapa3_resultado = 0,0,if(mapa3_resultado - 1 = j.posicion, 1,-1)) +
+		if(mapa4_resultado IS NULL OR mapa4_resultado = 0,0,if(mapa4_resultado - 1 = j.posicion, 1,-1)) +
+		if(mapa5_resultado IS NULL OR mapa5_resultado = 0,0,if(mapa5_resultado - 1 = j.posicion, 1,-1)) ) AS DM
+		
+		 FROM partida p 
+		LEFT JOIN juegaequipo j ON p.competicion_id = j.competicion_id AND p.id = j.partida_id
+   	LEFT JOIN juegaequipo j2  ON p.id = j2.partida_id AND j2.competicion_id = p.competicion_id
+		WHERE p.estado = 'cerrada' AND p.competicion_id = ". $this->id . " AND j.equipoinscrito_id != j2.equipoinscrito_id"
+		." group by j.equipoinscrito_id"
+		." ORDER BY DM desc";
+		
            $this->db->select($sql) ;
            
            $resultados = array();
            $results = $this->db->get()->result();
            foreach ($results as $row){
-               $eq = $this->inscritoequipo->get($row->id,$this->id); 
-               
-               array_push( $resultados, array("equipo" => $eq, "puntos" => $row->puntos));
+               $eq = $this->inscritoequipo->get($row->equipoinscrito_id,$this->id); 
+               array_push( $resultados, array("equipo" => $eq, "puntos" => $row->puntos, "jugados" => $row->jugados,"ganados"=>$row->ganados,"perdidos"=>$row->perdidos,"DM"=>$row->DM));
            }
            return $resultados;
         }
