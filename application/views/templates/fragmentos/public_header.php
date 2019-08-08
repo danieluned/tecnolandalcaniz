@@ -28,12 +28,7 @@
   <link href="<?= assets()?>css/style.css" rel="stylesheet">
   
 
-  <!-- =======================================================
-    Theme Name: TheEvent
-    Theme URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
-    Author: BootstrapMade.com
-    License: https://bootstrapmade.com/license/
-  ======================================================= -->
+  
 </head>
 
 <body>
