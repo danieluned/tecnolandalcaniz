@@ -425,6 +425,28 @@
               <img src="<?= assets()?>img/supporters/8.png" class="img-fluid" alt="">
             </div>
           </div>
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/9.png" class="img-fluid" alt="">
+            </div>
+
+          </div><div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/10.png" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/11.png" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/12.png" class="img-fluid" alt="">
+            </div>
+          </div>
 
         </div>
 
