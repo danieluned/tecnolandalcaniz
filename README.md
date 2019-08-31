@@ -16,4 +16,4 @@ Cambio sencillito a ver si solo con el GIT push esta bien configurado
 ### Discord
 [Enlace Discord](https://discord.gg/9tJEfd)
 
-### prueba 19
+### prueba 20 , nuevo servvidor de autodespliegue
