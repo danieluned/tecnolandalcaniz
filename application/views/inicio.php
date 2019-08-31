@@ -481,9 +481,9 @@
                   <li><span class="fa-li"><i class="fa fa-check"></i></span>Torneos</li>                  
                 </ul>
                 <hr>
-                <!--<div class="text-center">
+                <div class="text-center">
                   <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access">Buy Now</button>
-                </div>-->
+                </div>
               </div>
             </div>
           </div>
