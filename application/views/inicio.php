@@ -458,6 +458,12 @@
             </div>
           </div>
 
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/13.png" class="img-fluid" alt="">
+            </div>
+          </div>
+
         </div>
 
       </div>
