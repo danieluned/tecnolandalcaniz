@@ -124,7 +124,15 @@
       </div>
 
     </section>
-
+    <section> 
+      <div class="container">
+        <div class="row">
+          <center>
+            <img src="<?= assets()?>img/alquiler1.jpg" alt="">
+          </center>
+        </div>
+      </div>
+    </section>
     <!--==========================
       Schedule Section
     ============================-->
