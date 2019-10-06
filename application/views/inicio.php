@@ -70,6 +70,16 @@
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="speaker">
+              <img src="<?= assets()?>img/torneos/8.jpg" alt="Speaker 1" class="img-fluid">
+              <div class="details">
+                <h3>FORTNITE</h3>
+                <p>4 vs 4</p>
+                <p>400€ - 200€</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="speaker">
               <img src="<?= assets()?>img/torneos/3.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
                 <h3>Hearthstone</h3>
