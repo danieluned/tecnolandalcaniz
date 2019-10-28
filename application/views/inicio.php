@@ -182,6 +182,15 @@
                   <p>Convocatoria League of Legends / CS:GO </p>                  
               </div>
             </div>
+            <div class="row schedule-item">
+              <div class="col-md-2"><time>10:30 AM</time></div>
+              <div class="col-md-10">
+                <div class="speaker">                  
+                </div>
+                  <h4>Comienzo torneos: </h4>
+                  <p>Comienzo torneos League of Legends / CS:GO </p>                  
+              </div>
+            </div>
 
             
 
