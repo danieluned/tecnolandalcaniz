@@ -7,7 +7,7 @@
         <div class="row">
 
           <div class="col-lg-6 col-md-6 footer-info">
-            <img src="<?= assets()?>img/logo.png" alt="TheEvenet">
+            <img src="<?= assets()?>img/logo.png" alt="Tecnoland">
             <p>2019 nos trae por 6º año consecutivo la nueva edición de Alcañiz Lan party, de la mano de nuestra asociación Tecnoland. Un encuentro para todos los amantes de los videojuegos y la tecnología.</p>
           </div>
           <!--
@@ -44,9 +44,9 @@
             </p>
 
             <div class="social-links">
-              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="https://twitter.com/TecnolandAlca" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="https://www.facebook.com/tecnolandalcaniz" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="https://www.instagram.com/tecnoland_lanparty" class="instagram"><i class="fa fa-instagram"></i></a>
               <!--<a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
               <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>-->
             </div>
@@ -59,15 +59,10 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong>TheEvent</strong>. All Rights Reserved
+        &copy; Copyright <strong>Tecnoland</strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=TheEvent
-        -->
+       
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>

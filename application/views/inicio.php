@@ -70,6 +70,16 @@
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="speaker">
+              <img src="<?= assets()?>img/torneos/8.jpg" alt="Speaker 1" class="img-fluid">
+              <div class="details">
+                <h3>FORTNITE</h3>
+                <p>4 vs 4</p>
+                <p>400€ - 200€</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="speaker">
               <img src="<?= assets()?>img/torneos/3.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
                 <h3>Hearthstone</h3>
@@ -114,7 +124,15 @@
       </div>
 
     </section>
-
+    <section> 
+      <div class="container">
+        <div class="row">
+          <center>
+            <img src="<?= assets()?>img/alquiler.jpg" alt="">
+          </center>
+        </div>
+      </div>
+    </section>
     <!--==========================
       Schedule Section
     ============================-->
@@ -149,6 +167,21 @@
                 <p>Instalate, Acomodate y comienza a Jugar</p>
               </div>
             </div>
+            <div class="row schedule-item">
+              <div class="col-md-2"><time>20:00 AM</time></div>
+              <div class="col-md-10">
+                <h4>Charla Zahïra</h4>                
+              </div>
+            </div>
+            <div class="row schedule-item">
+              <div class="col-md-2"><time>22:00 AM</time></div>
+              <div class="col-md-10">
+                <div class="speaker">                  
+                </div>
+                  <h4>LAN PARTY:</h4>                
+                  <p>Convocatoria League of Legends / CS:GO </p>                  
+              </div>
+            </div>
 
             
 
@@ -164,7 +197,7 @@
                 <div class="speaker">                  
                 </div>
                   <h4>LAN PARTY:</h4>                
-                  <p>Convocatoria League of Legends / CS:GO / Hearthstone</p>                  
+                  <p>Convocatoria League of Legends TFT / Hearthstone</p>                  
               </div>
             </div>
 
@@ -174,7 +207,7 @@
                 <div class="speaker">                  
                 </div>
                   <h4>Comienzo torneos: </h4>
-                  <p>Comienzo torneos League of Legends / CS:GO / Hearthstone</p>                  
+                  <p>Comienzo torneos League of Legends TFT/ Hearthstone</p>                  
               </div>
             </div>
 
@@ -184,7 +217,7 @@
                 <div class="speaker">
                 </div>
                 <h4>Abierto al publico:</h4> 
-                  <p>Convocatoria Dragon Ball Fighter Z / FIFA </p>
+                  <p>Combocatoria Tekken7 / FIFA20 </p>
               </div>
             </div>
 
@@ -194,7 +227,7 @@
                 <div class="speaker">
                 </div>
                 <h4>Abierto al publico:</h4> 
-                  <p>Comienzo Torneos Dragon Ball Fighter Z / FIFA </p>
+                  <p>Comienzo torneo Tekken7 / FIFA20 </p>
               </div>
             </div>
 
@@ -224,6 +257,22 @@
                 <div class="speaker">                  
                 </div>                
                   <p>Concurso de Cosplay </p>
+              </div>
+            </div>
+            <div class="row schedule-item">
+              <div class="col-md-2"><time>16:00 PM</time></div>
+              <div class="col-md-10">
+                <div class="speaker">                  
+                </div>                
+                  <p>Charla Nitro PC </p>
+              </div>
+            </div>
+            <div class="row schedule-item">
+              <div class="col-md-2"><time>16:00 PM</time></div>
+              <div class="col-md-10">
+                <div class="speaker">                  
+                </div>                
+                  <p>Taller DeKa Modder </p>
               </div>
             </div>
 
@@ -425,6 +474,34 @@
               <img src="<?= assets()?>img/supporters/8.png" class="img-fluid" alt="">
             </div>
           </div>
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/9.png" class="img-fluid" alt="">
+            </div>
+
+          </div><div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/10.png" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/11.png" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/12.png" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="supporter-logo">
+              <img src="<?= assets()?>img/supporters/13.png" class="img-fluid" alt="">
+            </div>
+          </div>
 
         </div>
 
@@ -459,9 +536,9 @@
                   <li><span class="fa-li"><i class="fa fa-check"></i></span>Torneos</li>                  
                 </ul>
                 <hr>
-                <!--<div class="text-center">
+                <div class="text-center">
                   <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access">Buy Now</button>
-                </div>-->
+                </div>
               </div>
             </div>
           </div>
